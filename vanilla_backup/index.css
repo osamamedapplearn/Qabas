@@ -1,0 +1,533 @@
+/* ═══════════════════════════════════════════════════════════════ */
+/*  QABAS (قبس) — DESIGN SYSTEM & HERO STYLES                     */
+/*  Palette extracted directly from Qabas Brand Identity          */
+/*  Key visual: Dual Cyan/Red theatrical spotlights on deep black  */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Brand Color Tokens ── */
+:root {
+  /* Brand Core Colors */
+  --red-primary: #E52427;
+  --red-dark: #B71C1C;
+  --red-glow: rgba(229, 36, 39, 0.4);
+
+  --cyan-primary: #00A3E0;
+  --cyan-dark: #006699;
+  --cyan-glow: rgba(0, 163, 224, 0.4);
+
+  --yellow-accent: #FFC107;
+  --yellow-glow: rgba(255, 193, 7, 0.35);
+
+  /* Neutrals */
+  --white: #FFFFFF;
+  --white-soft: #F3F4F6;
+  --gray-light: #E5E7EB;
+  --gray-muted: #9CA3AF;
+  --gray-dark: #1F2937;
+
+  /* Deep Space Backgrounds */
+  --dark-bg: #070A0F;
+  --dark-surface: #0E131F;
+  --dark-card: #141A29;
+
+  /* Typography */
+  --font-arabic: 'Cairo', 'Amiri', sans-serif;
+  --font-latin: 'Space Grotesk', 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--white);
+  font-family: var(--font-arabic);
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════ */
+/*  NAVIGATION                            */
+/* ═══════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(7, 10, 15, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+}
+
+.nav__brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.nav__logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.nav__brand {
+  font-family: var(--font-latin);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--white);
+}
+
+.nav__brand-ar {
+  font-family: var(--font-arabic);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--red-primary);
+  margin-right: 0.4rem;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gray-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav__link:hover {
+  color: var(--white);
+}
+
+.nav__link--cta {
+  padding: 0.5rem 1.4rem;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--red-primary), #B71C1C);
+  color: var(--white) !important;
+  box-shadow: 0 4px 15px rgba(229, 36, 39, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav__link--cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 36, 39, 0.5);
+}
+
+/* ═══════════════════════════════════════ */
+/*  HERO SECTION                          */
+/* ═══════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--dark-bg);
+}
+
+/* Noise overlay */
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════ */
+/*  DUAL VOLUMETRIC LIGHT BEAMS           */
+/*  Cyan Beam (Left) + Red Beam (Right)   */
+/* ═══════════════════════════════════════ */
+
+.hero__beam {
+  position: absolute;
+  top: -15%;
+  height: 120vh;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero__beam--cyan {
+  left: 5%;
+  width: 500px;
+  background: conic-gradient(
+    from 140deg at 20% 0%,
+    transparent 0deg,
+    rgba(0, 163, 224, 0.02) 150deg,
+    rgba(0, 163, 224, 0.12) 175deg,
+    rgba(0, 163, 224, 0.22) 180deg,
+    rgba(0, 163, 224, 0.12) 185deg,
+    transparent 210deg
+  );
+  clip-path: polygon(20% 0%, 70% 0%, 95% 100%, 0% 100%);
+  filter: blur(10px);
+}
+
+.hero__beam--red {
+  right: 5%;
+  width: 500px;
+  background: conic-gradient(
+    from 220deg at 80% 0%,
+    transparent 0deg,
+    rgba(229, 36, 39, 0.02) 150deg,
+    rgba(229, 36, 39, 0.15) 175deg,
+    rgba(229, 36, 39, 0.25) 180deg,
+    rgba(229, 36, 39, 0.15) 185deg,
+    transparent 210deg
+  );
+  clip-path: polygon(30% 0%, 80% 0%, 100% 100%, 5% 100%);
+  filter: blur(10px);
+}
+
+/* ═══════════════════════════════════════ */
+/*  FLOOR STAGE (HYBRID CYAN/RED POOL)     */
+/* ═══════════════════════════════════════ */
+
+.hero__floor-stage {
+  position: absolute;
+  bottom: -6%;
+  left: 50%;
+  transform: translateX(-50%) perspective(900px) rotateX(68deg);
+  width: 120vw;
+  max-width: 1500px;
+  height: 65vh;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero__floor-pool {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(240, 240, 245, 0.22) 25%,
+    rgba(0, 163, 224, 0.14) 45%,
+    rgba(229, 36, 39, 0.12) 65%,
+    transparent 85%
+  );
+  filter: blur(15px);
+}
+
+.hero__floor-glow {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  right: 15%;
+  bottom: 10%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 193, 7, 0.12) 40%,
+    transparent 75%
+  );
+  filter: blur(30px);
+}
+
+.hero__floor-rim {
+  position: absolute;
+  inset: -2%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to right, var(--cyan-primary), var(--yellow-accent), var(--red-primary)) 1;
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════ */
+/*  AMBIENT GLOW BLOOM                    */
+/* ═══════════════════════════════════════ */
+
+.hero__glow-bloom {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(229, 36, 39, 0.15) 0%,
+    rgba(0, 163, 224, 0.10) 40%,
+    transparent 75%
+  );
+  filter: blur(60px);
+}
+
+/* ═══════════════════════════════════════ */
+/*  PARTICLES                             */
+/* ═══════════════════════════════════════ */
+
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hero__particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 6px var(--cyan-primary);
+  opacity: 0;
+}
+
+/* ═══════════════════════════════════════ */
+/*  MAIN CONTENT                          */
+/* ═══════════════════════════════════════ */
+
+.hero__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -3vh;
+}
+
+/* ── Logo ── */
+.hero__logo-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+}
+
+.hero__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 25px rgba(229, 36, 39, 0.6))
+    drop-shadow(0 0 50px rgba(0, 163, 224, 0.4));
+  will-change: transform;
+}
+
+.hero__logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240%;
+  height: 240%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(229, 36, 39, 0.25) 0%,
+    rgba(0, 163, 224, 0.12) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Arabic Hero Title: قبس ── */
+.hero__arabic-hero-wrapper {
+  opacity: 0;
+  margin-bottom: 0.5rem;
+}
+
+.hero__arabic-title {
+  font-family: var(--font-arabic);
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-shadow:
+    0 0 30px rgba(229, 36, 39, 0.5),
+    0 0 70px rgba(0, 163, 224, 0.3);
+}
+
+.hero__flame-dot {
+  display: inline-block;
+  font-size: 0.7em;
+  margin-right: -0.2em;
+  filter: drop-shadow(0 0 15px #FF1744);
+}
+
+/* ── 3D Text: QABAS ── */
+.hero__text-3d-stage {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  margin-bottom: 1.4rem;
+}
+
+.hero__text-3d-wrapper {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+.hero__depth-text {
+  font-family: var(--font-latin);
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.hero__depth-text.is-front {
+  position: relative;
+  z-index: 10;
+  color: var(--white);
+  text-shadow:
+    0 0 40px rgba(255, 255, 255, 0.6),
+    0 0 80px rgba(0, 163, 224, 0.4);
+}
+
+.hero__depth-text.is-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* ── Slogan Badge ── */
+.hero__slogan-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.6rem;
+  border-radius: 99px;
+  background: rgba(14, 19, 31, 0.85);
+  border: 1.5px solid var(--red-primary);
+  box-shadow:
+    0 0 20px rgba(229, 36, 39, 0.3),
+    inset 0 0 15px rgba(229, 36, 39, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.hero__badge-icon {
+  font-size: 1.1rem;
+}
+
+.hero__slogan {
+  font-family: var(--font-arabic);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 800;
+  color: var(--white);
+}
+
+.hero__subtext {
+  font-family: var(--font-arabic);
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  color: var(--yellow-accent);
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+}
+
+/* ── Scroll Hint ── */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  opacity: 0;
+}
+
+.hero__scroll-line {
+  width: 2px;
+  height: 48px;
+  background: linear-gradient(
+    to bottom,
+    var(--red-primary) 0%,
+    var(--cyan-primary) 50%,
+    transparent 100%
+  );
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════ */
+/*  RESPONSIVE                            */
+/* ═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav__links {
+    gap: 1rem;
+  }
+
+  .hero__beam--cyan,
+  .hero__beam--red {
+    width: 320px;
+  }
+
+  .hero__arabic-title {
+    font-size: 4rem;
+  }
+
+  .hero__depth-text {
+    font-size: 3rem;
+  }
+
+  .hero__logo-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+}

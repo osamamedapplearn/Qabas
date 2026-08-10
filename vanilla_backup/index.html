@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qabas — قبس | حلول رقمية.. تفوق التوقعات</title>
+  <meta name="description" content="قبس - وكالة حلول رقمية متكاملة تقدم تصميم هوية بصرية، تطوير مواقع، واستراتيجيات إبداعية تفوق التوقعات." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  NAVIGATION                                            -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <nav id="nav" class="nav" aria-label="Main navigation">
+    <div class="nav__brand-group">
+      <img src="logo.png" alt="قبس Qabas Logo" class="nav__logo-img" />
+      <span class="nav__brand">QABAS <span class="nav__brand-ar">قبس</span></span>
+    </div>
+    <div class="nav__links">
+      <a href="#services" class="nav__link">الخدمات</a>
+      <a href="#packages" class="nav__link">الباقات</a>
+      <a href="#work" class="nav__link">أعمالنا</a>
+      <a href="#contact" class="nav__link nav__link--cta">تواصل معنا</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  HERO SECTION                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero" aria-label="Qabas Hero">
+
+    <!-- Subtle noise texture overlay -->
+    <div class="hero__noise" aria-hidden="true"></div>
+
+    <!-- Dual Volumetric Light Beams (Cyan Left, Crimson Red Right) -->
+    <div class="hero__beam hero__beam--cyan" id="beamCyan" aria-hidden="true"></div>
+    <div class="hero__beam hero__beam--red" id="beamRed" aria-hidden="true"></div>
+
+    <!-- The large illuminated floor stage -->
+    <div class="hero__floor-stage" id="floorStage" aria-hidden="true">
+      <div class="hero__floor-pool" id="floorPool"></div>
+      <div class="hero__floor-glow" id="floorGlow"></div>
+      <div class="hero__floor-rim" id="floorRim"></div>
+    </div>
+
+    <!-- Floating particles in the dual light fields -->
+    <div class="hero__particles" id="particles" aria-hidden="true"></div>
+
+    <!-- Main content layer -->
+    <div class="hero__content">
+
+      <!-- Logo icon with red/cyan/yellow glow -->
+      <div class="hero__logo-wrapper" id="logoWrapper">
+        <img
+          src="logo.png"
+          alt="Qabas logo icon"
+          class="hero__logo"
+          id="heroLogo"
+          width="130"
+          height="130"
+        />
+        <div class="hero__logo-glow" id="logoGlow" aria-hidden="true"></div>
+      </div>
+
+      <!-- Main Arabic Typography: قبس -->
+      <div class="hero__arabic-hero-wrapper" id="arabicHeroWrapper">
+        <h1 class="hero__arabic-title" id="arabicTitle">
+          قبس
+          <span class="hero__flame-dot" aria-hidden="true">🔥</span>
+        </h1>
+      </div>
+
+      <!-- 3D Rotating Text Container: QABAS -->
+      <div class="hero__text-3d-stage" id="text3dStage">
+        <div class="hero__text-3d-wrapper" id="text3dWrapper">
+          <!-- Depth layers injected by JS -->
+        </div>
+      </div>
+
+      <!-- Subtitle badge & slogan from design -->
+      <div class="hero__slogan-wrapper" id="sloganWrapper">
+        <div class="hero__badge">
+          <span class="hero__badge-icon">⚡</span>
+          <span class="hero__slogan">حلول رقمية.. تفوق التوقعات</span>
+        </div>
+        <p class="hero__subtext" id="subtext">إبداع بصري.. يعبّر عنك</p>
+      </div>
+
+    </div>
+
+    <!-- Ambient glow bloom -->
+    <div class="hero__glow-bloom" id="glowBloom" aria-hidden="true"></div>
+
+    <!-- Scroll hint -->
+    <div class="hero__scroll-hint" id="scrollHint" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+
+  </section>
+
+  <script src="hero.js"></script>
+</body>
+</html>
