@@ -16,12 +16,7 @@ export default {
           ink: 'var(--ink)',
           'ink-soft': 'var(--ink-soft)',
           gold: 'var(--gold)',
-          cream:       "#F5F3F0",
-          "ink-soft":  "#4A4A4A",
-          maroon:      "#4A0008",
-
-          // Gold accent
-          gold:        "#D4AF37",
+          maroon: 'var(--qabas-red-deep)',
         },
       },
       fontFamily: {

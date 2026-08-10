@@ -88,7 +88,7 @@ export default function App() {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-brand-deep border-t border-brand-red-light/30 px-4 py-3 space-y-1 shadow-2xl">
+          <div className="md:hidden bg-brand-deep border-t border-white/10 px-4 py-3 space-y-1 shadow-2xl">
             {TABS.map(({ id, label, icon: Icon }) => (
               <a
                 key={id}
