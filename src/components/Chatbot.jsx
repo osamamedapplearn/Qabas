@@ -15,6 +15,12 @@ export default function Chatbot() {
     if (isOpen) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading, isOpen]);
 
+  useEffect(() => {
+    const open = () => { setIsOpen(true); setShowTooltip(false); };
+    window.addEventListener('qabas:open-chat', open);
+    return () => window.removeEventListener('qabas:open-chat', open);
+  }, [setIsOpen, setShowTooltip]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!inputPrompt.trim()) return;

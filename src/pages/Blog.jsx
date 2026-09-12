@@ -23,9 +23,10 @@ export default function Blog() {
       <FilterPills options={POST_CATEGORIES} value={filter} onChange={setFilter} />
 
       {featured && (
-        <Link to={`/blog/${featured.slug}`} className="group grid grid-cols-1 lg:grid-cols-2 gap-0 mt-10 rounded-3xl overflow-hidden border border-brand-teal/10 shadow-lg hover:shadow-2xl transition-all mb-8 bg-white">
-          <div className="relative h-64 lg:h-auto overflow-hidden">
+        <Link to={`/blog/${featured.slug}`} className="group grid grid-cols-1 lg:grid-cols-2 gap-0 mt-10 rounded-3xl overflow-hidden border border-brand-teal/10 shadow-lg hover:shadow-2xl transition-all mb-8 bg-white card-lift">
+          <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[320px] overflow-hidden">
             <img src={featured.cover} alt={featured.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/40 via-transparent to-transparent pointer-events-none" />
           </div>
           <div className="p-8 sm:p-10 flex flex-col justify-center">
             <span className="text-xs font-extrabold text-brand-teal-dark mb-3">{POST_CATEGORIES.find((c) => c.id === featured.category)?.title} • {featured.date}</span>
@@ -40,12 +41,13 @@ export default function Blog() {
         <AnimatePresence mode="popLayout">
           {(featured ? rest : []).concat(featured ? [] : list).map((p) => (
             <motion.div key={p.slug} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
-              <Link to={`/blog/${p.slug}`} className="group rounded-3xl overflow-hidden bg-white border border-brand-teal/10 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
-                <div className="relative h-48 overflow-hidden">
+              <Link to={`/blog/${p.slug}`} className="group rounded-3xl overflow-hidden bg-white border border-brand-teal/10 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full card-lift">
+                <div className="relative aspect-[16/10] overflow-hidden">
                   <img src={p.cover} alt={p.title} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/45 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-brand-teal-dark text-[11px] font-extrabold">{POST_CATEGORIES.find((c) => c.id === p.category)?.title}</span>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <span className="text-xs font-extrabold text-brand-teal-dark mb-2">{POST_CATEGORIES.find((c) => c.id === p.category)?.title}</span>
                   <h3 className="font-arabic text-lg font-extrabold text-brand-maroon leading-snug mb-2 group-hover:text-brand-teal-dark transition-colors">{p.title}</h3>
                   <p className="text-sm text-brand-ink-soft font-body leading-relaxed flex-1">{p.excerpt}</p>
                   <span className="mt-4 text-xs font-bold text-brand-ink-soft">{p.date} • {p.readTime}</span>

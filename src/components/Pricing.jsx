@@ -4,6 +4,7 @@ import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, 
 import { SITE, waLink } from '../config/site';
 
 const PRICING = { designUnit: 90, reelUnit: 250, automation: 3000, website: 4000 };
+export const openExpertChat = () => window.dispatchEvent(new CustomEvent('qabas:open-chat'));
 
 export default function Pricing() {
   const [modal, setModal] = useState(false);
@@ -44,9 +45,15 @@ export default function Pricing() {
           <span className="block text-xs text-brand-ink-soft mb-1 uppercase tracking-wider font-bold">Starting from</span>
           <span className="font-extrabold text-2xl text-brand-red">{price} <span className="text-sm font-normal text-brand-ink-soft">ج.م</span></span>
         </div>
-        <a href={waLink(link)} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white border border-brand-deep/20 flex items-center justify-center text-brand-red hover:bg-brand-red hover:text-white hover:border-brand-red transition-all shadow-sm">
-          <ArrowLeft className="w-5 h-5" />
-        </a>
+        <div className="flex items-center gap-2.5">
+          <button onClick={openExpertChat} aria-label={`تحدث مع خبير عن ${title}`}
+            className="h-12 px-5 rounded-full bg-brand-teal-soft text-brand-teal-dark text-sm font-extrabold hover:bg-brand-teal hover:text-white transition-all whitespace-nowrap">
+            تحدث مع خبير
+          </button>
+          <a href={waLink(link)} target="_blank" rel="noreferrer" aria-label={`اطلب ${title} عبر واتساب`} className="w-12 h-12 rounded-full bg-white border border-brand-deep/20 flex items-center justify-center text-brand-red hover:bg-brand-red hover:text-white hover:border-brand-red transition-all shadow-sm">
+            <ArrowLeft className="w-5 h-5" />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -110,10 +117,16 @@ export default function Pricing() {
                   <span className="block text-white/70 text-sm mb-1 uppercase font-bold tracking-widest">Investment</span>
                   <span className="text-5xl font-extrabold text-white drop-shadow-md">4,500 <span className="text-xl font-normal text-white/80">ج.م</span></span>
                 </div>
-                <a href={waLink('أريد الاشتراك في باقة NOVA')} target="_blank" rel="noreferrer"
-                  className="w-full sm:w-auto px-10 py-4 rounded-full bg-white text-brand-red font-extrabold text-center hover:bg-brand-snow hover:scale-105 transition-all shadow-xl text-lg flex items-center justify-center gap-2">
-                  احجز باقة NOVA <ArrowLeft className="w-5 h-5" />
-                </a>
+                <div className="w-full sm:w-auto flex flex-col gap-3">
+                  <a href={waLink('أريد الاشتراك في باقة NOVA')} target="_blank" rel="noreferrer"
+                    className="px-10 py-4 rounded-full bg-white text-brand-red font-extrabold text-center hover:bg-brand-snow hover:scale-105 active:scale-95 transition-all shadow-xl text-lg flex items-center justify-center gap-2">
+                    احجز باقة NOVA <ArrowLeft className="w-5 h-5" />
+                  </a>
+                  <button onClick={openExpertChat}
+                    className="px-10 py-2.5 rounded-full border border-white/40 text-white/90 font-bold text-sm text-center hover:bg-white/10 hover:border-white hover:text-white active:scale-95 transition-all">
+                    تحدث مع خبير أولاً
+                  </button>
+                </div>
               </div>
             </div>
 

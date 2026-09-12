@@ -4,15 +4,7 @@ import { ArrowUpLeft } from 'lucide-react';
 import { SECTORS } from '../data/sectors';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
-
-const IMAGES = {
-  tourism: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop',
-  realestate: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop',
-  ecommerce: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop',
-  education: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop',
-  healthcare: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop',
-  retail: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop',
-};
+import SectorArt from './SectorArt';
 
 const DETAILS = {
   tourism: 'مونتاج ريلز للوجهات السياحية، أوتوميشن الرد الآلي على أسعار الرحلات والبرامج 24/7، وصفحة هبوط بحجز مباشر.',
@@ -40,16 +32,10 @@ export default function Sectors() {
             const Icon = s.icon;
             return (
               <Reveal key={s.id} delay={Math.min(i * 0.06, 0.3)}>
-                <div className="group relative h-[450px] w-full rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 bg-brand-deep">
-                  <img
-                    src={IMAGES[s.id]}
-                    alt={s.fullTitle}
-                    loading="lazy"
-                    decoding="async"
-                    width="800"
-                    height="450"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                <div className="group card-lift relative h-[450px] w-full rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl bg-brand-deep">
+                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                    <SectorArt variant={s.id} />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-8 text-right z-10">
                     <div className="mb-auto mt-4">

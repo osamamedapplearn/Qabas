@@ -8,7 +8,7 @@ export default function ProjectCard({ project }) {
   return (
     <Link
       to={`/works/${project.slug}`}
-      className="group rounded-3xl overflow-hidden bg-white border border-brand-teal/10 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
+      className="group card-lift rounded-3xl overflow-hidden bg-white border border-brand-teal/10 shadow-md hover:shadow-2xl flex flex-col"
     >
       <div className="relative h-56 overflow-hidden">
         <img src={project.cover} alt={project.title} loading="lazy" decoding="async"

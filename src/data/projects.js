@@ -123,7 +123,8 @@ export const PROJECTS = [
       'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=900&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop',
     ],
-    tech: ['Brand Identity', 'Reels Production', 'Menu Automation', 'Social Management'],
+        beforeAfter: { before: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=900&auto=format&fit=crop', after: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=900&auto=format&fit=crop', caption: 'صور توضيحية — تُستبدل بلقطات العميل الفعلية قبل وبعد الإطلاق.' },
+tech: ['Brand Identity', 'Reels Production', 'Menu Automation', 'Social Management'],
   },
   {
     slug: 'nova-brand-system',

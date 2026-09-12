@@ -124,6 +124,38 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   .drawer-in { animation: none; }
 }
 
+/* ── Hero aurora drift + underline draw (subtle, GPU-cheap transforms) ── */
+@keyframes aurora-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -40px) scale(1.15); }
+}
+@keyframes aurora-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-70px, 50px) scale(1.1); }
+}
+@keyframes underline-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.animate-aurora-a { animation: aurora-a 16s ease-in-out infinite; }
+.animate-aurora-b { animation: aurora-b 20s ease-in-out infinite; }
+.animate-underline-grow { animation: underline-grow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-a, .animate-aurora-b, .animate-underline-grow { animation: none !important; }
+}
+
+/* ── Consistent card micro-interaction (lift + shadow + teal border) ── */
+.card-lift { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease; }
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(10, 94, 93, 0.14);
+  border-color: rgba(14, 124, 123, 0.35);
+}
+
+/* ── Satisfying button push feedback ── */
+.btn-accent:active, .btn-glow:active { transform: translateY(1px) scale(0.98); }
+a:active[class*="rounded-full"], button:active[class*="rounded-full"] { transform: scale(0.98); }
+
 /* ── Long-form article typography ── */
 .prose-ar p { font-size: 1.125rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.5rem; }
 .prose-ar h2 { font-family: Cairo, sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--qabas-red-deep); margin: 2.5rem 0 1rem; line-height: 1.7; }

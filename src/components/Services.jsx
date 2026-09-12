@@ -27,7 +27,7 @@ export default function Services() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map(({ icon: Icon, title, desc }, i) => (
             <Reveal key={title} delay={Math.min(i * 0.05, 0.25)}>
-              <div className="glass-card rounded-2xl p-8 group h-full">
+              <div className="glass-card card-lift rounded-2xl p-8 group h-full">
                 <div className="p-3 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal-dark w-fit mb-6 group-hover:bg-brand-teal group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand-teal/30 transition-all duration-300">
                   <Icon className="w-6 h-6" />
                 </div>

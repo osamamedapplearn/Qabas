@@ -24,7 +24,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((t, i) => (
             <Reveal key={t.author} delay={i * 0.08}>
-              <figure className="glass-card rounded-3xl p-8 h-full flex flex-col">
+              <figure className="glass-card card-lift rounded-3xl p-8 h-full flex flex-col">
                 <div className="flex gap-1 mb-4" aria-label={`تقييم ${t.rating} من 5`}>
                   {Array.from({ length: t.rating }).map((_, s) => (
                     <Star key={s} className="w-4 h-4 text-brand-amber fill-brand-amber" />

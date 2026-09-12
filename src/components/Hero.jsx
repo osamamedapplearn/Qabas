@@ -48,10 +48,11 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* ── Soft Ambient Lighting ── */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-red-vivid rounded-full mix-blend-screen filter blur-[120px] opacity-20" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-brand-gold rounded-full mix-blend-screen filter blur-[150px] opacity-10" />
+      {/* ── Ambient Lighting: slow aurora drift (motion-safe, pure CSS) ── */}
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden" aria-hidden="true">
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-red-vivid rounded-full mix-blend-screen blur-[120px] opacity-20 motion-safe:animate-aurora-a" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-brand-gold rounded-full mix-blend-screen blur-[150px] opacity-10 motion-safe:animate-aurora-b" />
+        <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-brand-teal rounded-full mix-blend-screen blur-[130px] opacity-15 motion-safe:animate-aurora-a" />
       </div>
 
       {/* ── 3D Glassmorphic Flame/Spark ── */}
@@ -66,7 +67,11 @@ export default function Hero() {
       {/* ── Headline (Sharp Arabic Naskh styling) ── */}
       <h1 id="heroHeadline" className="opacity-0 max-w-5xl mb-6 z-20 relative">
         <span className="block font-arabic text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.2] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-          نُشعل نجاحك ونبني أثرك الرقمي
+          نُشعل نجاحك ونبني{' '}
+          <span className="relative inline-block text-brand-amber">
+            أثرك الرقمي
+            <span aria-hidden="true" className="absolute -bottom-1 right-0 left-0 h-1 rounded-full bg-brand-amber/70 motion-safe:animate-underline-grow origin-right" />
+          </span>
         </span>
       </h1>
 
