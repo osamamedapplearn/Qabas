@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, Send, X, Flame, PhoneCall, Minimize2, Check } from 'lucide-react';
 import { useQabasChat } from '../hooks/useQabasChat';
 
-const WHATSAPP_NUMBER = '201144712845';
-
 export default function Chatbot() {
   const { isOpen, setIsOpen, showTooltip, setShowTooltip, messages, loading, sendMessage } = useQabasChat();
   const [inputPrompt, setInputPrompt] = useState('');
@@ -69,7 +67,7 @@ export default function Chatbot() {
           aria-label="مساعد قبس الذكي"
           className="relative w-16 h-16 rounded-full btn-glow flex items-center justify-center cursor-pointer shadow-xl shadow-brand-red/30"
         >
-          <span className="absolute inset-0 rounded-full bg-brand-red-vivid/40 animate-ping pointer-events-none" />
+          <span className="absolute inset-0 rounded-full bg-brand-red-vivid/40 motion-safe:animate-ping pointer-events-none" />
           <div className="w-full h-full rounded-full flex items-center justify-center text-white relative z-10">
             {isOpen ? <X className="w-7 h-7" /> : <Flame className="w-7 h-7" />}
           </div>
@@ -148,7 +146,7 @@ export default function Chatbot() {
             {/* Lead Form */}
             {showLeadForm && (
               <form onSubmit={handleLeadSubmit} className="p-4 bg-brand-snow border-t border-brand-red/10 flex gap-3 shadow-inner">
-                <input type="text" placeholder="أدخل رقم الواتساب..." value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className="flex-1 bg-white border border-brand-red/20 rounded-xl px-4 py-2.5 text-xs text-brand-ink font-bold placeholder-brand-ink-soft focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red shadow-sm transition-all" />
+                <input type="tel" inputMode="tel" autoComplete="tel" pattern="[0-9+\s]{8,15}" placeholder="أدخل رقم الواتساب..." value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} aria-label="رقم الواتساب" className="flex-1 bg-white border border-brand-red/20 rounded-xl px-4 py-2.5 text-xs text-brand-ink font-bold placeholder-brand-ink-soft focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red shadow-sm transition-all" />
                 <button type="submit" className="px-4 py-2.5 rounded-xl btn-glow text-white font-bold text-xs flex items-center gap-1.5">
                   <Check className="w-4 h-4" /> إرسال
                 </button>

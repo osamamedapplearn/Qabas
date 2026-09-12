@@ -1,76 +1,99 @@
-import React from 'react';
-import { PhoneCall, MessageCircle, Mail, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { PhoneCall, MessageCircle, Mail, Clock, Send } from 'lucide-react';
+import { SITE, waLink } from '../config/site';
+import { SECTORS } from '../data/sectors';
+import SectionHeading from './ui/SectionHeading';
 
-const WHATSAPP_NUMBER = '201144712845';
+export default function Contact({ compact = false }) {
+  const [params] = useSearchParams();
+  const initialSector = params.get('sector') ?? '';
+  const [sector, setSector] = useState(initialSector);
+  const [name, setName] = useState('');
+  const [need, setNeed] = useState('');
 
-export default function Contact() {
+  const submitHref = waLink(
+    `طلب استشارة — الاسم: ${name || '—'} | القطاع: ${sector ? SECTORS.find((s) => s.id === sector)?.fullTitle : 'عام'} | التفاصيل: ${need || '—'}`
+  );
+
   return (
-    <section id="contact" className="relative w-full pt-28 md:pt-36 pb-24 sm:pb-28 px-6 sm:px-8 bg-soft-red-glow scroll-mt-24">
+    <section id="contact" className="relative w-full pt-24 md:pt-32 pb-20 sm:pb-24 px-6 sm:px-8 bg-brand-teal-soft/40 scroll-mt-24">
       <div className="max-w-5xl mx-auto relative z-10">
-        {/* Headline Banner with CTA */}
-        <div className="bg-brand-deep rounded-[2rem] p-8 sm:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_rgba(102,0,0,0.2)]">
-          <div>
-            <span className="font-serif text-sm italic text-brand-gold tracking-widest uppercase block mb-2 font-bold">The Future</span>
-            <h2 className="font-arabic text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-              لنبدأ قصة نجاحك القادمة
-            </h2>
-          </div>
-          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="btn-glow shrink-0 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3">
-            <MessageCircle className="w-5 h-5" /> تواصل عبر واتساب
-          </a>
-        </div>
+        <SectionHeading
+          eyebrow="Contact"
+          title="لنبدأ قصة نجاحك القادمة"
+          desc="نموذج واحد ذكي يغنيك عن أزرار متعددة — اختر قطاعك وسنتواصل معك بالحل المناسب."
+          align="center"
+        />
 
-        {/* Contact Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-14">
-          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
-            <div className="p-4 rounded-xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 group-hover:bg-brand-red group-hover:text-white group-hover:shadow-[0_4px_15px_rgba(196,12,32,0.3)] transition-all">
-              <MessageCircle className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="block text-sm text-brand-ink-soft font-bold mb-1">واتساب</span>
-              <span className="font-extrabold text-lg text-brand-maroon group-hover:text-brand-red transition" dir="ltr">+20 11 4471 2845</span>
-            </div>
-          </a>
-          <a href="tel:+201144712845" className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
-            <div className="p-4 rounded-xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 group-hover:bg-brand-red group-hover:text-white group-hover:shadow-[0_4px_15px_rgba(196,12,32,0.3)] transition-all">
-              <PhoneCall className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="block text-sm text-brand-ink-soft font-bold mb-1">اتصال مباشر</span>
-              <span className="font-extrabold text-lg text-brand-maroon group-hover:text-brand-red transition" dir="ltr">+20 11 4471 2845</span>
-            </div>
-          </a>
-          <a href="mailto:hello@qabas.agency" className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
-            <div className="p-4 rounded-xl bg-brand-red/10 border border-brand-red/20 text-brand-red shrink-0 group-hover:bg-brand-red group-hover:text-white group-hover:shadow-[0_4px_15px_rgba(196,12,32,0.3)] transition-all">
-              <Mail className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="block text-sm text-brand-ink-soft font-bold mb-1">البريد الإلكتروني</span>
-              <span className="font-extrabold text-lg text-brand-maroon group-hover:text-brand-red transition">hello@qabas.agency</span>
-            </div>
-          </a>
-          <div className="glass-card rounded-2xl p-6 flex items-center gap-5 shadow-sm">
-            <div className="p-4 rounded-xl bg-brand-gold/10 border border-brand-gold/20 text-brand-gold shrink-0">
-              <Clock className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="block text-sm text-brand-ink-soft font-bold mb-1">مواعيد العمل</span>
-              <span className="font-extrabold text-lg text-brand-maroon">يومياً 10 صباحاً - 10 مساءً</span>
+        {/* Smart form */}
+        <form
+          className="bg-white rounded-3xl p-6 sm:p-10 mb-12 border border-brand-teal/15 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-5"
+          onSubmit={(e) => { e.preventDefault(); window.open(submitHref, '_blank'); }}
+        >
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact-name" className="font-bold text-sm text-brand-ink">الاسم</label>
+            <input id="contact-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="اسمك الكريم"
+              className="rounded-xl border border-brand-teal/25 px-4 py-3 font-body focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact-sector" className="font-bold text-sm text-brand-ink">القطاع</label>
+            <select id="contact-sector" value={sector} onChange={(e) => setSector(e.target.value)}
+              className="rounded-xl border border-brand-teal/25 px-4 py-3 font-body bg-white focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal">
+              <option value="">عام / غير محدد</option>
+              {SECTORS.map((s) => <option key={s.id} value={s.id}>{s.fullTitle}</option>)}
+            </select>
+          </div>
+          <div className="flex flex-col gap-2 md:col-span-2">
+            <label htmlFor="contact-need" className="font-bold text-sm text-brand-ink">ما الذي تحتاجه؟</label>
+            <textarea id="contact-need" value={need} onChange={(e) => setNeed(e.target.value)} rows={3} placeholder="احكِ لنا باختصار عن مشروعك..."
+              className="rounded-xl border border-brand-teal/25 px-4 py-3 font-body focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal" />
+          </div>
+          <button type="submit" className="btn-accent text-white md:col-span-2 py-4 rounded-full font-extrabold text-lg flex items-center justify-center gap-2">
+            <Send className="w-5 h-5" /> إرسال عبر واتساب
+          </button>
+        </form>
+
+        {!compact && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
+            <a href={waLink()} target="_blank" rel="noreferrer" className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
+              <div className="p-4 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal-dark shrink-0 group-hover:bg-brand-teal group-hover:text-white transition-all">
+                <MessageCircle className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-sm text-brand-ink-soft font-bold mb-1">واتساب</span>
+                <span className="font-extrabold text-lg text-brand-maroon" dir="ltr">{SITE.whatsappDisplay}</span>
+              </div>
+            </a>
+            <a href={SITE.phoneHref} className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
+              <div className="p-4 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal-dark shrink-0 group-hover:bg-brand-teal group-hover:text-white transition-all">
+                <PhoneCall className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-sm text-brand-ink-soft font-bold mb-1">اتصال مباشر</span>
+                <span className="font-extrabold text-lg text-brand-maroon" dir="ltr">{SITE.whatsappDisplay}</span>
+              </div>
+            </a>
+            <a href={`mailto:${SITE.email}`} className="glass-card rounded-2xl p-6 flex items-center gap-5 group shadow-sm">
+              <div className="p-4 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal-dark shrink-0 group-hover:bg-brand-teal group-hover:text-white transition-all">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-sm text-brand-ink-soft font-bold mb-1">البريد الإلكتروني</span>
+                <span className="font-extrabold text-lg text-brand-maroon" dir="ltr">{SITE.email}</span>
+              </div>
+            </a>
+            <div className="glass-card rounded-2xl p-6 flex items-center gap-5 shadow-sm">
+              <div className="p-4 rounded-xl bg-brand-amber/10 border border-brand-amber/30 text-brand-amber shrink-0">
+                <Clock className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-sm text-brand-ink-soft font-bold mb-1">مواعيد العمل</span>
+                <span className="font-extrabold text-lg text-brand-maroon">{SITE.hours}</span>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Main CTA */}
-        <div className="text-center">
-          <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('أريد استشارة مجانية لمشروعي')}`}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-glow inline-block px-12 py-5 rounded-full text-white font-extrabold text-lg shadow-[0_6px_20px_rgba(196,12,32,0.3)] hover:shadow-[0_8px_30px_rgba(196,12,32,0.5)] transition-all"
-          >
-            اطلب استشارة مجانية عبر الواتساب
-          </a>
-        </div>
+        )}
       </div>
     </section>
   );

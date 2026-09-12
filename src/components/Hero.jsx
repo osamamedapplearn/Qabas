@@ -1,13 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 import { ArrowUpLeft, Sparkles } from 'lucide-react';
-
-const WHATSAPP_NUMBER = '201144712845';
+import { waLink } from '../config/site';
 
 export default function Hero() {
   const ref = useRef(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ['#heroWatermark', '#heroSpark', '#heroHeadline', '#heroSub', '#heroCtas'].forEach((sel) => {
+        document.querySelector(sel)?.classList.remove('opacity-0');
+      });
+      const wm = document.querySelector('#heroWatermark');
+      if (wm) wm.style.opacity = '0.04';
+      return;
+    }
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 });
       
@@ -70,21 +78,21 @@ export default function Hero() {
       {/* ── CTAs ── */}
       <div id="heroCtas" className="opacity-0 flex flex-col sm:flex-row gap-5 w-full max-w-md sm:max-w-none sm:w-auto z-20 mb-16 relative">
         <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('أريد استشارة مجانية لمشروعي')}`}
+          href={waLink('أريد استشارة مجانية لمشروعي')}
           target="_blank"
           rel="noreferrer"
-          className="bg-white text-brand-deep px-10 py-4 rounded-full font-extrabold text-base flex items-center justify-center gap-2 group hover:bg-brand-snow shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.3)] transition-all duration-300 transform hover:-translate-y-1"
+          className="btn-accent text-white px-10 py-4 rounded-full font-extrabold text-base flex items-center justify-center gap-2 group shadow-xl transition-all duration-300 transform hover:-translate-y-1"
         >
-          <Sparkles className="w-5 h-5 text-brand-deep" />
+          <Sparkles className="w-5 h-5" />
           <span>احجز استشارة مجانية</span>
           <ArrowUpLeft className="w-5 h-5 group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform" />
         </a>
-        <a
-          href="#pricing"
+        <Link
+          to="/works"
           className="px-10 py-4 rounded-full border border-white/30 text-white font-bold text-base hover:bg-white/10 hover:border-white transition-all duration-300 text-center flex items-center justify-center backdrop-blur-sm"
         >
-          تصفح الباقات
-        </a>
+          تصفح أعمالنا
+        </Link>
       </div>
     </section>
   );

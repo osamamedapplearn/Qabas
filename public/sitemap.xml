@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://qabas.agency/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://qabas.agency/works</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://qabas.agency/blog</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://qabas.agency/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://qabas.agency/works/tourism-booking-funnel</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://qabas.agency/works/realestate-launch-page</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://qabas.agency/works/ecommerce-cart-recovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://qabas.agency/works/nova-brand-system</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://qabas.agency/blog/tourism-reels-that-convert</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://qabas.agency/blog/ecommerce-cart-recovery-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://qabas.agency/blog/automation-playbook-arabic-business</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>

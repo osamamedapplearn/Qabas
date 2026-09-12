@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, ArrowLeft } from 'lucide-react';
+import { SITE, waLink } from '../config/site';
 
-const WHATSAPP_NUMBER = '201144712845';
 const PRICING = { designUnit: 90, reelUnit: 250, automation: 3000, website: 4000 };
-const waLink = (t) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t)}`;
 
 export default function Pricing() {
   const [modal, setModal] = useState(false);
@@ -13,6 +12,14 @@ export default function Pricing() {
   const [ia, setIa] = useState(false);
   const [iw, setIw] = useState(false);
   const total = cd * PRICING.designUnit + cr * PRICING.reelUnit + (ia ? PRICING.automation : 0) + (iw ? PRICING.website : 0);
+
+  useEffect(() => {
+    if (!modal) return;
+    const onKey = (e) => { if (e.key === 'Escape') setModal(false); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+  }, [modal]);
 
   const CI = ({ children, light }) => (
     <li className="flex items-center gap-3 text-base">
@@ -161,7 +168,7 @@ export default function Pricing() {
             </h3>
             <p className="text-brand-ink-soft text-lg font-body">اختر عدد التصاميم والريلز وأي حلول برمجية تحتاجها، واحسب التكلفة فورياً.</p>
           </div>
-          <button onClick={() => setModal(true)} className="btn-glow shrink-0 px-10 py-4 rounded-full font-bold text-lg flex items-center gap-3">
+          <button onClick={() => setModal(true)} className="btn-accent text-white shrink-0 px-10 py-4 rounded-full font-bold text-lg flex items-center gap-3">
             <Calculator className="w-6 h-6" /> احسب باقتك الآن
           </button>
         </div>
@@ -170,23 +177,25 @@ export default function Pricing() {
       {/* ═══ Calculator Modal ═══ */}
       <AnimatePresence>
         {modal && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-brand-maroon/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-brand-maroon/80 backdrop-blur-md" onClick={() => setModal(false)}>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
+              role="dialog" aria-modal="true" aria-label="حاسبة الباقة المخصصة"
+              onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-2xl rounded-3xl bg-white p-8 sm:p-10 max-h-[90vh] overflow-y-auto text-right shadow-2xl"
             >
-              <button onClick={() => setModal(false)} className="absolute top-6 left-6 p-2 rounded-full bg-brand-red/5 hover:bg-brand-red/10 text-brand-ink-soft hover:text-brand-red transition"><X className="w-6 h-6" /></button>
+              <button onClick={() => setModal(false)} aria-label="إغلاق الحاسبة" className="absolute top-6 left-6 p-2 rounded-full bg-brand-red/5 hover:bg-brand-red/10 text-brand-ink-soft hover:text-brand-red transition"><X className="w-6 h-6" /></button>
               <div className="flex items-center gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-brand-red/10 text-brand-red"><Calculator className="w-8 h-8" /></div>
                 <div><h3 className="font-arabic text-2xl font-extrabold text-brand-maroon">حاسبة الباقة المخصصة</h3><p className="text-sm text-brand-ink-soft mt-1">راقب السعر التقديري مباشرة</p></div>
               </div>
               <div className="space-y-6 mb-8">
                 <div className="bg-brand-snow p-5 rounded-2xl border border-brand-red/10">
-                  <div className="flex justify-between items-center mb-4"><span className="font-bold text-base text-brand-ink">عدد تصاميم السوشيال ميديا</span><span className="font-extrabold text-brand-red text-xl">{cd} تصميم</span></div>
-                  <input type="range" min="0" max="50" step="5" value={cd} onChange={e => setCd(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
+                  <div className="flex justify-between items-center mb-4"><label htmlFor="calc-designs" className="font-bold text-base text-brand-ink">عدد تصاميم السوشيال ميديا</label><span className="font-extrabold text-brand-red text-xl">{cd} تصميم</span></div>
+                  <input id="calc-designs" type="range" min="0" max="50" step="5" value={cd} onChange={e => setCd(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
                 </div>
                 <div className="bg-brand-snow p-5 rounded-2xl border border-brand-red/10">
-                  <div className="flex justify-between items-center mb-4"><span className="font-bold text-base text-brand-ink">عدد فيديوهات الريلز</span><span className="font-extrabold text-brand-red text-xl">{cr} ريل</span></div>
-                  <input type="range" min="0" max="30" step="1" value={cr} onChange={e => setCr(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
+                  <div className="flex justify-between items-center mb-4"><label htmlFor="calc-reels" className="font-bold text-base text-brand-ink">عدد فيديوهات الريلز</label><span className="font-extrabold text-brand-red text-xl">{cr} ريل</span></div>
+                  <input id="calc-reels" type="range" min="0" max="30" step="1" value={cr} onChange={e => setCr(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className={`p-5 rounded-2xl border-2 cursor-pointer transition flex items-center justify-between ${ia ? 'bg-brand-red/5 border-brand-red text-brand-red' : 'bg-brand-snow border-brand-red/10 text-brand-ink-soft'}`}>

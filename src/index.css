@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 :root {
-  /* Unified Red Color System */
+  /* Unified Red Color System + new teal/amber accents */
   --qabas-red-deep:   #660000;
   --qabas-red-main:   #800316;
   --qabas-red-accent: #A80B1E;
+  --teal:        #0E7C7B;
+  --teal-dark:   #0A5E5D;
+  --teal-soft:   #E6F4F3;
+  --amber:       #F59E0B;
+  --amber-soft:  #FEF3C7;
   
   --snow:        #FFFFFF;
   --ink:         #1A1A1A;
@@ -64,6 +69,27 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   transform: translateY(-1px);
 }
 
+/* ── Accent CTA Button (Teal) — primary for conversion actions ── */
+.btn-accent {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  box-shadow: 0 4px 16px rgba(14, 124, 123, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%);
+  transform: translateX(-150%);
+  transition: transform 0.6s ease;
+}
+.btn-accent:hover {
+  box-shadow: 0 8px 28px rgba(14, 124, 123, 0.55);
+  transform: translateY(-2px);
+}
+.btn-accent:hover::after { transform: translateX(150%); }
+
 /* ── Crimson spotlight utility (for white backgrounds) ── */
 .spotlight {
   position: absolute;
@@ -83,19 +109,21 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   background: radial-gradient(circle at top center, rgba(128, 3, 22, 0.08) 0%, var(--snow) 70%, var(--snow) 100%);
 }
 
-/* ── Marquee Animation ── */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(50%); } /* positive 50% for RTL scrolling right-to-left naturally if container is ltr, or adjust based on structure */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-slow, .animate-float, .animate-glow-breathe { animation: none !important; }
+  html { scroll-behavior: auto; }
 }
-.animate-marquee {
-  animation: marquee 25s linear infinite;
+
+/* ── Mobile drawer: slides in from the left (end side in RTL) ── */
+@keyframes drawer-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
-/* Ensure RTL scrolling goes in the right direction. Since we are in dir="rtl", transforming to translateX(50%) moves it right. We want continuous left movement, so we translate to left. Wait, in RTL, translateX(50%) moves it right. If we want it to scroll continuously, we should translate it by half its width. */
-@keyframes marquee-rtl {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(50%); } 
+.drawer-in { animation: drawer-in 0.32s cubic-bezier(0.16, 1, 0.3, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .drawer-in { animation: none; }
 }
-html[dir="rtl"] .animate-marquee {
-  animation: marquee-rtl 25s linear infinite;
-}
+
+/* ── Long-form article typography ── */
+.prose-ar p { font-size: 1.125rem; line-height: 2; color: var(--ink-soft); margin-bottom: 1.5rem; }
+.prose-ar h2 { font-family: Cairo, sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--qabas-red-deep); margin: 2.5rem 0 1rem; line-height: 1.7; }
