@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, ArrowLeft } from 'lucide-react';
 import { SITE, waLink } from '../config/site';
 
-const PRICING = { designUnit: 90, reelUnit: 250, automation: 3000, website: 4000 };
+const PRICING = { designUnit: 350, reelUnit: 450, automation: 3200, website: 4200 };
 export const openExpertChat = () => window.dispatchEvent(new CustomEvent('qabas:open-chat'));
 
 export default function Pricing() {
@@ -204,11 +204,11 @@ export default function Pricing() {
               <div className="space-y-6 mb-8">
                 <div className="bg-brand-snow p-5 rounded-2xl border border-brand-red/10">
                   <div className="flex justify-between items-center mb-4"><label htmlFor="calc-designs" className="font-bold text-base text-brand-ink">عدد تصاميم السوشيال ميديا</label><span className="font-extrabold text-brand-red text-xl">{cd} تصميم</span></div>
-                  <input id="calc-designs" type="range" min="0" max="50" step="5" value={cd} onChange={e => setCd(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
+                  <input id="calc-designs" type="number" min="0" value={cd} onChange={e => setCd(e.target.value === '' ? 0 : +e.target.value)} className="w-full p-3 border border-brand-red/20 rounded-xl text-brand-ink text-right font-bold text-lg focus:outline-none focus:border-brand-red bg-white" />
                 </div>
                 <div className="bg-brand-snow p-5 rounded-2xl border border-brand-red/10">
                   <div className="flex justify-between items-center mb-4"><label htmlFor="calc-reels" className="font-bold text-base text-brand-ink">عدد فيديوهات الريلز</label><span className="font-extrabold text-brand-red text-xl">{cr} ريل</span></div>
-                  <input id="calc-reels" type="range" min="0" max="30" step="1" value={cr} onChange={e => setCr(+e.target.value)} className="w-full accent-brand-red-vivid cursor-pointer" />
+                  <input id="calc-reels" type="number" min="0" value={cr} onChange={e => setCr(e.target.value === '' ? 0 : +e.target.value)} className="w-full p-3 border border-brand-red/20 rounded-xl text-brand-ink text-right font-bold text-lg focus:outline-none focus:border-brand-red bg-white" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className={`p-5 rounded-2xl border-2 cursor-pointer transition flex items-center justify-between ${ia ? 'bg-brand-red/5 border-brand-red text-brand-red' : 'bg-brand-snow border-brand-red/10 text-brand-ink-soft'}`}>
