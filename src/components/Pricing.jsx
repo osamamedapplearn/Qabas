@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, ArrowLeft } from 'lucide-react';
+import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, ArrowLeft, Tag } from 'lucide-react';
 import { SITE, waLink } from '../config/site';
 
 const PRICING = { designUnit: 350, reelUnit: 450, automation: 3200, website: 4200 };
@@ -12,7 +12,39 @@ export default function Pricing() {
   const [cr, setCr] = useState(5);
   const [ia, setIa] = useState(false);
   const [iw, setIw] = useState(false);
-  const total = cd * PRICING.designUnit + cr * PRICING.reelUnit + (ia ? PRICING.automation : 0) + (iw ? PRICING.website : 0);
+  const [coupon, setCoupon] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState('');
+  const [couponError, setCouponError] = useState(false);
+
+  const baseTotal = cd * PRICING.designUnit + cr * PRICING.reelUnit + (ia ? PRICING.automation : 0) + (iw ? PRICING.website : 0);
+  let discount = 0;
+  let discountMsg = '';
+  
+  if (appliedCoupon === 'QABAS10') {
+    discount = baseTotal * 0.10;
+    discountMsg = 'خصم 10%';
+  } else if (appliedCoupon === 'QABAS20') {
+    discount = baseTotal * 0.20;
+    discountMsg = 'خصم 20%';
+  }
+  
+  const total = baseTotal - discount;
+
+  const handleApplyCoupon = () => {
+    const code = coupon.trim().toUpperCase();
+    if (code === '') {
+      setAppliedCoupon('');
+      setCouponError(false);
+      return;
+    }
+    if (['QABAS10', 'QABAS20'].includes(code)) {
+      setAppliedCoupon(code);
+      setCouponError(false);
+    } else {
+      setAppliedCoupon('');
+      setCouponError(true);
+    }
+  };
 
   useEffect(() => {
     if (!modal) return;
@@ -115,7 +147,7 @@ export default function Pricing() {
               <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto">
                 <div className="text-center sm:text-right w-full sm:w-auto">
                   <span className="block text-white/70 text-sm mb-1 uppercase font-bold tracking-widest">Investment</span>
-                  <span className="text-5xl font-extrabold text-white drop-shadow-md">4,500 <span className="text-xl font-normal text-white/80">ج.م</span></span>
+                  <span className="text-5xl font-extrabold text-white drop-shadow-md">13,150 <span className="text-xl font-normal text-white/80">ج.م</span></span>
                 </div>
                 <div className="w-full sm:w-auto flex flex-col gap-3">
                   <a href={waLink('أريد الاشتراك في باقة NOVA')} target="_blank" rel="noreferrer"
@@ -131,10 +163,12 @@ export default function Pricing() {
             </div>
 
             {/* Image Side */}
-            <div className="lg:w-2/5 relative min-h-[300px] bg-black/10">
+            <div className="lg:w-2/5 relative min-h-[300px] bg-black/10 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-brand-red via-transparent to-transparent z-10 hidden lg:block" />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-red via-transparent to-transparent z-10 lg:hidden" />
               <img src="/packages/nova.jpeg" alt="NOVA" loading="lazy" className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" />
+              {/* Blur overlay to hide any baked-in prices in the image */}
+              <div className="absolute inset-0 backdrop-blur-md bg-brand-red/10 z-0"></div>
             </div>
           </motion.div>
 
@@ -146,28 +180,28 @@ export default function Pricing() {
               icon={Zap} 
               title="باقة SPARK" 
               desc="إنتاج محتوى شهري متكامل: 10 ريلز مونتاج و 20 تصميم سوشيال ميديا." 
-              price="4,000" 
+              price="11,500" 
               link="أريد الاشتراك في باقة SPARK"
             />
             <MinimalRow 
               icon={Palette} 
               title="باقة التصميم" 
               desc="تصاميم سوشيال ميديا بجودة عالية جاهزة للنشر والتفاعل. باقات 20 أو 30 تصميم." 
-              price="1,800" 
+              price="7,000" 
               link="استفسار عن باقات التصميم"
             />
             <MinimalRow 
               icon={Video} 
               title="باقة المونتاج" 
               desc="ريلز وموشن قصير يبني الانتباه من الثواني الأولى. باقات 10 إلى 30 ريل." 
-              price="2,500" 
+              price="4,500" 
               link="استفسار عن باقات المونتاج"
             />
             <MinimalRow 
               icon={Globe} 
               title="المواقع والأوتوميشن" 
               desc="مواقع بالإيجار أو الشراء، وأوتوميشن ذكي للرد التلقائي على عملائك." 
-              price="800" 
+              price="7,400" 
               link="استفسار عن خدمات المواقع"
             />
           </div>
@@ -221,14 +255,55 @@ export default function Pricing() {
                   </label>
                 </div>
               </div>
+              
+              {/* Coupon Section */}
+              <div className="mb-6 flex gap-3">
+                <div className="relative flex-1">
+                  <Tag className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-ink-soft" />
+                  <input 
+                    type="text" 
+                    placeholder="لديك كود خصم؟ (جرب QABAS10)" 
+                    value={coupon}
+                    onChange={(e) => {
+                      setCoupon(e.target.value);
+                      if (couponError) setCouponError(false);
+                    }}
+                    className={`w-full bg-brand-snow border ${couponError ? 'border-red-500' : 'border-brand-red/10'} rounded-xl py-4 pr-12 pl-4 text-brand-ink font-bold focus:outline-none focus:border-brand-red transition-all`}
+                  />
+                </div>
+                <button 
+                  onClick={handleApplyCoupon}
+                  className="bg-brand-red text-white px-8 rounded-xl font-bold hover:bg-brand-maroon transition-colors whitespace-nowrap active:scale-95"
+                >
+                  تطبيق
+                </button>
+              </div>
+
               <div className="p-6 rounded-2xl bg-brand-red/5 border border-brand-red/15 flex items-center justify-between mb-8">
                 <div>
                   <span className="text-sm text-brand-ink-soft block font-bold mb-1">التكلفة التقديرية:</span>
-                  <span className="text-4xl font-extrabold text-brand-red">{total.toLocaleString()} <span className="text-lg font-normal text-brand-ink-soft">ج.م</span></span>
+                  <div className="flex flex-col">
+                    {discount > 0 && (
+                      <span className="text-lg text-brand-ink-soft line-through decoration-brand-red/50">{baseTotal.toLocaleString()} ج.م</span>
+                    )}
+                    <span className="text-4xl font-extrabold text-brand-red">
+                      {total.toLocaleString()} <span className="text-lg font-normal text-brand-ink-soft">ج.م</span>
+                    </span>
+                    {discount > 0 && (
+                      <span className="text-sm font-bold text-green-600 mt-2 flex items-center gap-1">
+                        <Check className="w-4 h-4" /> تم تطبيق {discountMsg} بنجاح!
+                      </span>
+                    )}
+                    {couponError && (
+                      <span className="text-sm font-bold text-red-500 mt-2 flex items-center gap-1">
+                        <X className="w-4 h-4" /> كود الخصم غير صحيح أو منتهي الصلاحية
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <Calculator className="w-12 h-12 text-brand-red/20" />
               </div>
-              <a href={waLink(`طلب باقة مخصصة: ${cd} تصميم, ${cr} ريل, أوتوميشن: ${ia?'نعم':'لا'}, موقع: ${iw?'نعم':'لا'}, السعر: ${total} ج.م`)}
+              <a href={waLink(`طلب باقة مخصصة: ${cd} تصميم, ${cr} ريل, أوتوميشن: ${ia?'نعم':'لا'}, موقع: ${iw?'نعم':'لا'}, السعر: ${total} ج.م${appliedCoupon ? ` (باستخدام كوبون ${appliedCoupon})` : ''}`)}
                 target="_blank" rel="noreferrer" className="btn-glow w-full py-5 rounded-full text-white font-extrabold text-center block flex items-center justify-center gap-3 text-lg">
                 <PhoneCall className="w-6 h-6" /> تأكيد الباقة عبر الواتساب
               </a>
