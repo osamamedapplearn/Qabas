@@ -26,6 +26,9 @@ export default function Pricing() {
   } else if (appliedCoupon === 'QABAS20') {
     discount = baseTotal * 0.20;
     discountMsg = 'خصم 20%';
+  } else if (appliedCoupon === 'DR_AMIR') {
+    discount = cd * (PRICING.designUnit - 150);
+    discountMsg = 'تصميم بـ 150 ج.م';
   }
   
   const total = baseTotal - discount;
@@ -37,7 +40,7 @@ export default function Pricing() {
       setCouponError(false);
       return;
     }
-    if (['QABAS10', 'QABAS20'].includes(code)) {
+    if (['QABAS10', 'QABAS20', 'DR_AMIR'].includes(code)) {
       setAppliedCoupon(code);
       setCouponError(false);
     } else {
