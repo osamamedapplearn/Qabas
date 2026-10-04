@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قبس | QABAS — بريف المشروع الرقمي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+--bg-dark:#070406;--bg-surface:#11090c;--bg-card:rgba(22,13,17,.72);--bg-card-hover:rgba(35,18,25,.85);
+--border-subtle:rgba(255,255,255,.08);--border-glow:rgba(230,27,51,.35);
+--primary-crimson:#e61b33;--primary-glow:#ff2a42;
+--text-white:#fff;--text-muted:#9e8e93;--text-dim:#685b60;
+--wa-green:#25d366;--wa-dark:#0a3d24;
+--font-body:'IBM Plex Sans Arabic',sans-serif;--font-display:'Cairo',sans-serif;--font-brand:'Cinzel',serif;
+--transition-smooth:all .35s cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+body{background-color:var(--bg-dark);color:var(--text-white);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;line-height:1.6;background-image:radial-gradient(circle at 85% 10%,rgba(200,24,43,.18) 0%,transparent 45%),radial-gradient(circle at 15% 75%,rgba(130,10,24,.14) 0%,transparent 40%),linear-gradient(180deg,#060305 0%,#0d0609 50%,#050204 100%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 0);background-size:32px 32px;opacity:.25;pointer-events:none;z-index:0}
+.cosmic-arc{position:fixed;top:-20%;left:-10%;width:120vw;height:70vh;border-bottom:2px solid rgba(255,255,255,.35);border-radius:50%;filter:drop-shadow(0 0 16px rgba(255,255,255,.7)) drop-shadow(0 0 35px var(--primary-crimson));transform:rotate(-7deg);pointer-events:none;z-index:0;opacity:.45}
+.app-container{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+header{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-subtle);background:rgba(7,4,6,.7);backdrop-filter:blur(16px);position:sticky;top:0;z-index:50;gap:1rem;flex-wrap:wrap}
+.brand-group{display:flex;align-items:center;gap:1.25rem;text-decoration:none}
+.brand-mark{width:44px;height:44px;background:#fff;border-radius:8px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2.5px;padding:3.5px;box-shadow:0 0 20px rgba(255,255,255,.25);flex-shrink:0}
+.brand-mark-cell{background:#000;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px}
+.brand-text-block{display:flex;flex-direction:column}
+.brand-arabic{font-family:var(--font-display);font-size:1.7rem;font-weight:900;letter-spacing:-.5px;line-height:1;color:#fff}
+.brand-latin{font-family:var(--font-brand);font-size:.8rem;letter-spacing:3px;color:#fff;font-weight:700}
+.brand-pill-motto{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-radius:9999px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.45);font-size:.75rem;letter-spacing:.5px}
+.motto-letter{color:var(--primary-crimson);font-weight:800}
+.header-actions{display:flex;align-items:center;gap:1rem}
+.btn-toggle-view{padding:.5rem 1.1rem;border-radius:999px;font-size:.8rem;font-weight:600;border:1px solid var(--border-subtle);background:rgba(255,255,255,.04);color:var(--text-white);cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:var(--transition-smooth);font-family:var(--font-body)}
+.btn-toggle-view:hover{border-color:var(--primary-crimson);background:rgba(230,27,51,.12)}
+.btn-toggle-view.active{background:var(--primary-crimson);border-color:var(--primary-crimson);color:#fff;box-shadow:0 0 15px rgba(230,27,51,.5)}
+main{flex:1;max-width:1040px;width:100%;margin:0 auto;padding:2.5rem 1.5rem 5rem;display:flex;flex-direction:column}
+.view-welcome{min-height:72vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 1rem}
+.hero-banner-visual{width:100%;max-width:820px;height:220px;border-radius:18px;overflow:hidden;margin-bottom:2.75rem;position:relative;border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 45px rgba(0,0,0,.6),0 0 30px rgba(230,27,51,.2);background:linear-gradient(135deg,#1a0a0f 0%,#3a0e16 40%,#0a0a0a 70%,#4a0f1a 100%)}
+.hero-banner-visual::after{content:"QABAS • QUALITY • AMBITION • BOLDNESS • ARTISTRY • SUBSTANCE";position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:var(--font-brand);font-size:.65rem;letter-spacing:3px;color:rgba(255,255,255,.7);white-space:nowrap}
+.hero-banner-visual img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1.2s ease}
+.hero-banner-visual:hover img{transform:scale(1.025)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(230,27,51,.12);border:1px solid rgba(230,27,51,.35);color:#ff5266;font-size:.85rem;font-weight:600;padding:.4rem 1.2rem;border-radius:9999px;margin-bottom:1.5rem}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.25;margin-bottom:1.25rem;color:#fff}
+.hero-title span{color:var(--primary-glow);text-shadow:0 0 25px rgba(230,27,51,.5)}
+.hero-subtitle{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-muted);max-width:660px;margin:0 auto 2.2rem;font-weight:400;line-height:1.8}
+.btn-start-hero{background:linear-gradient(135deg,#e61b33 0%,#a30e20 100%);color:#fff;font-family:var(--font-display);font-size:1.2rem;font-weight:700;padding:1.15rem 3.25rem;border-radius:12px;border:1px solid rgba(255,255,255,.25);cursor:pointer;display:inline-flex;align-items:center;gap:.9rem;box-shadow:0 10px 30px rgba(230,27,51,.45);transition:var(--transition-smooth);text-decoration:none}
+.btn-start-hero:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 45px rgba(230,27,51,.65)}
+.btn-start-hero i{transition:transform .3s ease}
+.btn-start-hero:hover i{transform:translateX(-5px)}
+.welcome-links-row{margin-top:1.4rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.link-visit-qabas{display:inline-flex;align-items:center;gap:.55rem;color:#d8cdd0;text-decoration:none;font-size:.92rem;font-weight:600;padding:.6rem 1.3rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);transition:var(--transition-smooth)}
+.link-visit-qabas:hover{color:#fff;border-color:var(--primary-crimson);background:rgba(230,27,51,.1);box-shadow:0 0 18px rgba(230,27,51,.25);transform:translateY(-1px)}
+.link-visit-qabas i{color:var(--primary-glow);font-size:.85rem}
+.welcome-micro{margin-top:.9rem;font-size:.78rem;color:var(--text-dim)}
+.welcome-micro a{color:var(--text-muted);text-decoration:underline;text-underline-offset:3px}
+.welcome-micro a:hover{color:#fff}
+.trust-row{margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+.trust-chip{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:.4rem .9rem;border-radius:999px}
+.trust-chip i{color:#ff5266;font-size:.75rem}
+.stepper-header{margin-bottom:2.5rem}
+.stepper-track-wrap{overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+.stepper-track-wrap::-webkit-scrollbar{display:none}
+.stepper-track{display:flex;align-items:center;justify-content:space-between;min-width:640px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:.75rem 1rem;position:relative}
+.step-pill{display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.5rem .85rem;border-radius:8px;color:var(--text-dim);font-size:.82rem;font-weight:600;transition:var(--transition-smooth);white-space:nowrap;background:transparent;border:none;font-family:var(--font-body)}
+.step-pill:hover{color:var(--text-white)}
+.step-pill .step-num{width:24px;height:24px;border-radius:6px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-family:var(--font-brand);font-weight:700;color:var(--text-muted);transition:var(--transition-smooth)}
+.step-pill.active{color:#fff;background:rgba(255,255,255,.05)}
+.step-pill.active .step-num{background:var(--primary-crimson);color:#fff;box-shadow:0 0 10px rgba(230,27,51,.6)}
+.step-pill.completed{color:#cfc5c7}
+.step-pill.completed .step-num{background:rgba(255,255,255,.15);color:#fff}
+.progress-line-container{height:4px;background:rgba(255,255,255,.06);border-radius:99px;margin-top:1rem;overflow:hidden;position:relative}
+.progress-line-fill{height:100%;background:linear-gradient(90deg,#ff2a42,#e61b33);width:14.28%;box-shadow:0 0 10px rgba(230,27,51,.8);transition:width .4s ease}
+.form-stage-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:20px;padding:2.75rem;backdrop-filter:blur(20px);box-shadow:0 25px 60px rgba(0,0,0,.55);animation:fadeIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.stage-header{margin-bottom:2.25rem;border-bottom:1px solid var(--border-subtle);padding-bottom:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.stage-title{font-family:var(--font-display);font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:.35rem;display:flex;align-items:center;gap:.75rem}
+.stage-title i{color:var(--primary-crimson);font-size:1.35rem}
+.stage-desc{color:var(--text-muted);font-size:.95rem}
+.stage-badge{font-family:var(--font-brand);font-size:.85rem;background:rgba(255,255,255,.05);padding:.3rem .8rem;border-radius:6px;border:1px solid var(--border-subtle);color:var(--text-muted);white-space:nowrap}
+.fields-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.fields-grid.full{grid-template-columns:1fr}
+.field-span-2{grid-column:span 2}
+.form-group{display:flex;flex-direction:column;gap:.6rem}
+.form-label{font-size:.92rem;font-weight:600;color:#ded6d8;display:flex;align-items:center;gap:.4rem}
+.required-star{color:var(--primary-crimson);font-size:.85rem}
+.input-wrapper{position:relative;display:flex;align-items:center}
+.input-wrapper i.field-icon{position:absolute;right:1.15rem;color:var(--text-dim);font-size:.95rem;pointer-events:none;transition:color .2s ease}
+.form-control{width:100%;background:rgba(9,5,8,.8);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.9rem 2.85rem .9rem 1.25rem;color:#fff;font-family:var(--font-body);font-size:.95rem;transition:var(--transition-smooth);outline:none}
+.form-control:focus{border-color:var(--primary-crimson);background:rgba(14,7,11,.95);box-shadow:0 0 0 3px rgba(230,27,51,.2)}
+.form-control::placeholder{color:#55494d}
+textarea.form-control{padding:1rem 1.25rem;min-height:120px;resize:vertical}
+.selectable-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.1rem}
+.select-card{background:rgba(14,8,12,.8);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.35rem 1.15rem;cursor:pointer;display:flex;flex-direction:column;gap:.8rem;transition:var(--transition-smooth);position:relative;user-select:none}
+.select-card:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.select-card.selected{background:rgba(230,27,51,.12);border-color:var(--primary-crimson);box-shadow:0 0 20px rgba(230,27,51,.25)}
+.select-card-header{display:flex;align-items:center;justify-content:space-between}
+.select-card-icon{width:40px;height:40px;border-radius:9px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:#fff;transition:var(--transition-smooth)}
+.select-card.selected .select-card-icon{background:var(--primary-crimson);color:#fff}
+.select-check{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:transparent;transition:var(--transition-smooth)}
+.select-card.selected .select-check{background:var(--primary-crimson);border-color:var(--primary-crimson);color:#fff}
+.select-card-title{font-weight:700;font-size:1.05rem;color:#fff}
+.select-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.radio-pill-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem}
+.radio-pill-item{position:relative}
+.radio-pill-item input[type=radio]{position:absolute;opacity:0;width:0;height:0}
+.radio-pill-label{display:flex;align-items:center;gap:.75rem;background:rgba(12,7,10,.75);border:1px solid var(--border-subtle);border-radius:10px;padding:.95rem 1.15rem;cursor:pointer;font-size:.92rem;font-weight:600;color:#ded6d8;transition:var(--transition-smooth)}
+.radio-pill-item input[type=radio]:checked+.radio-pill-label{background:rgba(230,27,51,.15);border-color:var(--primary-crimson);color:#fff;box-shadow:0 0 16px rgba(230,27,51,.25)}
+.custom-radio-circle{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--transition-smooth)}
+.radio-pill-item input[type=radio]:checked+.radio-pill-label .custom-radio-circle{border-color:var(--primary-crimson);background:var(--primary-crimson)}
+.radio-pill-item input[type=radio]:checked+.radio-pill-label .custom-radio-circle::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.dropzone-container{border:1.5px dashed rgba(255,255,255,.15);background:rgba(9,5,8,.5);border-radius:14px;padding:1.8rem 1.5rem;text-align:center;cursor:pointer;transition:var(--transition-smooth);position:relative}
+.dropzone-container:hover{border-color:var(--primary-crimson);background:rgba(230,27,51,.04)}
+.dropzone-icon{font-size:2rem;color:var(--text-dim);margin-bottom:.75rem;transition:color .3s ease}
+.dropzone-container:hover .dropzone-icon{color:var(--primary-glow)}
+.dropzone-title{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.35rem}
+.dropzone-hint{font-size:.8rem;color:var(--text-muted)}
+.file-chip{margin-top:.85rem;display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.08);border-radius:8px;padding:.35rem .85rem;font-size:.8rem;color:#fff}
+.stage-actions-bar{margin-top:2.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-action{padding:.95rem 2.25rem;border-radius:10px;font-family:var(--font-display);font-size:1.05rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.65rem;transition:var(--transition-smooth);border:none}
+.btn-next{background:var(--primary-crimson);color:#fff;box-shadow:0 8px 24px rgba(230,27,51,.4);margin-right:auto}
+.btn-next:hover{background:#ff2a42;box-shadow:0 12px 30px rgba(230,27,51,.6);transform:translateY(-2px)}
+.btn-prev{background:rgba(255,255,255,.06);color:var(--text-muted);border:1px solid var(--border-subtle)}
+.btn-prev:hover{background:rgba(255,255,255,.12);color:#fff}
+.review-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+.review-section-card{background:rgba(14,8,12,.8);border:1px solid var(--border-subtle);border-radius:14px;padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1rem;transition:var(--transition-smooth)}
+.review-section-card:hover{border-color:rgba(255,255,255,.18)}
+.review-card-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.75rem;gap:.8rem;flex-wrap:wrap}
+.review-card-title{font-size:1.05rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:.6rem}
+.review-card-title i{color:var(--primary-crimson)}
+.btn-edit-step{background:transparent;border:1px solid var(--border-subtle);color:var(--text-muted);padding:.35rem .85rem;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:var(--transition-smooth);font-family:var(--font-body)}
+.btn-edit-step:hover{border-color:var(--primary-crimson);color:#fff;background:rgba(230,27,51,.1)}
+.review-items-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.review-data-point{display:flex;flex-direction:column;gap:.25rem}
+.review-label{font-size:.8rem;color:var(--text-dim)}
+.review-value{font-size:.95rem;color:#fff;font-weight:500;word-break:break-word}
+.review-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.review-tag{background:rgba(230,27,51,.15);border:1px solid rgba(230,27,51,.3);color:#ffadb6;font-size:.78rem;padding:.2rem .65rem;border-radius:6px;font-weight:600}
+.success-container{text-align:center;padding:3rem 1.8rem;display:flex;flex-direction:column;align-items:center}
+.success-icon-wrap{width:88px;height:88px;border-radius:50%;background:rgba(230,27,51,.15);border:2px solid var(--primary-crimson);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--primary-glow);margin-bottom:1.5rem;box-shadow:0 0 45px rgba(230,27,51,.5);animation:popSuccess .6s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes popSuccess{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+.success-title{font-family:var(--font-display);font-size:clamp(1.9rem,4vw,2.6rem);font-weight:900;margin-bottom:.8rem;color:#fff}
+.success-desc{color:var(--text-muted);font-size:1.08rem;max-width:620px;line-height:1.8;margin-bottom:1.5rem}
+.brief-id-badge{background:rgba(255,255,255,.05);border:1px dashed var(--border-subtle);border-radius:10px;padding:.85rem 1.75rem;font-family:var(--font-brand);font-size:.95rem;color:#cfc5c7;margin-bottom:1.5rem;letter-spacing:.5px}
+.confirm-whatsapp-banner{width:100%;max-width:680px;background:linear-gradient(135deg,rgba(37,211,102,.14) 0%,rgba(37,211,102,.06) 50%,rgba(230,27,51,.08) 100%);border:1px solid rgba(37,211,102,.35);border-radius:14px;padding:1.15rem 1.4rem;display:flex;align-items:center;gap:1rem;text-align:right;margin-bottom:1.6rem;box-shadow:0 8px 30px rgba(37,211,102,.12)}
+.confirm-wa-icon{width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#06281a;flex-shrink:0;box-shadow:0 0 20px rgba(37,211,102,.5);animation:waPulse 2s infinite}
+@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+.confirm-text{font-size:.98rem;font-weight:600;color:#eafff2;line-height:1.7}
+.confirm-sub{font-size:.82rem;color:#a8c9b6;font-weight:400;margin-top:.2rem}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366 0%,#128c4a 100%);color:#06281a;font-family:var(--font-display);font-weight:800;font-size:1.12rem;padding:1.05rem 2.4rem;border-radius:12px;border:1px solid rgba(255,255,255,.25);cursor:pointer;display:inline-flex;align-items:center;gap:.7rem;box-shadow:0 10px 30px rgba(37,211,102,.35);transition:var(--transition-smooth);text-decoration:none}
+.btn-whatsapp:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 16px 40px rgba(37,211,102,.5);filter:brightness(1.05)}
+.btn-whatsapp i{font-size:1.4rem}
+.btn-ghost-light{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:.95rem 1.6rem;font-family:var(--font-body);font-weight:600;font-size:.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:var(--transition-smooth);text-decoration:none}
+.btn-ghost-light:hover{border-color:var(--primary-crimson);background:rgba(230,27,51,.12);transform:translateY(-1px)}
+.success-btns{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+.wa-preview-wrap{width:100%;max-width:680px;margin-top:1rem;text-align:right}
+.wa-preview-wrap details{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+.wa-preview-wrap summary{cursor:pointer;padding:.9rem 1.2rem;font-size:.9rem;font-weight:700;color:#d8cdd0;list-style:none;display:flex;align-items:center;gap:.6rem}
+.wa-preview-wrap summary::-webkit-details-marker{display:none}
+.wa-preview-wrap summary:hover{color:#fff}
+.wa-preview-text{padding:1.2rem;font-size:.82rem;line-height:1.9;color:#d6cfd1;white-space:pre-wrap;word-break:break-word;border-top:1px solid rgba(255,255,255,.07);max-height:320px;overflow-y:auto;direction:rtl;text-align:right;font-family:var(--font-body);background:rgba(9,5,8,.6)}
+.wa-preview-text a{color:#25d366}
+.success-site-note{margin-top:1.2rem;font-size:.82rem;color:var(--text-dim)}
+.success-site-note a{color:#ff8090;text-decoration:none;font-weight:700}
+.success-site-note a:hover{color:#fff;text-decoration:underline}
+.admin-view-wrap{display:none;animation:fadeIn .35s ease}
+.admin-header{margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.admin-headline{font-family:var(--font-display);font-size:1.8rem;font-weight:800}
+.admin-headline span{color:var(--primary-glow)}
+.kanban-board{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;align-items:start}
+.kanban-col{background:rgba(14,8,12,.65);border:1px solid var(--border-subtle);border-radius:14px;padding:1.25rem;min-height:520px;display:flex;flex-direction:column;gap:1rem}
+.kanban-col-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.kanban-col-title{font-size:.95rem;font-weight:700;color:#ded6d8;display:flex;align-items:center;gap:.5rem}
+.kanban-count{background:rgba(255,255,255,.1);border-radius:99px;padding:.15rem .6rem;font-size:.75rem;font-family:var(--font-brand);color:#fff}
+.kanban-cards-stack{display:flex;flex-direction:column;gap:.85rem}
+.pipeline-card{background:rgba(22,13,17,.9);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:.6rem;transition:var(--transition-smooth);cursor:pointer}
+.pipeline-card:hover{border-color:var(--primary-crimson);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.pipeline-client-name{font-weight:700;font-size:1rem;color:#fff}
+.pipeline-company{font-size:.82rem;color:var(--text-muted)}
+.pipeline-badge-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.25rem}
+.pipeline-meta{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-dim);border-top:1px solid rgba(255,255,255,.05);padding-top:.5rem;margin-top:.25rem}
+.pipeline-budget{color:#38ef7d;font-weight:600}
+.detail-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:100;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.detail-modal.active{display:flex}
+.modal-dialog{background:var(--bg-surface);border:1px solid var(--border-glow);border-radius:18px;width:100%;max-width:680px;max-height:85vh;overflow-y:auto;padding:2.25rem;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.8)}
+.modal-close-btn{position:absolute;top:1.25rem;left:1.25rem;background:rgba(255,255,255,.07);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close-btn:hover{background:var(--primary-crimson)}
+footer{border-top:1px solid var(--border-subtle);padding:2rem 2.5rem;background:rgba(6,3,5,.8);font-size:.85rem;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-links{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+.footer-links a{color:var(--text-muted);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:.4rem}
+.footer-links a:hover{color:var(--primary-crimson)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#111;border:1px solid rgba(37,211,102,.4);color:#eafff2;padding:.85rem 1.4rem;border-radius:12px;font-size:.9rem;font-weight:600;opacity:0;pointer-events:none;transition:all .35s ease;z-index:200;box-shadow:0 12px 30px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.err{border-color:rgba(230,27,51,.5)}
+@media(max-width:900px){.kanban-board{grid-template-columns:1fr}.fields-grid{grid-template-columns:1fr}.field-span-2{grid-column:span 1}.form-stage-card{padding:1.75rem 1.25rem}header{padding:1rem 1.25rem}.brand-pill-motto{display:none}.confirm-whatsapp-banner{flex-direction:column;text-align:center}.success-btns .btn-whatsapp,.success-btns .btn-ghost-light{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="cosmic-arc"></div>
+<div class="app-container">
+<header>
+<a href="#" class="brand-group" onclick="showWelcomeScreen();return false;">
+<div class="brand-mark" title="QABAS"><div class="brand-mark-cell"><i class="fa-solid fa-paper-plane" style="transform:scaleX(-1)"></i></div><div class="brand-mark-cell"><i class="fa-solid fa-bolt"></i></div><div class="brand-mark-cell"><i class="fa-solid fa-wave-square"></i></div><div class="brand-mark-cell"><i class="fa-solid fa-link"></i></div></div>
+<div class="brand-text-block"><span class="brand-arabic">قَبَسْ</span><span class="brand-latin">QABAS</span></div>
+</a>
+<div class="brand-pill-motto"><span><span class="motto-letter">Q</span>uality.</span><span><span class="motto-letter">A</span>mbition.</span><span><span class="motto-letter">B</span>oldness.</span><span><span class="motto-letter">A</span>rtistry.</span><span><span class="motto-letter">S</span>ubstance.</span></div>
+<div class="header-actions"><button type="button" class="btn-toggle-view" id="viewModeToggle" onclick="toggleAdminView()"><i class="fa-solid fa-layer-group"></i><span id="viewModeText">لوحة متابعة قبس</span></button></div>
+</header>
+<main>
+<!-- WELCOME -->
+<section id="screen-welcome" class="view-welcome">
+<div class="hero-banner-visual"><img src="https://www.designarena.ai/u/a610a667-0dd7-45ce-aa61-55952e6d4d49" alt="Qabas Digital Agency Aesthetic Banner" onerror="this.style.display='none'"></div>
+<div class="hero-badge"><i class="fa-solid fa-sparkles"></i> رحلة انطلاق شريكتك الرقمية</div>
+<h1 class="hero-title">خلّي <span>قبس</span> يعرف مشروعك أكثر</h1>
+<p class="hero-subtitle">كل ما عرفنا مشروعك وتفاصيل رؤيتك بشكل أفضل، قدرنا نبني لك الحل الإبداعي المناسب بدقة فائقة وأثر استثنائي في السوق.</p>
+<button class="btn-start-hero" onclick="startBriefJourney()"><span>ابدأ البريف الآن</span><i class="fa-solid fa-arrow-left"></i></button>
+<div class="welcome-links-row">
+<a class="link-visit-qabas" href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> زيارة موقع قبس <i class="fa-solid fa-arrow-up-left" style="font-size:.7rem;opacity:.7"></i></a>
+<a class="link-visit-qabas" href="#" onclick="toggleAdminView();return false;" style="border-style:dashed"><i class="fa-solid fa-layer-group"></i> معاينة لوحة المتابعة</a>
+</div>
+<div class="trust-row"><span class="trust-chip"><i class="fa-solid fa-check"></i> إرسال مباشر عبر واتساب</span><span class="trust-chip"><i class="fa-solid fa-lock"></i> بياناتك بأمان مع فريق قبس</span><span class="trust-chip"><i class="fa-solid fa-bolt"></i> رد خلال 24 ساعة</span></div>
+<p class="welcome-micro">Qabas — قَبَس | حلول رقمية.. تفوق التوقعات — <a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener">qabas-three.vercel.app</a></p>
+</section>
+<!-- FORM -->
+<section id="screen-form" style="display:none">
+<div class="stepper-header"><div class="stepper-track-wrap"><div class="stepper-track" id="stepsTrack">
+<button type="button" class="step-pill active" onclick="jumpToStep(1)"><span class="step-num">01</span><span>بياناتك</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(2)"><span class="step-num">02</span><span>عن البراند</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(3)"><span class="step-num">03</span><span>احتياجاتك</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(4)"><span class="step-num">04</span><span>جمهورك</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(5)"><span class="step-num">05</span><span>أهدافك</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(6)"><span class="step-num">06</span><span>الذوق والمنافسون</span></button>
+<button type="button" class="step-pill" onclick="jumpToStep(7)"><span class="step-num">07</span><span>الميزانية</span></button>
+</div></div><div class="progress-line-container"><div class="progress-line-fill" id="progressFillBar"></div></div></div>
+<div class="form-stage-card">
+<div class="step-content" id="step-1">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-regular fa-id-badge"></i> بيانات العميل الأساسية</h2><p class="stage-desc">معلومات التواصل السريع للبدء في تنسيق استراتيجيتك مع فريق قبس</p></div><span class="stage-badge">STEP 01 / 07</span></div>
+<div class="fields-grid">
+<div class="form-group"><label class="form-label">اسم العميل / الشركة <span class="required-star">*</span></label><div class="input-wrapper"><input type="text" class="form-control" id="client_company" placeholder="مثال: شركة مدار للحلول التقنية"><i class="fa-solid fa-building field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">اسم المسؤول <span class="required-star">*</span></label><div class="input-wrapper"><input type="text" class="form-control" id="client_name" placeholder="مثال: أحمد عبد الله"><i class="fa-solid fa-user field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">رقم الهاتف / واتساب <span class="required-star">*</span></label><div class="input-wrapper"><input type="tel" class="form-control" id="client_phone" placeholder="مثال: +20 10 1234 5678"><i class="fa-brands fa-whatsapp field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">البريد الإلكتروني <span class="required-star">*</span></label><div class="input-wrapper"><input type="email" class="form-control" id="client_email" placeholder="name@company.com"><i class="fa-solid fa-envelope field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">مجال النشاط التجاري</label><div class="input-wrapper"><input type="text" class="form-control" id="client_industry" placeholder="مثال: تجارة إلكترونية، مطاعم..."><i class="fa-solid fa-briefcase field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">رابط الموقع الحالي (إن وجد)</label><div class="input-wrapper"><input type="url" class="form-control" id="client_website" placeholder="https://example.com"><i class="fa-solid fa-globe field-icon"></i></div></div>
+<div class="form-group field-span-2"><label class="form-label">روابط السوشيال ميديا الحالية</label><div class="input-wrapper"><input type="text" class="form-control" id="client_socials" placeholder="Instagram, LinkedIn, Facebook, TikTok..."><i class="fa-solid fa-share-nodes field-icon"></i></div></div>
+</div>
+</div>
+<div class="step-content" id="step-2" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-fingerprint"></i> عن البراند والهوية</h2><p class="stage-desc">ساعدنا نتعرف على جوهر مشروعك، وقيمك التنافسية</p></div><span class="stage-badge">STEP 02 / 07</span></div>
+<div class="fields-grid full">
+<div class="form-group"><label class="form-label">عرفنا بنفسك وبنشاطك التجاري <span class="required-star">*</span></label><textarea class="form-control" id="brand_story" placeholder="اكتب نبذة مختصرة عن فكرة البراند وقصته، وكيف بدأ؟"></textarea></div>
+<div class="form-group"><label class="form-label">ما هي المنتجات أو الخدمات التي تقدمها تحديدًا؟</label><textarea class="form-control" id="brand_products" placeholder="تفاصيل قائمة خدماتك أو المنتجات الرئيسية وأسعارها التقديرية"></textarea></div>
+<div class="form-group"><label class="form-label">ما الذي يميّزك عن المنافسين؟ (القيمة الفريدة USP)</label><input type="text" class="form-control" id="brand_usp" placeholder="مثال: الجودة العالية، خدمة العملاء السريعة..." style="padding-right:1.25rem"></div>
+<div class="form-group"><label class="form-label">هل لديك هوية بصرية حالية؟</label><div class="radio-pill-group">
+<div class="radio-pill-item"><input type="radio" name="has_identity" id="has_id_yes" value="نعم لدي هوية كاملة"><label class="radio-pill-label" for="has_id_yes"><span class="custom-radio-circle"></span><span>نعم، لدي هوية وشعار</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="has_identity" id="has_id_partial" value="لدي شعار فقط وأحتاج تطوير"><label class="radio-pill-label" for="has_id_partial"><span class="custom-radio-circle"></span><span>لدي شعار فقط وأحتاج تجديد</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="has_identity" id="has_id_none" value="مشروع جديد لا توجد هوية" checked><label class="radio-pill-label" for="has_id_none"><span class="custom-radio-circle"></span><span>مشروع جديد بالكامل</span></label></div>
+</div></div>
+</div>
+<div class="fields-grid" style="margin-top:1rem">
+<div class="dropzone-container" onclick="mockFileUpload('logoFile')"><i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i><div class="dropzone-title">ارفع شعار البراند (إن وجد)</div><div class="dropzone-hint">PNG, SVG, AI, PDF (بحد أقصى 25MB)</div><div id="logoFile-badge" class="file-chip" style="display:none"><i class="fa-solid fa-check" style="color:#38ef7d"></i><span id="logoFile-name">brand-logo.svg</span></div></div>
+<div class="dropzone-container" onclick="mockFileUpload('brandFile')"><i class="fa-solid fa-folder-open dropzone-icon"></i><div class="dropzone-title">ارفع ملفات البراند / Brand Guideline</div><div class="dropzone-hint">ملف تعريف البراند، الكتالوج، أو الصور المتاحة</div><div id="brandFile-badge" class="file-chip" style="display:none"><i class="fa-solid fa-check" style="color:#38ef7d"></i><span id="brandFile-name">brand-guidelines.pdf</span></div></div>
+</div>
+</div>
+<div class="step-content" id="step-3" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-cubes"></i> ماذا تحتاج من قبس؟</h2><p class="stage-desc">اختر خدمة أو أكثر لتكوين باقة العمل المتكاملة لمشروعك</p></div><span class="stage-badge">STEP 03 / 07</span></div>
+<div class="selectable-cards-grid" id="servicesGrid">
+<div class="select-card" data-service="تصميم وهوية بصرية" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-bezier-curve"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">تصميم وهوية</div><div class="select-card-desc">شعارات، هويات بصرية، وبوسترات وسوشيال ميديا</div></div>
+<div class="select-card" data-service="مونتاج وفيديو" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-film"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">مونتاج وفيديو</div><div class="select-card-desc">فيديوهات ريلز، إعلانات سينمائية، وموشن جرافيك</div></div>
+<div class="select-card" data-service="تصوير وإنتاج" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-camera-retro"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">جلسات تصوير</div><div class="select-card-desc">تصوير منتجات احترافي، جلسات تجارية وتغطية ميدانية</div></div>
+<div class="select-card" data-service="مواقع إلكترونية وبرمجة" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-code"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">مواقع إلكترونية</div><div class="select-card-desc">متاجر إلكترونية، صفحات هبوط عصرية، وتطبيقات ويب</div></div>
+<div class="select-card" data-service="إدارة سوشيال ميديا" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-hashtag"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">إدارة سوشيال ميديا</div><div class="select-card-desc">خطة محتوى شهرية، كتابة إعلانية، وإدارة الحسابات</div></div>
+<div class="select-card" data-service="إعلانات ممولة Media Buying" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-bullhorn"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">إعلانات ممولة</div><div class="select-card-desc">حملات تحويل ومبيعات على Meta, TikTok, Google</div></div>
+<div class="select-card" data-service="أتمتة وأنظمة ذكية" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-robot"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">أتمتة الأعمال AI</div><div class="select-card-desc">روبوتات واتساب، CRM، وأتمتة مسارات التحويل</div></div>
+<div class="select-card" data-service="تسويق واستراتيجية" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-chess-knight"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">تسويق واستراتيجية</div><div class="select-card-desc">خطة تسويق شاملة، دراسة سوق، وتحديد موقع البراند</div></div>
+<div class="select-card" data-service="حلول أخرى مخصصة" onclick="toggleService(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">أخرى / مخصص</div><div class="select-card-desc">استشارات، حزم هجينة، أو متطلبات خاصة بالكامل</div></div>
+</div>
+<div class="form-group" style="margin-top:1.75rem"><label class="form-label">احكيلنا بالتفصيل، إيه اللي محتاجه من قبس بالتحديد؟</label><textarea class="form-control" id="services_detail" placeholder="اكتب أي ملاحظات أو أفكار مسبقة ترغب في تنفيذها..."></textarea></div>
+</div>
+<div class="step-content" id="step-4" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-users-viewfinder"></i> الجمهور المستهدف</h2><p class="stage-desc">من هم الأشخاص الذين نصنع هذا العمل من أجلهم؟</p></div><span class="stage-badge">STEP 04 / 07</span></div>
+<div class="fields-grid">
+<div class="form-group"><label class="form-label">الفئة العمرية المستهدفة</label><div class="input-wrapper"><input type="text" class="form-control" id="audience_age" placeholder="مثال: من 22 إلى 45 سنة"><i class="fa-solid fa-calendar-days field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">الجنس</label><div class="radio-pill-group">
+<div class="radio-pill-item"><input type="radio" name="audience_gender" id="gender_all" value="الجميع (ذكور وإناث)" checked><label class="radio-pill-label" for="gender_all"><span class="custom-radio-circle"></span><span>الجميع</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="audience_gender" id="gender_female" value="سيدات فقط"><label class="radio-pill-label" for="gender_female"><span class="custom-radio-circle"></span><span>سيدات</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="audience_gender" id="gender_male" value="رجال فقط"><label class="radio-pill-label" for="gender_male"><span class="custom-radio-circle"></span><span>رجال</span></label></div>
+</div></div>
+<div class="form-group"><label class="form-label">الموقع الجغرافي</label><div class="input-wrapper"><input type="text" class="form-control" id="audience_location" placeholder="مثال: القاهرة والإسكندرية، أو دول الخليج..."><i class="fa-solid fa-map-pin field-icon"></i></div></div>
+<div class="form-group"><label class="form-label">المستوى الاقتصادي</label><div class="input-wrapper"><input type="text" class="form-control" id="audience_economic" placeholder="مثال: Class A / B+ أو متوسط الدخل"><i class="fa-solid fa-gem field-icon"></i></div></div>
+<div class="form-group field-span-2"><label class="form-label">اهتمامات وسلوكيات الجمهور</label><textarea class="form-control" id="audience_interests" placeholder="ما هي اهتماماتهم؟ ما التطبيقات التي يفضلونها؟ ما المشكلات التي يبحثون عن حل لها؟"></textarea></div>
+<div class="form-group field-span-2"><label class="form-label">كيف يصل إليك العملاء حاليًا؟</label><input type="text" class="form-control" id="audience_channels" style="padding-right:1.25rem" placeholder="مثال: ترشيحات الأصدقاء، إنستغرام، إعلانات جوجل..."></div>
+</div>
+</div>
+<div class="step-content" id="step-5" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-bullseye"></i> أهداف المشروع</h2><p class="stage-desc">ما الهدف الأساسي الذي تسعى لتحقيقه من خلال العمل مع قبس؟</p></div><span class="stage-badge">STEP 05 / 07</span></div>
+<div class="selectable-cards-grid" id="goalsGrid">
+<div class="select-card" data-goal="زيادة المبيعات المباشرة" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-chart-line"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">زيادة المبيعات</div><div class="select-card-desc">تحقيق عائد استثماري فوري وتكثيف عمليات الشراء</div></div>
+<div class="select-card" data-goal="بناء وترسيخ الهوية" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-crown"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">بناء الهوية والبراند</div><div class="select-card-desc">صناعة حضور ذهني راسخ ومظهر فاخر واثق</div></div>
+<div class="select-card" data-goal="زيادة الانتشار والوعي" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-satellite-dish"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">الانتشار والوعي (Awareness)</div><div class="select-card-desc">الوصول إلى أكبر شريحة ممكنة والتصدر بالسوق</div></div>
+<div class="select-card" data-goal="إطلاق منتج أو خدمة جديدة" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-rocket"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">إطلاق منتج جديد</div><div class="select-card-desc">حملة تدشين متكاملة للمنتج الجديد بضجة قوية</div></div>
+<div class="select-card" data-goal="تحسين الصورة الاحترافية" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-shield-halved"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">تحسين الاحترافية والسمعة</div><div class="select-card-desc">رفع مستوى المصداقية وجذب عملاء نخبة ومستثمرين</div></div>
+<div class="select-card" data-goal="أهداف تسويقية أخرى" onclick="toggleGoal(this)"><div class="select-card-header"><div class="select-card-icon"><i class="fa-solid fa-arrows-to-circle"></i></div><div class="select-check"><i class="fa-solid fa-check"></i></div></div><div class="select-card-title">أخرى / متعدد</div><div class="select-card-desc">حزمة أهداف متداخلة قصيرة وطويلة المدى</div></div>
+</div>
+<div class="form-group" style="margin-top:1.75rem"><label class="form-label">كيف ستعرف أن هذا المشروع قد نجح تمامًا؟ (مقياس النجاح KPI)</label><textarea class="form-control" id="project_kpi" placeholder="مثال: وصولنا لـ 1,000 عميل خلال 3 أشهر، أو مضاعفة عائد الإنفاق الإعلاني..."></textarea></div>
+</div>
+<div class="step-content" id="step-6" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-palette"></i> المنافسون والذوق البصري</h2><p class="stage-desc">لنعرف الاتجاه الفني الذي يروق لك والاتجاه الذي نبتعد عنه</p></div><span class="stage-badge">STEP 06 / 07</span></div>
+<div class="fields-grid">
+<div class="form-group"><label class="form-label">أهم المنافسين محليًا أو عالميًا</label><input type="text" class="form-control" style="padding-right:1.25rem" id="competitors_names" placeholder="اذكر 2 - 3 منافسين بارزين"></div>
+<div class="form-group"><label class="form-label">روابط حسابات أو مواقع المنافسين</label><input type="text" class="form-control" style="padding-right:1.25rem" id="competitors_links" placeholder="https://instagram.com/competitor"></div>
+<div class="form-group"><label class="form-label">ما الذي يعجبك في عملهم؟</label><textarea class="form-control" id="competitors_pros" placeholder="مثال: بساطة التصميم، طريقة تصوير المنتجات..."></textarea></div>
+<div class="form-group"><label class="form-label">ما الذي لا يعجبك وتود تجنبه؟</label><textarea class="form-control" id="competitors_cons" placeholder="مثال: الألوان باهتة، إعلاناتهم مكررة..."></textarea></div>
+<div class="form-group"><label class="form-label">الألوان المفضلة للبراند</label><input type="text" class="form-control" style="padding-right:1.25rem" id="colors_fav" placeholder="مثال: أسود، أحمر داكن، ذهبي..."></div>
+<div class="form-group"><label class="form-label">الألوان التي لا ترغب باستخدامها إطلاقًا</label><input type="text" class="form-control" style="padding-right:1.25rem" id="colors_avoid" placeholder="مثال: لا نريد الأصفر، أو الألوان الفاقعة"></div>
+<div class="form-group field-span-2"><label class="form-label">وصف الستايل العام الذي تفضله</label><input type="text" class="form-control" style="padding-right:1.25rem" id="visual_style" placeholder="مثال: فخم، جريء وعصري، مينيمال هادئ..."></div>
+<div class="dropzone-container" onclick="mockFileUpload('inspireLike')"><i class="fa-solid fa-heart dropzone-icon" style="color:#ff4d6d"></i><div class="dropzone-title">ارفع أمثلة لتصميمات تعجبك</div><div class="dropzone-hint">سكرين شوتس أو مراجع بصرية تنال إعجابك</div><div id="inspireLike-badge" class="file-chip" style="display:none"><i class="fa-solid fa-check"></i><span id="inspireLike-name">reference-moodboard.jpg</span></div></div>
+<div class="dropzone-container" onclick="mockFileUpload('inspireDislike')"><i class="fa-solid fa-ban dropzone-icon"></i><div class="dropzone-title">ارفع أمثلة لتصميمات لا تعجبك</div><div class="dropzone-hint">أساليب أو أفكار تريد من فريقنا تجنبها تمامًا</div><div id="inspireDislike-badge" class="file-chip" style="display:none"><i class="fa-solid fa-check"></i><span id="inspireDislike-name">avoid-example.png</span></div></div>
+</div>
+</div>
+<div class="step-content" id="step-7" style="display:none">
+<div class="stage-header"><div><h2 class="stage-title"><i class="fa-solid fa-wallet"></i> الميزانية والجدول الزمني</h2><p class="stage-desc">تحديد الإطار الاستثماري المناسب لتصميم الباقة المثالية</p></div><span class="stage-badge">STEP 07 / 07</span></div>
+<div class="fields-grid full">
+<div class="form-group"><label class="form-label">الميزانية المتوقعة للمشروع <span class="required-star">*</span></label><div class="radio-pill-group">
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_1" value="أقل من 2,000 جنيه"><label class="radio-pill-label" for="b_1"><span class="custom-radio-circle"></span><span>أقل من 2,000 جنيه</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_2" value="2,000 – 5,000 جنيه"><label class="radio-pill-label" for="b_2"><span class="custom-radio-circle"></span><span>2,000 – 5,000 جنيه</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_3" value="5,000 – 10,000 جنيه" checked><label class="radio-pill-label" for="b_3"><span class="custom-radio-circle"></span><span>5,000 – 10,000 جنيه</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_4" value="10,000 – 20,000 جنيه"><label class="radio-pill-label" for="b_4"><span class="custom-radio-circle"></span><span>10,000 – 20,000 جنيه</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_5" value="أكثر من 20,000 جنيه"><label class="radio-pill-label" for="b_5"><span class="custom-radio-circle"></span><span>أكثر من 20,000 جنيه</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_budget" id="b_6" value="أحتاج إلى اقتراح مناسب"><label class="radio-pill-label" for="b_6"><span class="custom-radio-circle"></span><span>أحتاج إلى اقتراح مناسب</span></label></div>
+</div></div>
+<div class="form-group" style="margin-top:1rem"><label class="form-label">الموعد المستهدف لبدء المشروع</label><div class="radio-pill-group">
+<div class="radio-pill-item"><input type="radio" name="project_start" id="start_asap" value="فورًا وبشكل عاجل" checked><label class="radio-pill-label" for="start_asap"><span class="custom-radio-circle"></span><span>فورًا (بشكل عاجل)</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_start" id="start_week" value="خلال أسبوع"><label class="radio-pill-label" for="start_week"><span class="custom-radio-circle"></span><span>خلال أسبوع</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_start" id="start_month" value="خلال شهر"><label class="radio-pill-label" for="start_month"><span class="custom-radio-circle"></span><span>خلال شهر</span></label></div>
+<div class="radio-pill-item"><input type="radio" name="project_start" id="start_tbd" value="لم أحدد بعد"><label class="radio-pill-label" for="start_tbd"><span class="custom-radio-circle"></span><span>لم أحدد بعد</span></label></div>
+</div></div>
+<div class="form-group" style="margin-top:1rem"><label class="form-label">هل هناك أي تفاصيل أخرى تريد أن يعرفها فريق قبس؟</label><textarea class="form-control" id="additional_notes" placeholder="ملاحظات ختامية، تواريخ معينة لمناسبات، شروط خاصة..."></textarea></div>
+</div>
+</div>
+<div class="stage-actions-bar"><button type="button" class="btn-action btn-prev" id="btnPrev" onclick="navigateStep(-1)" style="visibility:hidden"><i class="fa-solid fa-arrow-right"></i><span>السابق</span></button><button type="button" class="btn-action btn-next" id="btnNext" onclick="navigateStep(1)"><span>التالي</span><i class="fa-solid fa-arrow-left"></i></button></div>
+</div>
+</section>
+<!-- REVIEW -->
+<section id="screen-review" style="display:none">
+<div class="stage-header" style="border:none;margin-bottom:1.5rem"><div><h1 class="stage-title" style="font-size:2.2rem"><i class="fa-solid fa-clipboard-check"></i> راجع بريف مشروعك</h1><p class="stage-desc">تأكد من دقة كافة البيانات والمدخلات قبل إرسالها رسميًا إلى فريق قبس عبر واتساب.</p></div><span class="stage-badge">REVIEW STAGE</span></div>
+<div class="review-grid">
+<div class="review-section-card"><div class="review-card-head"><div class="review-card-title"><i class="fa-solid fa-user-check"></i> 01. بيانات العميل</div><button class="btn-edit-step" onclick="jumpToStep(1)"><i class="fa-solid fa-pen-to-square"></i> تعديل</button></div><div class="review-items-list"><div class="review-data-point"><span class="review-label">اسم العميل / الشركة</span><span class="review-value" id="rev-company">-</span></div><div class="review-data-point"><span class="review-label">اسم المسؤول</span><span class="review-value" id="rev-name">-</span></div><div class="review-data-point"><span class="review-label">الهاتف / واتساب</span><span class="review-value" id="rev-phone">-</span></div><div class="review-data-point"><span class="review-label">البريد الإلكتروني</span><span class="review-value" id="rev-email">-</span></div><div class="review-data-point"><span class="review-label">مجال النشاط</span><span class="review-value" id="rev-industry">-</span></div><div class="review-data-point"><span class="review-label">الموقع والسوشيال</span><span class="review-value" id="rev-links">-</span></div></div></div>
+<div class="review-section-card"><div class="review-card-head"><div class="review-card-title"><i class="fa-solid fa-fingerprint"></i> 02. عن البراند</div><button class="btn-edit-step" onclick="jumpToStep(2)"><i class="fa-solid fa-pen-to-square"></i> تعديل</button></div><div class="review-items-list"><div class="review-data-point" style="grid-column:1/-1"><span class="review-label">نبذة عن النشاط</span><span class="review-value" id="rev-story">-</span></div><div class="review-data-point"><span class="review-label">ما يميزك (USP)</span><span class="review-value" id="rev-usp">-</span></div><div class="review-data-point"><span class="review-label">حالة الهوية الحالية</span><span class="review-value" id="rev-hasid">-</span></div></div></div>
+<div class="review-section-card"><div class="review-card-head"><div class="review-card-title"><i class="fa-solid fa-cubes"></i> 03. الخدمات المطلوبة من قبس</div><button class="btn-edit-step" onclick="jumpToStep(3)"><i class="fa-solid fa-pen-to-square"></i> تعديل</button></div><div class="review-tags" id="rev-services-tags"></div><div class="review-data-point" style="margin-top:.5rem"><span class="review-label">تفاصيل إضافية عن المطلوب</span><span class="review-value" id="rev-services-notes">-</span></div></div>
+<div class="review-section-card"><div class="review-card-head"><div class="review-card-title"><i class="fa-solid fa-crosshairs"></i> 04 & 05. الجمهور والأهداف</div><button class="btn-edit-step" onclick="jumpToStep(4)"><i class="fa-solid fa-pen-to-square"></i> تعديل</button></div><div class="review-items-list"><div class="review-data-point"><span class="review-label">الجمهور والموقع</span><span class="review-value" id="rev-audience-summary">-</span></div><div class="review-data-point"><span class="review-label">الأهداف المحددة</span><div class="review-tags" id="rev-goals-tags"></div></div><div class="review-data-point" style="grid-column:1/-1"><span class="review-label">مقياس النجاح المنشود</span><span class="review-value" id="rev-kpi">-</span></div></div></div>
+<div class="review-section-card"><div class="review-card-head"><div class="review-card-title"><i class="fa-solid fa-coins"></i> 06 & 07. الميزانية والجدول الزمني</div><button class="btn-edit-step" onclick="jumpToStep(7)"><i class="fa-solid fa-pen-to-square"></i> تعديل</button></div><div class="review-items-list"><div class="review-data-point"><span class="review-label">الميزانية المختارة</span><span class="review-value" id="rev-budget" style="color:#4ade80;font-weight:700">-</span></div><div class="review-data-point"><span class="review-label">الموعد المستهدف للبدء</span><span class="review-value" id="rev-timeline">-</span></div><div class="review-data-point" style="grid-column:1/-1"><span class="review-label">ملاحظات ختامية</span><span class="review-value" id="rev-extra-notes">-</span></div></div></div>
+</div>
+<div class="stage-actions-bar" style="margin-top:2.5rem"><button type="button" class="btn-action btn-prev" onclick="jumpToStep(7)"><i class="fa-solid fa-arrow-right"></i><span>العودة للتعديل</span></button><button type="button" class="btn-action btn-next" onclick="submitFinalBrief()" style="background:linear-gradient(135deg,#1da851 0%,#0e7a3a 100%);box-shadow:0 8px 24px rgba(37,211,102,.35);font-size:1.15rem;padding:1.1rem 2.2rem"><span>إرسال البريف إلى قبس</span><i class="fa-brands fa-whatsapp" style="font-size:1.4rem"></i></button></div>
+<p style="text-align:center;margin-top:1rem;font-size:.82rem;color:var(--text-dim)"><i class="fa-solid fa-lock"></i> بالضغط على إرسال سيتم تجهيز بريفك وفتح واتساب لإرساله مباشرة إلى فريق قبس — لن تحتاج إلا للضغط على زر الإرسال في واتساب.</p>
+</section>
+<!-- SUCCESS -->
+<section id="screen-success" style="display:none">
+<div class="form-stage-card success-container">
+<div class="success-icon-wrap"><i class="fa-solid fa-check"></i></div>
+<h2 class="success-title">وصل البريف بنجاح!</h2>
+<p class="success-desc">شكرًا لك. أصبح لدى فريق <strong style="color:#fff">قبس</strong> الآن صورة واضحة ومفصلة عن مشروعك ورؤيتك. سيقوم المدير الإبداعي واستشاري المشروعات بمراجعة بياناتك بدقة للتواصل معك لتحديد موعد الجلسة الاستكشافية.</p>
+<div class="brief-id-badge">كود مرجع المشروع: <strong id="briefRefCode" style="color:var(--primary-glow);margin-right:.5rem">QBS-8942</strong></div>
+<div class="confirm-whatsapp-banner"><div class="confirm-wa-icon"><i class="fa-brands fa-whatsapp"></i></div><div><div class="confirm-text">تم تجهيز البريف بنجاح، سيتم فتح واتساب لإرساله إلى فريق قبس.</div><div class="confirm-sub" id="waAutoNote">تم فتح محادثة واتساب تلقائيًا — ستجد رسالة البريف جاهزة، اضغط إرسال فقط. إذا لم تفتح، استخدم الزر بالأسفل.</div></div></div>
+<div class="success-btns">
+<a href="#" id="btnOpenWhatsApp" class="btn-whatsapp" onclick="openWhatsAppBrief(event)"><i class="fa-brands fa-whatsapp"></i><span>إرسال عبر واتساب الآن</span></a>
+<button class="btn-ghost-light" onclick="copyBriefMessage()"><i class="fa-solid fa-copy"></i><span>نسخ نص البريف</span></button>
+</div>
+<div class="success-btns" style="margin-top:.2rem">
+<button class="btn-ghost-light" onclick="showWelcomeScreen()" style="padding:.8rem 1.5rem;font-size:.9rem"><i class="fa-solid fa-house"></i><span>العودة إلى الرئيسية</span></button>
+<a class="btn-ghost-light" href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener" style="padding:.8rem 1.5rem;font-size:.9rem;border-color:rgba(37,211,102,.35)"><i class="fa-solid fa-globe" style="color:#25d366"></i><span>زيارة موقع قبس</span></a>
+<button class="btn-ghost-light" onclick="toggleAdminView()" style="padding:.8rem 1.5rem;font-size:.9rem"><i class="fa-solid fa-list-check"></i><span>معاينة البريف في لوحة قبس</span></button>
+</div>
+<div class="wa-preview-wrap"><details id="waPreviewDetails"><summary><i class="fa-brands fa-whatsapp" style="color:#25d366"></i> معاينة رسالة الواتساب المجهزة <span style="font-weight:400;color:var(--text-dim);font-size:.78rem">(اضغط للعرض)</span></summary><div class="wa-preview-text" id="waMessagePreview">...</div></details></div>
+<p class="success-site-note">Qabas — قَبَس | حلول رقمية.. تفوق التوقعات — <a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener">زيارة موقع قبس: qabas-three.vercel.app</a></p>
+</div>
+</section>
+<!-- ADMIN -->
+<section id="screen-admin" class="admin-view-wrap">
+<div class="admin-header"><div><h2 class="admin-headline">لوحة بريفات <span>قبس</span></h2><p style="color:var(--text-muted);font-size:.95rem">متابعة طلبات العملاء الجدد ومراحل تأهيل واستلام المشروعات</p></div><button class="btn-action btn-prev" onclick="toggleAdminView()"><i class="fa-solid fa-arrow-right"></i><span>العودة للبريف</span></button></div>
+<div class="kanban-board">
+<div class="kanban-col"><div class="kanban-col-head"><div class="kanban-col-title"><i class="fa-solid fa-bell" style="color:#facc15"></i><span>عملاء جدد</span></div><span class="kanban-count" id="count-new">2</span></div><div class="kanban-cards-stack" id="stack-new">
+<div class="pipeline-card" onclick="openBriefModal('madar')"><div class="pipeline-client-name">منصة سحابة الشرق</div><div class="pipeline-company">خدمات لوجستية وسحابية</div><div class="pipeline-badge-row"><span class="review-tag">مواقع إلكترونية</span><span class="review-tag">أتمتة</span></div><div class="pipeline-meta"><span class="pipeline-budget">10,000 – 20,000 ج.م</span><span>منذ ساعتين</span></div></div>
+<div class="pipeline-card" onclick="openBriefModal('atelier')"><div class="pipeline-client-name">أتيليه نوران</div><div class="pipeline-company">أزياء ومجوهرات راقية</div><div class="pipeline-badge-row"><span class="review-tag">تصميم وهوية</span><span class="review-tag">تصوير</span></div><div class="pipeline-meta"><span class="pipeline-budget">أكثر من 20,000 ج.م</span><span>اليوم</span></div></div>
+</div></div>
+<div class="kanban-col"><div class="kanban-col-head"><div class="kanban-col-title"><i class="fa-solid fa-magnifying-glass"></i><span>قيد المراجعة</span></div><span class="kanban-count" id="count-review">1</span></div><div class="kanban-cards-stack" id="stack-review"><div class="pipeline-card" onclick="openBriefModal('vivid')"><div class="pipeline-client-name">كافيه لو ريڤ (Le Rêve)</div><div class="pipeline-company">ضيافة ومطاعم</div><div class="pipeline-badge-row"><span class="review-tag">سوشيال ميديا</span><span class="review-tag">مونتاج</span></div><div class="pipeline-meta"><span class="pipeline-budget">5,000 – 10,000 ج.م</span><span>أمس</span></div></div></div></div>
+<div class="kanban-col"><div class="kanban-col-head"><div class="kanban-col-title"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i><span>تم التواصل</span></div><span class="kanban-count" id="count-contacted">1</span></div><div class="kanban-cards-stack" id="stack-contacted"><div class="pipeline-card" onclick="openBriefModal('nexus')"><div class="pipeline-client-name">تطبيق فيتنس ون</div><div class="pipeline-company">صحة ورياضة تقنية</div><div class="pipeline-badge-row"><span class="review-tag">إعلانات ممولة</span><span class="review-tag">استراتيجية</span></div><div class="pipeline-meta"><span class="pipeline-budget">20,000+ ج.م</span><span>26 مارس</span></div></div></div></div>
+<div class="kanban-col"><div class="kanban-col-head"><div class="kanban-col-title"><i class="fa-solid fa-rocket" style="color:#a855f7"></i><span>قيد التنفيذ</span></div><span class="kanban-count" id="count-active">1</span></div><div class="kanban-cards-stack" id="stack-active"><div class="pipeline-card"><div class="pipeline-client-name">أكاديمية إلهام للتعليم</div><div class="pipeline-company">تعليم وتدريب رقمي</div><div class="pipeline-badge-row"><span class="review-tag">تصميم وهوية</span><span class="review-tag">موقع كامل</span></div><div class="pipeline-meta"><span class="pipeline-budget">15,000 ج.م</span><span>نشط الآن</span></div></div></div></div>
+</div>
+</section>
+</main>
+<div class="detail-modal" id="briefModal"><div class="modal-dialog"><button class="modal-close-btn" onclick="closeBriefModal()"><i class="fa-solid fa-xmark"></i></button><div style="margin-bottom:1.5rem"><span class="hero-badge" style="margin-bottom:.5rem" id="m-status">عميل جديد</span><h2 id="m-name" style="font-family:var(--font-display);font-size:1.6rem;color:#fff">اسم العميل</h2><p id="m-company" style="color:var(--text-muted);font-size:.95rem">الشركة والنشاط</p></div><div style="display:flex;flex-direction:column;gap:1.25rem"><div class="review-data-point"><span class="review-label">التواصل</span><span class="review-value" id="m-contact">-</span></div><div class="review-data-point"><span class="review-label">الخدمات المطلوبة</span><div class="review-tags" id="m-services"></div></div><div class="review-data-point"><span class="review-label">الميزانية المحددة والجدول الزمني</span><span class="review-value" id="m-budget" style="color:#38ef7d;font-weight:700">-</span></div><div class="review-data-point"><span class="review-label">الهدف الأساسي وملاحظات العميل</span><p class="review-value" id="m-notes" style="background:rgba(0,0,0,.3);padding:.85rem;border-radius:8px;font-size:.9rem;line-height:1.6">-</p></div></div></div></div>
+<footer><div><strong>قبس | QABAS DIGITAL SOLUTIONS</strong> &copy; 2026. جميع الحقوق محفوظة.</div><div class="brand-pill-motto" style="font-size:.7rem;border-color:rgba(255,255,255,.06)">Quality &bull; Ambition &bull; Boldness &bull; Artistry &bull; Substance</div><div class="footer-links"><a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i class="fa-solid fa-tag"></i> الأسعار والباقات</a><a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> موقع قبس</a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook"></i></a></div></footer>
+</div>
+<div id="toast"></div>
+<script>
+// ===== CONFIG — WhatsApp destination (single source of truth) =====
+const QABAS_WHATSAPP = "201144712845";
+const QABAS_WEBSITE = "https://qabas-three.vercel.app/#pricing";
+let currentStep = 1;
+const totalSteps = 7;
+const selectedServices = new Set(["تصميم وهوية بصرية","مواقع إلكترونية وبرمجة"]);
+const selectedGoals = new Set(["زيادة المبيعات المباشرة","بناء وترسيخ الهوية"]);
+let isAdminView = false;
+let lastWaMessage = "";
+let lastWaLink = "";
+let lastBriefCode = "";
+const uploadedFlags = {};
+
+function v(id){ const el=document.getElementById(id); return el ? el.value.trim() : ""; }
+function r(name){ const el=document.querySelector('input[name="'+name+'"]:checked'); return el ? el.value.trim() : ""; }
+function showToast(msg,isErr){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.toggle('err',!!isErr); t.classList.add('show'); clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('show'),3200); }
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll('#servicesGrid .select-card').forEach(card=>{
+    if(selectedServices.has(card.getAttribute('data-service'))) card.classList.add('selected');
+  });
+  document.querySelectorAll('#goalsGrid .select-card').forEach(card=>{
+    if(selectedGoals.has(card.getAttribute('data-goal'))) card.classList.add('selected');
+  });
+  updateStepperUI();
+});
+function startBriefJourney(){
+  document.getElementById('screen-welcome').style.display='none';
+  document.getElementById('screen-review').style.display='none';
+  document.getElementById('screen-success').style.display='none';
+  document.getElementById('screen-admin').style.display='none';
+  document.getElementById('screen-form').style.display='block';
+  jumpToStep(1); window.scrollTo({top:0,behavior:'smooth'});
+}
+function showWelcomeScreen(){
+  document.getElementById('screen-welcome').style.display='flex';
+  document.getElementById('screen-form').style.display='none';
+  document.getElementById('screen-review').style.display='none';
+  document.getElementById('screen-success').style.display='none';
+  document.getElementById('screen-admin').style.display='none';
+  isAdminView=false;
+  document.getElementById('viewModeToggle').classList.remove('active');
+  document.getElementById('viewModeText').innerText="لوحة متابعة قبس";
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navigateStep(direction){
+  if(direction===1){
+    if(currentStep===1){
+      const comp=v('client_company'), name=v('client_name'), phone=v('client_phone');
+      if(!comp||!name||!phone){ showToast('فضلاً قم بإدخال اسم الشركة واسم المسؤول ورقم الهاتف للمتابعة.',true); return; }
+    }
+    if(currentStep<totalSteps){ jumpToStep(currentStep+1); }
+    else{ openReviewScreen(); }
+  }else{ if(currentStep>1) jumpToStep(currentStep-1); }
+}
+function jumpToStep(step){
+  for(let i=1;i<=totalSteps;i++){ const el=document.getElementById('step-'+i); if(el) el.style.display='none'; }
+  document.getElementById('screen-welcome').style.display='none';
+  document.getElementById('screen-review').style.display='none';
+  document.getElementById('screen-success').style.display='none';
+  document.getElementById('screen-admin').style.display='none';
+  document.getElementById('screen-form').style.display='block';
+  currentStep=step;
+  document.getElementById('step-'+currentStep).style.display='block';
+  updateStepperUI(); window.scrollTo({top:180,behavior:'smooth'});
+}
+function updateStepperUI(){
+  const pills=document.querySelectorAll('#stepsTrack .step-pill');
+  pills.forEach((pill,idx)=>{
+    const s=idx+1; pill.classList.remove('active','completed');
+    if(s===currentStep) pill.classList.add('active'); else if(s<currentStep) pill.classList.add('completed');
+  });
+  const percent=(currentStep/totalSteps)*100;
+  document.getElementById('progressFillBar').style.width=percent+'%';
+  const btnPrev=document.getElementById('btnPrev'), btnNext=document.getElementById('btnNext');
+  btnPrev.style.visibility = currentStep===1 ? 'hidden':'visible';
+  if(currentStep===totalSteps) btnNext.innerHTML='<span>مراجعة البريف</span><i class="fa-solid fa-clipboard-check"></i>';
+  else btnNext.innerHTML='<span>التالي</span><i class="fa-solid fa-arrow-left"></i>';
+}
+function toggleService(card){
+  const s=card.getAttribute('data-service');
+  if(selectedServices.has(s)){ selectedServices.delete(s); card.classList.remove('selected'); }
+  else{ selectedServices.add(s); card.classList.add('selected'); }
+}
+function toggleGoal(card){
+  const g=card.getAttribute('data-goal');
+  if(selectedGoals.has(g)){ selectedGoals.delete(g); card.classList.remove('selected'); }
+  else{ selectedGoals.add(g); card.classList.add('selected'); }
+}
+function mockFileUpload(zoneKey){
+  uploadedFlags[zoneKey]=true;
+  const badge=document.getElementById(zoneKey+'-badge');
+  if(badge){ badge.style.display='inline-flex'; badge.style.animation='fadeIn .3s ease'; }
+  showToast('تم تجهيز الملف للإرفاق — سيتم ذكره في رسالة الواتساب.');
+}
+function openReviewScreen(){
+  document.getElementById('screen-form').style.display='none';
+  document.getElementById('screen-review').style.display='block';
+  const company=v('client_company')||"شركة غير محددة";
+  const name=v('client_name')||"غير محدد";
+  const phone=v('client_phone')||"غير محدد";
+  const email=v('client_email')||"غير محدد";
+  const industry=v('client_industry')||"غير محدد";
+  const website=v('client_website'), socials=v('client_socials');
+  document.getElementById('rev-company').innerText=company;
+  document.getElementById('rev-name').innerText=name;
+  document.getElementById('rev-phone').innerText=phone;
+  document.getElementById('rev-email').innerText=email;
+  document.getElementById('rev-industry').innerText=industry;
+  document.getElementById('rev-links').innerText=[website,socials].filter(Boolean).join(' | ')||"لا توجد روابط";
+  document.getElementById('rev-story').innerText=v('brand_story')||"لم يتم توفير تفاصيل إضافية";
+  document.getElementById('rev-usp').innerText=v('brand_usp')||"سيتم تحديدها مع الفريق";
+  document.getElementById('rev-hasid').innerText=r('has_identity')||"جديد";
+  const servContainer=document.getElementById('rev-services-tags'); servContainer.innerHTML='';
+  if(selectedServices.size===0) servContainer.innerHTML='<span style="color:var(--text-dim)">لم يتم تحديد خدمات محددة</span>';
+  else selectedServices.forEach(s=>{ const sp=document.createElement('span'); sp.className='review-tag'; sp.innerText=s; servContainer.appendChild(sp); });
+  document.getElementById('rev-services-notes').innerText=v('services_detail')||"لا توجد متطلبات مفصلة";
+  const age=v('audience_age')||"كافة الأعمار", loc=v('audience_location')||"جمهورية مصر / الوطن العربي";
+  document.getElementById('rev-audience-summary').innerText=age+" — "+loc;
+  const goalsContainer=document.getElementById('rev-goals-tags'); goalsContainer.innerHTML='';
+  if(selectedGoals.size===0) goalsContainer.innerHTML='<span style="color:var(--text-dim)">لم تحدد</span>';
+  else selectedGoals.forEach(g=>{ const sp=document.createElement('span'); sp.className='review-tag'; sp.innerText=g; goalsContainer.appendChild(sp); });
+  document.getElementById('rev-kpi').innerText=v('project_kpi')||"تحقيق أفضل نتائج ممكنة وزيادة التفاعل";
+  document.getElementById('rev-budget').innerText=r('project_budget')||"5,000 – 10,000 جنيه";
+  document.getElementById('rev-timeline').innerText=r('project_start')||"فورًا";
+  document.getElementById('rev-extra-notes').innerText=v('additional_notes')||"لا توجد ملاحظات إضافية";
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== WHATSAPP MESSAGE BUILDER =====
+function clean(val, fallback){ if(!val) return fallback||"—"; return val; }
+function buildWhatsAppMessage(code){
+  const company=clean(v('client_company'),"غير محدد");
+  const person=clean(v('client_name'),"غير محدد");
+  const phone=clean(v('client_phone'),"غير محدد");
+  const email=clean(v('client_email'),"غير محدد");
+  const industry=clean(v('client_industry'),"غير محدد");
+  const website=clean(v('client_website'),"لا يوجد");
+  const socials=clean(v('client_socials'),"لا توجد");
+  const story=clean(v('brand_story'),"لم يتم توفير نبذة");
+  const products=clean(v('brand_products'),"لم تحدد");
+  const usp=clean(v('brand_usp'),"سيتم تحديدها مع الفريق");
+  const identity=r('has_identity')||"مشروع جديد لا توجد هوية";
+  let identityFiles="لم يتم إرفاق ملفات في النموذج";
+  const attached=[];
+  if(uploadedFlags['logoFile']) attached.push("شعار البراند");
+  if(uploadedFlags['brandFile']) attached.push("ملف البراند / Guideline");
+  if(attached.length>0) identityFiles="تم تجهيز: "+attached.join(" + ") + " (سيتم إرسالها متابعةً)";
+  const servicesArr=Array.from(selectedServices);
+  const servicesDetail=clean(v('services_detail'),"لا توجد تفاصيل إضافية");
+  const goalsArr=Array.from(selectedGoals);
+  const kpi=clean(v('project_kpi'),"تحقيق أفضل نتائج ممكنة");
+  const age=clean(v('audience_age'),"كافة الأعمار");
+  const gender=r('audience_gender')||"الجميع (ذكور وإناث)";
+  const aLoc=clean(v('audience_location'),"مصر / الوطن العربي");
+  const aEco=clean(v('client_industry')&&v('audience_economic')?v('audience_economic'):v('audience_economic'),"غير محدد");
+  const aEcoFinal=clean(v('audience_economic'),"غير محدد");
+  const interests=clean(v('audience_interests'),"لم تحدد");
+  const channels=clean(v('audience_channels'),"لم تحدد");
+  const compNames=clean(v('competitors_names'),"لم يذكر");
+  const compLinks=clean(v('competitors_links'),"لا توجد روابط");
+  const compPros=clean(v('competitors_pros'),"—");
+  const compCons=clean(v('competitors_cons'),"—");
+  const favColors=clean(v('colors_fav'),"حسب اقتراح فريق قبس");
+  const avoidColors=clean(v('colors_avoid'),"لا يوجد مانع محدد");
+  const style=clean(v('visual_style'),"حسب رؤية قبس الإبداعية");
+  let refs=[];
+  if(uploadedFlags['inspireLike']) refs.push("أمثلة تعجب العميل (مجهزة للإرسال)");
+  if(uploadedFlags['inspireDislike']) refs.push("أمثلة مرفوضة (مجهزة للإرسال)");
+  const refsStr=refs.length?refs.join(" / "):"لم يتم إرفاق مراجع — حسب ذوق قبس";
+  const budget=r('project_budget')||"5,000 – 10,000 جنيه";
+  const start=r('project_start')||"فورًا وبشكل عاجل";
+  const notes=clean(v('additional_notes'),"لا توجد ملاحظات إضافية");
+  const L=[];
+  L.push("بريف عميل جديد — قبس");
+  L.push("━━━━━━━━━━━━━━━━");
+  L.push("");
+  L.push("بيانات العميل");
+  L.push("اسم الشركة: "+company);
+  L.push("اسم المسؤول: "+person);
+  L.push("رقم الهاتف: "+phone);
+  L.push("البريد الإلكتروني: "+email);
+  L.push("مجال النشاط: "+industry);
+  L.push("الموقع: "+website);
+  L.push("السوشيال ميديا: "+socials);
+  L.push("");
+  L.push("عن البراند");
+  L.push("نبذة عن النشاط: "+story);
+  L.push("الخدمات / المنتجات: "+products);
+  L.push("ما يميز البراند: "+usp);
+  L.push("الهوية البصرية: "+identity);
+  L.push("ملفات الهوية: "+identityFiles);
+  L.push("");
+  L.push("الخدمات المطلوبة");
+  if(servicesArr.length===0){ L.push("- لم يتم تحديد خدمة محددة (استشارة عامة)"); }
+  else{ servicesArr.forEach(s=>L.push("- "+s)); }
+  L.push("تفاصيل الطلب: "+servicesDetail);
+  L.push("");
+  L.push("أهداف المشروع");
+  if(goalsArr.length===0){ L.push("الهدف الأساسي: استشارة وتحديد مع الفريق"); }
+  else{ L.push("الهدف الأساسي: "+goalsArr.join(" / ")); goalsArr.forEach(g=>L.push("- "+g)); }
+  L.push("مؤشر النجاح: "+kpi);
+  L.push("");
+  L.push("الجمهور المستهدف");
+  L.push("العمر: "+age);
+  L.push("الجنس: "+gender);
+  L.push("الموقع: "+aLoc);
+  L.push("المستوى الاقتصادي: "+aEcoFinal);
+  L.push("الاهتمامات: "+interests);
+  L.push("طريقة الوصول الحالية: "+channels);
+  L.push("");
+  L.push("المنافسون");
+  L.push("المنافسون: "+compNames);
+  L.push("الروابط: "+compLinks);
+  L.push("ما يعجب العميل: "+compPros);
+  L.push("ما لا يعجبه: "+compCons);
+  L.push("");
+  L.push("التفضيلات البصرية");
+  L.push("الألوان المفضلة: "+favColors);
+  L.push("الألوان المرفوضة: "+avoidColors);
+  L.push("الستايل: "+style);
+  L.push("التصميمات المرجعية: "+refsStr);
+  L.push("");
+  L.push("الميزانية");
+  L.push("الميزانية: "+budget);
+  L.push("موعد البدء: "+start);
+  L.push("");
+  L.push("ملاحظات إضافية");
+  L.push(notes);
+  L.push("");
+  L.push("━━━━━━━━━━━━━━━━");
+  L.push("بريف جديد من منصة قبس");
+  L.push("موقع قبس:");
+  L.push(QABAS_WEBSITE);
+  L.push("كود المرجع: "+code);
+  return L.join("\n");
+}
+function submitFinalBrief(){
+  const code='QBS-'+Math.floor(1000+Math.random()*9000);
+  lastBriefCode=code;
+  const message=buildWhatsAppMessage(code);
+  lastWaMessage=message;
+  lastWaLink="https://wa.me/"+QABAS_WHATSAPP+"?text="+encodeURIComponent(message);
+  document.getElementById('briefRefCode').innerText=code;
+  document.getElementById('waMessagePreview').textContent=message;
+  const btnWa=document.getElementById('btnOpenWhatsApp');
+  if(btnWa) btnWa.setAttribute('href',lastWaLink);
+  const company=v('client_company')||"مشروع إبداعي جديد";
+  const name=v('client_name')||"عميل قبس";
+  const budget=r('project_budget')||"5,000 – 10,000 ج.م";
+  try{
+    const newCard=document.createElement('div');
+    newCard.className='pipeline-card';
+    const svcs=Array.from(selectedServices);
+    newCard.onclick=()=>openBriefModalCustom(name,company,svcs.length?svcs:["استشارة عامة"],budget,v('services_detail')||"بريف حديث مسجل من الموقع.",(v('client_phone')||"")+" | "+(v('client_email')||""));
+    newCard.innerHTML='<div class="pipeline-client-name"></div><div class="pipeline-company"></div><div class="pipeline-badge-row"></div><div class="pipeline-meta"><span class="pipeline-budget"></span><span style="color:#25d366"><i class="fa-solid fa-sparkles"></i> جديد الآن</span></div>';
+    newCard.querySelector('.pipeline-client-name').textContent=company;
+    newCard.querySelector('.pipeline-company').textContent=name+" • مسجل حديثًا";
+    newCard.querySelector('.pipeline-budget').textContent=budget;
+    const row=newCard.querySelector('.pipeline-badge-row');
+    svcs.slice(0,2).forEach(s=>{ const sp=document.createElement('span'); sp.className='review-tag'; sp.textContent=s; row.appendChild(sp); });
+    if(svcs.length===0){ const sp=document.createElement('span'); sp.className='review-tag'; sp.textContent="استشارة عامة"; row.appendChild(sp); }
+    const stack=document.getElementById('stack-new');
+    if(stack) stack.prepend(newCard);
+    const countBadge=document.getElementById('count-new');
+    if(countBadge) countBadge.innerText=parseInt(countBadge.innerText||"0")+1;
+  }catch(e){}
+  document.getElementById('screen-review').style.display='none';
+  document.getElementById('screen-success').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Open WhatsApp immediately (user gesture) pre-filled — client only presses Send
+  try{ window.open(lastWaLink,'_blank'); }catch(e){ window.location.href=lastWaLink; }
+  const note=document.getElementById('waAutoNote');
+  if(note) note.innerText="تم فتح محادثة واتساب تلقائيًا — ستجد رسالة البريف جاهزة، اضغط إرسال فقط. إذا لم تفتح، استخدم زر \"إرسال عبر واتساب الآن\" بالأسفل.";
+  showToast('تم تجهيز البريف بنجاح، سيتم فتح واتساب لإرساله إلى فريق قبس.');
+}
+function openWhatsAppBrief(e){
+  if(e) e.preventDefault();
+  if(!lastWaLink){ showToast('لا توجد رسالة جاهزة بعد.',true); return; }
+  window.open(lastWaLink,'_blank');
+}
+function copyBriefMessage(){
+  if(!lastWaMessage){ showToast('لا يوجد نص للنسخ بعد.',true); return; }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(lastWaMessage).then(()=>showToast('تم نسخ نص البريف بنجاح.')).catch(()=>fallbackCopy());
+  }else fallbackCopy();
+}
+function fallbackCopy(){
+  const ta=document.createElement('textarea'); ta.value=lastWaMessage; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); showToast('تم نسخ نص البريف بنجاح.'); }catch(e){ showToast('تعذر النسخ التلقائي.',true); }
+  document.body.removeChild(ta);
+}
+function toggleAdminView(){
+  isAdminView=!isAdminView;
+  const btn=document.getElementById('viewModeToggle'), text=document.getElementById('viewModeText');
+  if(isAdminView){
+    document.getElementById('screen-welcome').style.display='none';
+    document.getElementById('screen-form').style.display='none';
+    document.getElementById('screen-review').style.display='none';
+    document.getElementById('screen-success').style.display='none';
+    document.getElementById('screen-admin').style.display='block';
+    btn.classList.add('active'); text.innerText="العودة للبريف";
+  }else{ showWelcomeScreen(); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const sampleBriefs={
+  madar:{name:"م. خالد السعدي",company:"منصة سحابة الشرق (Logistics & Cloud)",contact:"+20 112 490 8821 | info@sharqcloud.sa",services:["مواقع إلكترونية وبرمجة","أتمتة الأعمال AI","تسويق واستراتيجية"],budget:"10,000 – 20,000 ج.م",notes:"نحتاج إعادة بناء واجهة المستخدم للبوابة السحابية وتكامل مع واتساب للأتمتة الفورية للشحنات.",status:"عميل جديد"},
+  atelier:{name:"نوران الشريف",company:"أتيليه نوران للأزياء الفاخرة",contact:"+20 109 881 2290 | nouran@atelier.com",services:["تصميم وهوية","جلسات تصوير","فيديو ومونتاج"],budget:"أكثر من 20,000 ج.م",notes:"نريد جلسة تصوير كولكشن شتاء 2026 مع ريلز إنستغرام سينمائية تعكس طابع الفخامة الملكي.",status:"عميل جديد"},
+  vivid:{name:"كريم يوسف",company:"كافيه ومخبوزات Le Rêve",contact:"+20 120 445 9901 | lereve@cafe.eg",services:["إدارة سوشيال ميديا","مونتاج وفيديو"],budget:"5,000 – 10,000 ج.م",notes:"التركيز على ريلز الفود بلوجرز وتجديد نمط تصوير القهوة المختصة لزيادة المبيعات الصباحية.",status:"قيد المراجعة الفنية"},
+  nexus:{name:"سارة طارق",company:"تطبيق فيتنس ون (Fitness One App)",contact:"+20 102 331 7765 | sara@fitone.app",services:["إعلانات ممولة","تسويق واستراتيجية"],budget:"20,000+ ج.م",notes:"هدفنا خفض تكلفة تثبيت التطبيق CPI وجلب اشتراكات سنوية في مصر والإمارات.",status:"تم التواصل هاتفياً"}
+};
+function openBriefModal(key){ const d=sampleBriefs[key]; if(!d) return; openBriefModalCustom(d.name,d.company,d.services,d.budget,d.notes,d.contact,d.status); }
+function openBriefModalCustom(name,company,services,budget,notes,contact,status){
+  document.getElementById('m-name').innerText=name;
+  document.getElementById('m-company').innerText=company;
+  document.getElementById('m-contact').innerText=contact||"—";
+  document.getElementById('m-budget').innerText=budget;
+  document.getElementById('m-notes').innerText=notes;
+  document.getElementById('m-status').innerText=status||"عميل تم إرساله حديثًا";
+  const w=document.getElementById('m-services'); w.innerHTML='';
+  (services||[]).forEach(s=>{ const sp=document.createElement('span'); sp.className='review-tag'; sp.innerText=s; w.appendChild(sp); });
+  document.getElementById('briefModal').classList.add('active');
+}
+function closeBriefModal(){ document.getElementById('briefModal').classList.remove('active'); }
+document.getElementById('briefModal').addEventListener('click',(e)=>{ if(e.target.id==='briefModal') closeBriefModal(); });
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeBriefModal(); });
+</script>
+</body>
+</html>

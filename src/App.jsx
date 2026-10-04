@@ -9,12 +9,14 @@ import Blog from './pages/Blog';
 import Article from './pages/Article';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
+import Brief from './pages/Brief';
 
 export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/brief" element={<Brief />} />
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="works" element={<Works />} />
