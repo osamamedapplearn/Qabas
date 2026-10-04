@@ -190,8 +190,8 @@ export default function Brief() {
 </div></div>
 </div>
 <div className="fields-grid" style={{marginTop: '1rem'}}>
-<div className="dropzone-container"><i className="fa-solid fa-cloud-arrow-up dropzone-icon"></i><div className="dropzone-title">ارفع شعار البراند (إن وجد)</div><div className="dropzone-hint">PNG, SVG, AI, PDF (بحد أقصى 25MB)</div><div id="logoFile-badge" className="file-chip" style={{display: 'none'}}><i className="fa-solid fa-check" style="color:#38ef7d"></i><span id="logoFile-name">brand-logo.svg</span></div></div>
-<div className="dropzone-container"><i className="fa-solid fa-folder-open dropzone-icon"></i><div className="dropzone-title">ارفع ملفات البراند / Brand Guideline</div><div className="dropzone-hint">ملف تعريف البراند، الكتالوج، أو الصور المتاحة</div><div id="brandFile-badge" className="file-chip" style={{display: 'none'}}><i className="fa-solid fa-check" style="color:#38ef7d"></i><span id="brandFile-name">brand-guidelines.pdf</span></div></div>
+<div className="dropzone-container"><i className="fa-solid fa-cloud-arrow-up dropzone-icon"></i><div className="dropzone-title">ارفع شعار البراند (إن وجد)</div><div className="dropzone-hint">PNG, SVG, AI, PDF (بحد أقصى 25MB)</div><div id="logoFile-badge" className="file-chip" style={{display: 'none'}}><i className="fa-solid fa-check" style={{color:'#38ef7d'}}></i><span id="logoFile-name">brand-logo.svg</span></div></div>
+<div className="dropzone-container"><i className="fa-solid fa-folder-open dropzone-icon"></i><div className="dropzone-title">ارفع ملفات البراند / Brand Guideline</div><div className="dropzone-hint">ملف تعريف البراند، الكتالوج، أو الصور المتاحة</div><div id="brandFile-badge" className="file-chip" style={{display: 'none'}}><i className="fa-solid fa-check" style={{color:'#38ef7d'}}></i><span id="brandFile-name">brand-guidelines.pdf</span></div></div>
 </div>
 </div>
 <div className="step-content" id="step-3" style={{display: 'none'}}>
