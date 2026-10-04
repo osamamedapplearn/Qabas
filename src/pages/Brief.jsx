@@ -1,6 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Brief.css";
 import { Link } from "react-router-dom";
+
+const WA_NUMBER = '201144712845';
+
+function buildWhatsAppMessage(formData, selectedServices, selectedGoals) {
+  const services = [...selectedServices].join('، ');
+  const goals = [...selectedGoals].join('، ');
+  return `🌟 *بريف مشروع جديد — قبس QABAS*
+
+👤 *بيانات العميل*
+الاسم: ${formData.client_name || '-'}
+الشركة/الكيان: ${formData.client_company || '-'}
+الهاتف: ${formData.client_phone || '-'}
+البريد: ${formData.client_email || '-'}
+المجال: ${formData.client_industry || '-'}
+الموقع الحالي: ${formData.client_website || '-'}
+السوشيال: ${formData.client_socials || '-'}
+
+🏷️ *عن البراند*
+قصة البراند: ${formData.brand_story || '-'}
+المنتجات/الخدمات: ${formData.brand_products || '-'}
+الميزة التنافسية: ${formData.brand_usp || '-'}
+الهوية البصرية الحالية: ${formData.has_identity}
+
+🎯 *الاحتياجات والخدمات*
+الخدمات المطلوبة: ${services}
+تفاصيل: ${formData.services_detail || '-'}
+
+👥 *الجمهور المستهدف*
+الفئة العمرية: ${formData.audience_age || '-'}
+الجنس: ${formData.audience_gender}
+الموقع الجغرافي: ${formData.audience_location || '-'}
+المستوى الاقتصادي: ${formData.audience_economic || '-'}
+الاهتمامات: ${formData.audience_interests || '-'}
+القنوات المفضلة: ${formData.audience_channels || '-'}
+
+📈 *الأهداف والنتائج*
+الأهداف: ${goals}
+مؤشرات النجاح: ${formData.project_kpi || '-'}
+
+🔍 *المنافسون*
+أسماء: ${formData.competitors_names || '-'}
+روابط: ${formData.competitors_links || '-'}
+نقاط قوتهم: ${formData.competitors_pros || '-'}
+نقاط ضعفهم: ${formData.competitors_cons || '-'}
+
+🎨 *الذوق البصري*
+ألوان مفضلة: ${formData.colors_fav || '-'}
+ألوان يتجنبها: ${formData.colors_avoid || '-'}
+أسلوب التصميم: ${formData.visual_style || '-'}
+
+💰 *الميزانية والجدول الزمني*
+الميزانية: ${formData.project_budget}
+موعد البدء: ${formData.project_start}
+ملاحظات إضافية: ${formData.additional_notes || '-'}
+
+---
+تم الإرسال عبر موقع قبس الرقمي 🚀`;
+}
 
 export default function Brief() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -59,7 +117,13 @@ export default function Brief() {
     }
   };
 
-  const submitFinalBrief = () => { setView("success"); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const submitFinalBrief = () => {
+    const message = buildWhatsAppMessage(formData, selectedServices, selectedGoals);
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setView("success");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -76,12 +140,12 @@ export default function Brief() {
 </header>
 <main>
 {/*  WELCOME  */}
-<section id="screen-welcome" className="view-welcome">
+<section id="screen-welcome" className="view-welcome" style={{display: view === 'welcome' ? '' : 'none'}}>
 <div className="hero-banner-visual"><img src="https://www.designarena.ai/u/a610a667-0dd7-45ce-aa61-55952e6d4d49" alt="Qabas Digital Agency Aesthetic Banner" /></div>
 <div className="hero-badge"><i className="fa-solid fa-sparkles"></i> رحلة انطلاق شريكتك الرقمية</div>
 <h1 className="hero-title">خلّي <span>قبس</span> يعرف مشروعك أكثر</h1>
 <p className="hero-subtitle">كل ما عرفنا مشروعك وتفاصيل رؤيتك بشكل أفضل، قدرنا نبني لك الحل الإبداعي المناسب بدقة فائقة وأثر استثنائي في السوق.</p>
-<button className="btn-start-hero"><span>ابدأ البريف الآن</span><i className="fa-solid fa-arrow-left"></i></button>
+<button className="btn-start-hero" onClick={() => { setView('form'); setCurrentStep(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}><span>ابدأ البريف الآن</span><i className="fa-solid fa-arrow-left"></i></button>
 <div className="welcome-links-row">
 <a className="link-visit-qabas" href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i className="fa-solid fa-globe"></i> زيارة موقع قبس <i className="fa-solid fa-arrow-up-left" style={{fontSize: '.7rem', opacity: '.7'}}></i></a>
 <a className="link-visit-qabas" href="#" style={{borderStyle: 'dashed'}}><i className="fa-solid fa-layer-group"></i> معاينة لوحة المتابعة</a>
@@ -90,7 +154,7 @@ export default function Brief() {
 <p className="welcome-micro">Qabas — قَبَس | حلول رقمية.. تفوق التوقعات — <a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener">qabas-three.vercel.app</a></p>
 </section>
 {/*  FORM  */}
-<section id="screen-form" style={{display: 'none'}}>
+<section id="screen-form" style={{display: view === 'form' ? '' : 'none'}}>
 <div className="stepper-header"><div className="stepper-track-wrap"><div className="stepper-track" id="stepsTrack">
 <button type="button" className="step-pill active"><span className="step-num">01</span><span>بياناتك</span></button>
 <button type="button" className="step-pill"><span className="step-num">02</span><span>عن البراند</span></button>
@@ -210,7 +274,7 @@ export default function Brief() {
 </div>
 </section>
 {/*  REVIEW  */}
-<section id="screen-review" style={{display: 'none'}}>
+<section id="screen-review" style={{display: view === 'review' ? '' : 'none'}}>
 <div className="stage-header" style={{border: 'none', marginBottom: '1.5rem'}}><div><h1 className="stage-title" style={{fontSize: '2.2rem'}}><i className="fa-solid fa-clipboard-check"></i> راجع بريف مشروعك</h1><p className="stage-desc">تأكد من دقة كافة البيانات والمدخلات قبل إرسالها رسميًا إلى فريق قبس عبر واتساب.</p></div><span className="stage-badge">REVIEW STAGE</span></div>
 <div className="review-grid">
 <div className="review-section-card"><div className="review-card-head"><div className="review-card-title"><i className="fa-solid fa-user-check"></i> 01. بيانات العميل</div><button className="btn-edit-step"><i className="fa-solid fa-pen-to-square"></i> تعديل</button></div><div className="review-items-list"><div className="review-data-point"><span className="review-label">اسم العميل / الشركة</span><span className="review-value" id="rev-company">-</span></div><div className="review-data-point"><span className="review-label">اسم المسؤول</span><span className="review-value" id="rev-name">-</span></div><div className="review-data-point"><span className="review-label">الهاتف / واتساب</span><span className="review-value" id="rev-phone">-</span></div><div className="review-data-point"><span className="review-label">البريد الإلكتروني</span><span className="review-value" id="rev-email">-</span></div><div className="review-data-point"><span className="review-label">مجال النشاط</span><span className="review-value" id="rev-industry">-</span></div><div className="review-data-point"><span className="review-label">الموقع والسوشيال</span><span className="review-value" id="rev-links">-</span></div></div></div>
@@ -223,7 +287,7 @@ export default function Brief() {
 <p style={{textAlign: 'center', marginTop: '1rem', fontSize: '.82rem', color: 'var(--text-dim)'}}><i className="fa-solid fa-lock"></i> بالضغط على إرسال سيتم تجهيز بريفك وفتح واتساب لإرساله مباشرة إلى فريق قبس — لن تحتاج إلا للضغط على زر الإرسال في واتساب.</p>
 </section>
 {/*  SUCCESS  */}
-<section id="screen-success" style={{display: 'none'}}>
+<section id="screen-success" style={{display: view === 'success' ? '' : 'none'}}>
 <div className="form-stage-card success-container">
 <div className="success-icon-wrap"><i className="fa-solid fa-check"></i></div>
 <h2 className="success-title">وصل البريف بنجاح!</h2>
@@ -244,7 +308,7 @@ export default function Brief() {
 </div>
 </section>
 {/*  ADMIN  */}
-<section id="screen-admin" className="admin-view-wrap">
+<section id="screen-admin" className="admin-view-wrap" style={{display: view === 'admin' ? '' : 'none'}}>
 <div className="admin-header"><div><h2 className="admin-headline">لوحة بريفات <span>قبس</span></h2><p style={{color: 'var(--text-muted)', fontSize: '.95rem'}}>متابعة طلبات العملاء الجدد ومراحل تأهيل واستلام المشروعات</p></div><button className="btn-action btn-prev"><i className="fa-solid fa-arrow-right"></i><span>العودة للبريف</span></button></div>
 <div className="kanban-board">
 <div className="kanban-col"><div className="kanban-col-head"><div className="kanban-col-title"><i className="fa-solid fa-bell" style={{color: '#facc15'}}></i><span>عملاء جدد</span></div><span className="kanban-count" id="count-new">2</span></div><div className="kanban-cards-stack" id="stack-new">
