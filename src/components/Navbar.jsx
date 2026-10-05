@@ -37,14 +37,14 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Sticky top bar: clean white, teal identity ── */}
-      <nav aria-label="التنقل الرئيسي" className="fixed top-0 inset-x-0 z-[100] bg-white/92 backdrop-blur-lg border-b border-brand-teal/10 shadow-[0_2px_20px_rgba(10,94,93,0.07)]">
+      {/* ── Sticky top bar: deep maroon, white links ── */}
+      <nav aria-label="التنقل الرئيسي" className="fixed top-0 inset-x-0 z-[100] bg-brand-deep backdrop-blur-lg border-b border-white/10 shadow-[0_2px_20px_rgba(0,0,0,0.35)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16 lg:h-20 gap-4">
           {/* Brand — right in RTL (first in DOM) */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0 group rounded-md">
             <img src="/logo.png" alt="قبس" width="40" height="40" className="w-9 h-9 lg:w-10 lg:h-10 object-contain" />
-            <span className="font-arabic text-xl font-extrabold text-brand-maroon group-hover:text-brand-teal-dark transition-colors">
-              قَبَس <span className="text-xs font-bold text-brand-ink-soft">Qabas</span>
+            <span className="font-arabic text-xl font-extrabold text-white group-hover:text-brand-amber transition-colors">
+              قَبَس <span className="text-xs font-bold text-white/70">Qabas</span>
             </span>
           </Link>
 
@@ -53,19 +53,19 @@ export default function Navbar() {
             {ROUTE_LINKS.map(({ to, label, end }) => (
               <NavLink key={label} to={to} end={end}
                 className={({ isActive }) =>
-                  `${linkBase} ${isActive ? 'text-brand-teal-dark' : 'text-brand-ink-soft hover:text-brand-teal-dark'}`
+                  `${linkBase} ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`
                 }>
                 {({ isActive }) => (
                   <>
                     {label}
                     <span aria-hidden="true"
-                      className={`absolute bottom-0 right-3 left-3 h-0.5 rounded-full bg-brand-teal transition-all duration-300 ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'}`} />
+                      className={`absolute bottom-0 right-3 left-3 h-0.5 rounded-full bg-brand-amber transition-all duration-300 ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-50'}`} />
                   </>
                 )}
               </NavLink>
             ))}
             {HASH_LINKS.map(({ hash, label }) => (
-              <a key={label} href={`/#${hash}`} className={`${linkBase} text-brand-ink-soft hover:text-brand-teal-dark`}>
+              <a key={label} href={`/#${hash}`} className={`${linkBase} text-white/80 hover:text-white`}>
                 {label}
               </a>
             ))}
@@ -74,7 +74,7 @@ export default function Navbar() {
           {/* Left side (end in RTL): CTA + mobile hamburger only */}
           <div className="flex items-center gap-2.5">
             <Link to="/brief"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold border-2 border-brand-maroon text-brand-maroon hover:bg-brand-maroon hover:text-white transition-all duration-200">
+              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-extrabold border-2 border-white/60 text-white hover:bg-white hover:text-brand-maroon transition-all duration-200">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               ابدأ مشروعك
             </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
               احجز استشارة مجانية
             </a>
             <button onClick={() => setOpen(true)} aria-expanded={open} aria-controls="mobile-drawer" aria-label="فتح قائمة التنقل"
-              className="lg:hidden p-2.5 -ml-1 rounded-xl text-brand-maroon hover:text-brand-teal-dark hover:bg-brand-teal-soft/60 transition-colors">
+              className="lg:hidden p-2.5 -ml-1 rounded-xl text-white hover:text-brand-amber hover:bg-white/10 transition-colors">
               <Menu className="w-6 h-6" />
             </button>
           </div>
