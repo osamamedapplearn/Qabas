@@ -120,7 +120,7 @@ function buildWhatsAppMessage(formData, selectedServices, selectedGoals, refCode
 export default function Brief() {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 7;
-  const [view, setView] = useState("welcome"); // welcome, form, review, success, admin
+  const [view, setView] = useState("welcome"); // welcome, form, review, success
   const [selectedServices, setSelectedServices] = useState(new Set(["تصميم وهوية بصرية","مواقع إلكترونية وبرمجة"]));
   const [selectedGoals, setSelectedGoals] = useState(new Set(["زيادة المبيعات المباشرة","بناء وترسيخ الهوية"]));
   const [errors, setErrors] = useState({});
@@ -302,7 +302,6 @@ export default function Brief() {
 <div className="brand-text-block"><span className="brand-arabic">قَبَسْ</span><span className="brand-latin">QABAS</span></div>
 </a>
 <div className="brand-pill-motto"><span><span className="motto-letter">Q</span>uality.</span><span><span className="motto-letter">A</span>mbition.</span><span><span className="motto-letter">B</span>oldness.</span><span><span className="motto-letter">A</span>rtistry.</span><span><span className="motto-letter">S</span>ubstance.</span></div>
-<div className="header-actions"><button type="button" className="btn-toggle-view" id="viewModeToggle" onClick={() => setView((prev) => (prev === "admin" ? "form" : "admin"))}><i className="fa-solid fa-layer-group"></i><span id="viewModeText">لوحة متابعة قبس</span></button></div>
 </header>
 <main className="brief-main">
 {/*  WELCOME  */}
@@ -314,7 +313,6 @@ export default function Brief() {
 <button className="btn-start-hero" onClick={() => { setView('form'); setCurrentStep(1); setErrors({}); window.scrollTo({ top: 0, behavior: 'smooth' }); }}><span>ابدأ البريف الآن</span><i className="fa-solid fa-arrow-left"></i></button>
 <div className="welcome-links-row">
 <a className="link-visit-qabas" href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i className="fa-solid fa-globe"></i> زيارة موقع قبس <i className="fa-solid fa-arrow-up-left" style={{fontSize: '.7rem', opacity: '.7'}}></i></a>
-<a className="link-visit-qabas" href="#" style={{borderStyle: 'dashed'}} onClick={(e) => { e.preventDefault(); setView('admin'); }}><i className="fa-solid fa-layer-group"></i> معاينة لوحة المتابعة</a>
 </div>
 <div className="trust-row"><span className="trust-chip"><i className="fa-solid fa-check"></i> إرسال مباشر عبر واتساب</span><span className="trust-chip"><i className="fa-solid fa-lock"></i> بياناتك بأمان مع فريق قبس</span><span className="trust-chip"><i className="fa-solid fa-bolt"></i> رد خلال 24 ساعة</span></div>
 <p className="welcome-micro">Qabas — قَبَس | حلول رقمية.. تفوق التوقعات — <a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener">qabas-three.vercel.app</a></p>
@@ -456,27 +454,12 @@ export default function Brief() {
 <div className="success-btns" style={{marginTop: '.2rem'}}>
 <button type="button" className="btn-ghost-light" style={{padding: '.8rem 1.5rem', fontSize: '.9rem'}} onClick={goHome}><i className="fa-solid fa-house"></i><span>العودة إلى الرئيسية</span></button>
 <a className="btn-ghost-light" href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener" style={{padding: '.8rem 1.5rem', fontSize: '.9rem', borderColor: 'rgba(37,211,102,.35)'}}><i className="fa-solid fa-globe" style={{color: '#25d366'}}></i><span>زيارة موقع قبس</span></a>
-<button type="button" className="btn-ghost-light" style={{padding: '.8rem 1.5rem', fontSize: '.9rem'}} onClick={() => setView("admin")}><i className="fa-solid fa-list-check"></i><span>معاينة البريف في لوحة قبس</span></button>
 </div>
 <div className="wa-preview-wrap"><details id="waPreviewDetails"><summary><i className="fa-brands fa-whatsapp" style={{color: '#25d366'}}></i> معاينة رسالة الواتساب المجهزة <span style={{fontWeight: '400', color: 'var(--text-dim)', fontSize: '.78rem'}}>(اضغط للعرض)</span></summary><div className="wa-preview-text" id="waMessagePreview">{waMessage || "..."}</div></details></div>
 <p className="success-site-note">Qabas — قَبَس | حلول رقمية.. تفوق التوقعات — <a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener">زيارة موقع قبس: qabas-three.vercel.app</a></p>
 </div>
 </section>
-{/*  ADMIN  */}
-<section id="screen-admin" className="admin-view-wrap" style={{display: view === 'admin' ? 'block' : 'none'}}>
-<div className="admin-header"><div><h2 className="admin-headline">لوحة بريفات <span>قبس</span></h2><p style={{color: 'var(--text-muted)', fontSize: '.95rem'}}>متابعة طلبات العملاء الجدد ومراحل تأهيل واستلام المشروعات</p></div><button type="button" className="btn-action btn-prev" onClick={() => setView("form")}><i className="fa-solid fa-arrow-right"></i><span>العودة للبريف</span></button></div>
-<div className="kanban-board">
-<div className="kanban-col"><div className="kanban-col-head"><div className="kanban-col-title"><i className="fa-solid fa-bell" style={{color: '#facc15'}}></i><span>عملاء جدد</span></div><span className="kanban-count" id="count-new">2</span></div><div className="kanban-cards-stack" id="stack-new">
-<div className="pipeline-card"><div className="pipeline-client-name">منصة سحابة الشرق</div><div className="pipeline-company">خدمات لوجستية وسحابية</div><div className="pipeline-badge-row"><span className="review-tag">مواقع إلكترونية</span><span className="review-tag">أتمتة</span></div><div className="pipeline-meta"><span className="pipeline-budget">10,000 – 20,000 ج.م</span><span>منذ ساعتين</span></div></div>
-<div className="pipeline-card"><div className="pipeline-client-name">أتيليه نوران</div><div className="pipeline-company">أزياء ومجوهرات راقية</div><div className="pipeline-badge-row"><span className="review-tag">تصميم وهوية</span><span className="review-tag">تصوير</span></div><div className="pipeline-meta"><span className="pipeline-budget">أكثر من 20,000 ج.م</span><span>اليوم</span></div></div>
-</div></div>
-<div className="kanban-col"><div className="kanban-col-head"><div className="kanban-col-title"><i className="fa-solid fa-magnifying-glass"></i><span>قيد المراجعة</span></div><span className="kanban-count" id="count-review">1</span></div><div className="kanban-cards-stack" id="stack-review"><div className="pipeline-card"><div className="pipeline-client-name">كافيه لو ريڤ (Le Rêve)</div><div className="pipeline-company">ضيافة ومطاعم</div><div className="pipeline-badge-row"><span className="review-tag">سوشيال ميديا</span><span className="review-tag">مونتاج</span></div><div className="pipeline-meta"><span className="pipeline-budget">أكثر من 20,000 ج.م</span><span>أمس</span></div></div></div></div>
-<div className="kanban-col"><div className="kanban-col-head"><div className="kanban-col-title"><i className="fa-brands fa-whatsapp" style={{color: '#25d366'}}></i><span>تم التواصل</span></div><span className="kanban-count" id="count-contacted">1</span></div><div className="kanban-cards-stack" id="stack-contacted"><div className="pipeline-card"><div className="pipeline-client-name">تطبيق فيتنس ون</div><div className="pipeline-company">صحة ورياضة تقنية</div><div className="pipeline-badge-row"><span className="review-tag">إعلانات ممولة</span><span className="review-tag">استراتيجية</span></div><div className="pipeline-meta"><span className="pipeline-budget">20,000+ ج.م</span><span>26 مارس</span></div></div></div></div>
-<div className="kanban-col"><div className="kanban-col-head"><div className="kanban-col-title"><i className="fa-solid fa-rocket" style={{color: '#a855f7'}}></i><span>قيد التنفيذ</span></div><span className="kanban-count" id="count-active">1</span></div><div className="kanban-cards-stack" id="stack-active"><div className="pipeline-card"><div className="pipeline-client-name">أكاديمية إلهام للتعليم</div><div className="pipeline-company">تعليم وتدريب رقمي</div><div className="pipeline-badge-row"><span className="review-tag">تصميم وهوية</span><span className="review-tag">موقع كامل</span></div><div className="pipeline-meta"><span className="pipeline-budget">15,000 ج.م</span><span>نشط الآن</span></div></div></div></div>
-</div>
-</section>
 </main>
-<div className="detail-modal" id="briefModal"><div className="modal-dialog"><button className="modal-close-btn"><i className="fa-solid fa-xmark"></i></button><div style={{marginBottom: '1.5rem'}}><span className="hero-badge" style={{marginBottom: '.5rem'}} id="m-status">عميل جديد</span><h2 id="m-name" style={{fontFamily: 'var(--font-display)', fontSize: '1.6rem', color: '#fff'}}>اسم العميل</h2><p id="m-company" style={{color: 'var(--text-muted)', fontSize: '.95rem'}}>الشركة والنشاط</p></div><div style={{display: 'flex', flexDirection: 'column', gap: '1.25rem'}}><div className="review-data-point"><span className="review-label">التواصل</span><span className="review-value" id="m-contact">-</span></div><div className="review-data-point"><span className="review-label">الخدمات المطلوبة</span><div className="review-tags" id="m-services"></div></div><div className="review-data-point"><span className="review-label">الميزانية المحددة والجدول الزمني</span><span className="review-value" id="m-budget" style={{color: '#38ef7d', fontWeight: '700'}}>-</span></div><div className="review-data-point"><span className="review-label">الهدف الأساسي وملاحظات العميل</span><p className="review-value" id="m-notes" style={{background: 'rgba(0,0,0,.3)', padding: '.85rem', borderRadius: '8px', fontSize: '.9rem', lineHeight: '1.6'}}>-</p></div></div></div></div>
 <footer className="brief-footer"><div><strong>قبس | QABAS DIGITAL SOLUTIONS</strong> &copy; 2026. جميع الحقوق محفوظة.</div><div className="brand-pill-motto" style={{fontSize: '.7rem', borderColor: 'rgba(255,255,255,.06)'}}>Quality &bull; Ambition &bull; Boldness &bull; Artistry &bull; Substance</div><div className="footer-links"><a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i className="fa-solid fa-tag"></i> الأسعار والباقات</a><a href="https://qabas-three.vercel.app/#pricing" target="_blank" rel="noopener"><i className="fa-solid fa-globe"></i> موقع قبس</a><a href="#"><i className="fa-brands fa-instagram"></i></a><a href="#"><i className="fa-brands fa-facebook"></i></a></div></footer>
 </div>
 <div id="toast" role="status" aria-live="polite" className={toast ? `show${toast.err ? " err" : ""}` : ""}>{toast ? toast.msg : ""}</div>
