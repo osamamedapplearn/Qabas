@@ -2,8 +2,9 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Quote, TrendingUp, AlertCircle, Lightbulb, PlayCircle, ArrowUpLeft } from 'lucide-react';
-import { projectBySlug, PROJECTS } from '../data/projects';
-import { sectorById } from '../data/sectors';
+import { projectBySlug, PROJECTS } from '../content';
+import { sectorById } from '../content';
+import MediaShowcase from '../components/MediaShowcase';
 import Button from '../components/ui/Button';
 import ProjectCard from '../components/ProjectCard';
 import BeforeAfter from '../components/BeforeAfter';
@@ -106,13 +107,9 @@ export default function CaseStudy() {
           </div>
         </Reveal>
 
-        {project.gallery.length > 1 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
-            {project.gallery.map((g) => (
-              <img key={g} src={g} alt={project.title} loading="lazy" decoding="async" className="w-full h-64 object-cover rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300" />
-            ))}
-          </div>
-        )}
+        {project.gallery.length > 1 || (project.videos || []).length > 0 || (project.files || []).length > 0 ? (
+          <MediaShowcase gallery={project.gallery} videos={project.videos} files={project.files} title={project.title} />
+        ) : null}
 
         <div className="mb-12">
           <h2 className="font-arabic text-2xl font-extrabold text-brand-maroon mb-4">التقنيات والأدوات</h2>

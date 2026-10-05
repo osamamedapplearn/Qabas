@@ -1,0 +1,7 @@
+[
+  { "id": "all", "title": "الكل" },
+  { "id": "tourism-marketing", "title": "نصائح للتسويق السياحي" },
+  { "id": "ecommerce-future", "title": "مستقبل التجارة الإلكترونية" },
+  { "id": "automation", "title": "أهمية الأتمتة" },
+  { "id": "general", "title": "عام/أخبار الصناعة" }
+]

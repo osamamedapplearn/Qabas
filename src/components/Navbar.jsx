@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Home, Zap, Target, Package, Briefcase, Newspaper, Phone, Menu, X, MessageCircle } from 'lucide-react';
-import { waLink } from '../config/site';
+import { waLink } from '../content';
 
 const ROUTE_LINKS = [
   { to: '/', label: 'الرئيسية', icon: Home, end: true },

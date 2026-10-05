@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpLeft } from 'lucide-react';
-import { sectorById } from '../data/sectors';
+import { sectorById } from '../content';
 
 export default function ProjectCard({ project }) {
   const sector = sectorById(project.sector);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PhoneCall, MessageCircle, Mail, Clock, Send } from 'lucide-react';
-import { SITE, waLink } from '../config/site';
-import { SECTORS } from '../data/sectors';
+import { SITE, waLink } from '../content';
+import { SECTORS } from '../content';
 import SectionHeading from './ui/SectionHeading';
 
 export default function Contact({ compact = false }) {

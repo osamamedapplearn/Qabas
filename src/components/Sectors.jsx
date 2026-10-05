@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpLeft } from 'lucide-react';
-import { SECTORS } from '../data/sectors';
+import { SECTORS } from '../content';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 import SectorArt from './SectorArt';

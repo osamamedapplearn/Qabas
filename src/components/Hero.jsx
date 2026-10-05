@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { ArrowUpLeft, Sparkles } from 'lucide-react';
-import { waLink } from '../config/site';
+import { waLink } from '../content';
 
 export default function Hero() {
   const ref = useRef(null);

@@ -1,0 +1,22 @@
+{
+  "slug": "nova-brand-system",
+  "title": "منظومة NOVA لعلامة ناشئة",
+  "sector": "general",
+  "category": "strategy",
+  "service": "باقة NOVA الشاملة",
+  "cover": "/packages/nova.jpeg",
+  "summary": "منظومة متكاملة: موقع + أوتوميشن + محتوى شهري في باقة واحدة.",
+  "challenge": "علامة ناشئة بلا حضور رقمي موحد، وجهود متفرقة بين مصممين ومطورين.",
+  "solution": "طبقنا باقة NOVA: موقع سريع، أوتوميشن 24/7، 10 تصاميم و5 ريلز شهرياً، وإدارة صفحة باستراتيجية.",
+  "results": [
+    { "value": "30 يوم", "label": "للإطلاق الكامل" },
+    { "value": "+5x", "label": "نمو التفاعل" },
+    { "value": "+89%", "label": "استفسارات مؤهلة" }
+  ],
+  "gallery": ["/packages/nova.jpeg"],
+  "videos": [],
+  "files": [],
+  "tech": ["NOVA Bundle", "Website", "Automation", "Content Engine"],
+  "testimonial": { "text": "كأن لدينا فريقاً رقمياً كاملاً في باقة واحدة.", "author": "مؤسس علامة ناشئة" },
+  "visible": true
+}

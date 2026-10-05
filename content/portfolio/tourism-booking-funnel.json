@@ -1,0 +1,25 @@
+{
+  "slug": "tourism-booking-funnel",
+  "title": "منظومة حجز ذكية لشركة سفر",
+  "sector": "tourism",
+  "category": "automation",
+  "service": "الأوتوميشن الذكي + صفحة هبوط",
+  "cover": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=900&auto=format&fit=crop",
+  "summary": "أتمتة الرد على أسعار الرحلات وصفحة حجز مباشر رفعت التحويل.",
+  "challenge": "ضياع استفسارات الواتساب في المواسم، وتأخر الرد على أسعار البرامج أدى لتسرب العملاء قبل الحجز.",
+  "solution": "بنينا رداً آلياً 24/7 يجيب عن الأسعار والبرامج ويجمع بيانات المسافر، مع صفحة هبوط سريعة بزر حجز مباشر وربط واتساب.",
+  "results": [
+    { "value": "+64%", "label": "نمو طلبات الحجز" },
+    { "value": "24/7", "label": "رد آلي فوري" },
+    { "value": "2.3x", "label": "مضاعفة التحويل" }
+  ],
+  "gallery": [
+    "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=900&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=900&auto=format&fit=crop"
+  ],
+  "videos": [],
+  "files": [],
+  "tech": ["Landing Page", "WhatsApp Automation", "Lead Qualification", "Analytics"],
+  "testimonial": { "text": "الرد الآلي غيّر موسمنا — الحجوزات أصبحت تصلنا جاهزة.", "author": "مدير شركة سفر" },
+  "visible": true
+}

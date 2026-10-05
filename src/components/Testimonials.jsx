@@ -1,6 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
-import { TESTIMONIALS, CLIENT_LOGOS } from '../data/testimonials';
+import { TESTIMONIALS, CLIENT_LOGOS } from '../content';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
 

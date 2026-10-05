@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock } from 'lucide-react';
-import { POSTS, POST_CATEGORIES } from '../data/posts';
+import { POSTS, POST_CATEGORIES } from '../content';
 import FilterPills from '../components/ui/FilterPills';
 
 export default function Blog() {

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Clock, User, Quote, ListChecks, BarChart3 } from 'lucide-react';
-import { postBySlug, POSTS, POST_CATEGORIES } from '../data/posts';
+import { postBySlug, POSTS, POST_CATEGORIES, youtubeIdFromUrl } from '../content';
+import MediaShowcase from '../components/MediaShowcase';
 import ShareButtons from '../components/ui/ShareButtons';
 import Button from '../components/ui/Button';
 import { ArrowUpLeft } from 'lucide-react';
@@ -60,11 +61,28 @@ export default function Article() {
           <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4" />{post.readTime} قراءة</span>
         </div>
         <ShareButtons title={post.title} />
+        {post.videoUrl && youtubeIdFromUrl(post.videoUrl) && (
+          <div className="rounded-3xl overflow-hidden shadow-xl my-8 bg-black">
+            <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${youtubeIdFromUrl(post.videoUrl)}`}
+                title={post.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+        )}
         <div className="relative rounded-3xl overflow-hidden shadow-xl my-8">
           <img src={post.cover} alt={post.title} className="w-full aspect-[16/9] object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/50 via-transparent to-transparent pointer-events-none" />
           <span className="absolute bottom-4 right-4 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur text-brand-teal-dark text-xs font-extrabold">{cat}</span>
         </div>
+        {(post.gallery || []).length > 1 && (
+          <MediaShowcase gallery={post.gallery} title={post.title} />
+        )}
         <div id="article-body" className="prose-ar">
           <p className="text-xl font-bold text-brand-ink leading-loose">{post.excerpt}</p>
           {post.body.map((b, i) => {

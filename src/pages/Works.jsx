@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PROJECTS } from '../data/projects';
-import { SECTORS } from '../data/sectors';
+import { PROJECTS } from '../content';
+import { SECTORS } from '../content';
 import ProjectCard from '../components/ProjectCard';
 import FilterPills from '../components/ui/FilterPills';
 import Button from '../components/ui/Button';

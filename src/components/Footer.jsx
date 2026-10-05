@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SITE } from '../config/site';
+import { SITE } from '../content';
 
 export default function Footer() {
   return (

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Zap, Video, Palette, Globe, Check, X, Calculator, PhoneCall, ArrowLeft, Tag } from 'lucide-react';
-import { SITE, waLink } from '../config/site';
+import { Sparkles, Check, X, Calculator, PhoneCall, ArrowLeft, Tag } from 'lucide-react';
+import { waLink, PRICING, PRICING_CONTENT, packageIcon, applyCoupon } from '../content';
 
-const PRICING = { designUnit: 350, reelUnit: 450, automation: 3200, website: 4200 };
 export const openExpertChat = () => window.dispatchEvent(new CustomEvent('qabas:open-chat'));
 
 export default function Pricing() {
@@ -16,22 +15,8 @@ export default function Pricing() {
   const [appliedCoupon, setAppliedCoupon] = useState('');
   const [couponError, setCouponError] = useState(false);
 
-  const baseTotal = cd * PRICING.designUnit + cr * PRICING.reelUnit + (ia ? PRICING.automation : 0) + (iw ? PRICING.website : 0);
-  let discount = 0;
-  let discountMsg = '';
-  
-  if (appliedCoupon === 'QABAS10') {
-    discount = baseTotal * 0.10;
-    discountMsg = 'خصم 10%';
-  } else if (appliedCoupon === 'QABAS20') {
-    discount = baseTotal * 0.20;
-    discountMsg = 'خصم 20%';
-  } else if (appliedCoupon === 'DR_AMIR') {
-    discount = cd * (PRICING.designUnit - 150);
-    discountMsg = 'تصميم بـ 150 ج.م';
-  }
-  
-  const total = baseTotal - discount;
+  const couponCodes = PRICING_CONTENT.coupons.map((c) => c.code);
+  const { total, baseTotal, discount, discountMsg } = applyCoupon(appliedCoupon, { cd, cr, ia, iw, units: PRICING });
 
   const handleApplyCoupon = () => {
     const code = coupon.trim().toUpperCase();
@@ -40,7 +25,7 @@ export default function Pricing() {
       setCouponError(false);
       return;
     }
-    if (['QABAS10', 'QABAS20', 'DR_AMIR'].includes(code)) {
+    if (couponCodes.includes(code)) {
       setAppliedCoupon(code);
       setCouponError(false);
     } else {
@@ -56,6 +41,11 @@ export default function Pricing() {
     document.body.style.overflow = 'hidden';
     return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
   }, [modal]);
+
+  const featured = PRICING_CONTENT.featured;
+  const featHalf = Math.ceil(featured.features.length / 2);
+  const featColA = featured.features.slice(0, featHalf);
+  const featColB = featured.features.slice(featHalf);
 
   const CI = ({ children, light }) => (
     <li className="flex items-center gap-3 text-base">
@@ -95,7 +85,7 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="relative w-full pt-28 md:pt-36 pb-24 sm:pb-28 px-6 sm:px-8 bg-soft-red-glow scroll-mt-24 overflow-hidden">
-      
+
       {/* Editorial Oversized Typography Background */}
       <div className="absolute top-10 left-0 right-0 flex justify-center pointer-events-none overflow-hidden select-none z-0 opacity-[0.03]">
         <span className="font-serif text-[8rem] sm:text-[12rem] lg:text-[18rem] font-black text-brand-deep leading-none tracking-widest uppercase">
@@ -104,7 +94,7 @@ export default function Pricing() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Header */}
         <div className="text-center mb-16">
           <span className="font-serif text-sm italic text-brand-red font-bold tracking-widest uppercase block mb-3">Transparent Value</span>
@@ -118,44 +108,41 @@ export default function Pricing() {
 
         {/* Asymmetric Editorial Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-12 mb-16">
-          
+
           {/* Featured Double-Width Hero Card (NOVA) */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="xl:col-span-12 rounded-[2rem] bg-gradient-red-base shadow-[0_20px_60px_rgba(102,0,0,0.25)] border-none overflow-hidden flex flex-col lg:flex-row relative"
           >
             {/* Ribbon */}
             <div className="absolute top-8 left-0 bg-white text-brand-red px-6 py-2 rounded-r-full font-bold text-sm flex items-center gap-2 shadow-lg z-20">
-              <Sparkles className="w-4 h-4 text-brand-gold" /> الباقة الأكثر طلباً
+              <Sparkles className="w-4 h-4 text-brand-gold" /> {featured.ribbon}
             </div>
 
             {/* Content Side */}
             <div className="p-8 sm:p-12 lg:w-3/5 flex flex-col justify-center relative z-10">
-              <h3 className="font-arabic text-4xl sm:text-5xl font-extrabold text-white mb-4 drop-shadow-md">باقة NOVA الشاملة</h3>
+              <h3 className="font-arabic text-4xl sm:text-5xl font-extrabold text-white mb-4 drop-shadow-md">{featured.name}</h3>
               <p className="text-white/85 text-lg mb-8 font-body max-w-xl">
-                لكل شيء يحتاجه متجرك أو مشروعك في باقة واحدة. حوّل زوارك إلى عملاء دائمين من خلال منظومة رقمية متكاملة.
+                {featured.desc}
               </p>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                 <ul className="space-y-4">
-                  <CI light>أوتوميشن خدمة عملاء ذكي 24/7</CI>
-                  <CI light>10 تصاميم سوشيال ميديا</CI>
-                  <CI light>إدارة الصفحة باستراتيجية</CI>
+                  {featColA.map((f) => <CI key={f} light>{f}</CI>)}
                 </ul>
                 <ul className="space-y-4">
-                  <CI light>5 ريلز مونتاج احترافي</CI>
-                  <CI light>موقع احترافي سريع ومتجاوب</CI>
+                  {featColB.map((f) => <CI key={f} light>{f}</CI>)}
                 </ul>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto">
                 <div className="text-center sm:text-right w-full sm:w-auto">
                   <span className="block text-white/70 text-sm mb-1 uppercase font-bold tracking-widest">Investment</span>
-                  <span className="text-5xl font-extrabold text-white drop-shadow-md">13,150 <span className="text-xl font-normal text-white/80">ج.م</span></span>
+                  <span className="text-5xl font-extrabold text-white drop-shadow-md">{featured.price.toLocaleString('en-US')} <span className="text-xl font-normal text-white/80">ج.م</span></span>
                 </div>
                 <div className="w-full sm:w-auto flex flex-col gap-3">
-                  <a href={waLink('أريد الاشتراك في باقة NOVA')} target="_blank" rel="noreferrer"
+                  <a href={waLink(featured.waMessage)} target="_blank" rel="noreferrer"
                     className="px-10 py-4 rounded-full bg-white text-brand-red font-extrabold text-center hover:bg-brand-snow hover:scale-105 active:scale-95 transition-all shadow-xl text-lg flex items-center justify-center gap-2">
-                    احجز باقة NOVA <ArrowLeft className="w-5 h-5" />
+                    احجز {featured.name} <ArrowLeft className="w-5 h-5" />
                   </a>
                   <button onClick={openExpertChat}
                     className="px-10 py-2.5 rounded-full border border-white/40 text-white/90 font-bold text-sm text-center hover:bg-white/10 hover:border-white hover:text-white active:scale-95 transition-all">
@@ -169,44 +156,26 @@ export default function Pricing() {
             <div className="lg:w-2/5 relative min-h-[300px] bg-black/10 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-brand-red via-transparent to-transparent z-10 hidden lg:block" />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-red via-transparent to-transparent z-10 lg:hidden" />
-              <img src="/packages/nova.jpeg" alt="NOVA" loading="lazy" className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" />
+              <img src={featured.image} alt={featured.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" />
               {/* Blur overlay to hide any baked-in prices in the image */}
               <div className="absolute inset-0 backdrop-blur-md bg-brand-red/10 z-0"></div>
             </div>
           </motion.div>
 
-          {/* Secondary Editorial List (Design, Video, Web) */}
+          {/* Secondary Editorial List */}
           <div className="xl:col-span-12 flex flex-col gap-2 mt-4">
             <h3 className="font-arabic text-2xl font-extrabold text-brand-maroon mb-4 px-4">حلول متخصصة</h3>
-            
-            <MinimalRow 
-              icon={Zap} 
-              title="باقة SPARK" 
-              desc="إنتاج محتوى شهري متكامل: 10 ريلز مونتاج و 20 تصميم سوشيال ميديا." 
-              price="11,500" 
-              link="أريد الاشتراك في باقة SPARK"
-            />
-            <MinimalRow 
-              icon={Palette} 
-              title="باقة التصميم" 
-              desc="تصاميم سوشيال ميديا بجودة عالية جاهزة للنشر والتفاعل. باقات 20 أو 30 تصميم." 
-              price="7,000" 
-              link="استفسار عن باقات التصميم"
-            />
-            <MinimalRow 
-              icon={Video} 
-              title="باقة المونتاج" 
-              desc="ريلز وموشن قصير يبني الانتباه من الثواني الأولى. باقات 10 إلى 30 ريل." 
-              price="4,500" 
-              link="استفسار عن باقات المونتاج"
-            />
-            <MinimalRow 
-              icon={Globe} 
-              title="المواقع والأوتوميشن" 
-              desc="مواقع بالإيجار أو الشراء، وأوتوميشن ذكي للرد التلقائي على عملائك." 
-              price="7,400" 
-              link="استفسار عن خدمات المواقع"
-            />
+
+            {PRICING_CONTENT.packages.map((p) => (
+              <MinimalRow
+                key={p.name}
+                icon={packageIcon(p.icon)}
+                title={p.name}
+                desc={p.desc}
+                price={p.price.toLocaleString('en-US')}
+                link={p.waMessage}
+              />
+            ))}
           </div>
         </div>
 
@@ -258,14 +227,14 @@ export default function Pricing() {
                   </label>
                 </div>
               </div>
-              
+
               {/* Coupon Section */}
               <div className="mb-6 flex gap-3">
                 <div className="relative flex-1">
                   <Tag className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-ink-soft" />
-                  <input 
-                    type="text" 
-                    placeholder="لديك كود خصم؟ (جرب QABAS10)" 
+                  <input
+                    type="text"
+                    placeholder="لديك كود خصم؟ (جرب QABAS10)"
                     value={coupon}
                     onChange={(e) => {
                       setCoupon(e.target.value);
@@ -274,7 +243,7 @@ export default function Pricing() {
                     className={`w-full bg-brand-snow border ${couponError ? 'border-red-500' : 'border-brand-red/10'} rounded-xl py-4 pr-12 pl-4 text-brand-ink font-bold focus:outline-none focus:border-brand-red transition-all`}
                   />
                 </div>
-                <button 
+                <button
                   onClick={handleApplyCoupon}
                   className="bg-brand-red text-white px-8 rounded-xl font-bold hover:bg-brand-maroon transition-colors whitespace-nowrap active:scale-95"
                 >

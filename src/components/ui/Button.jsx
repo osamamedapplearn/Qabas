@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { waLink } from '../../config/site';
+import { waLink } from '../../content';
 
 export default function Button({ to, href, wa, onClick, variant = 'accent', size = 'md', children, className = '', ...rest }) {
   const sizes = {
