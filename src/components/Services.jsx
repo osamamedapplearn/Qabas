@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
-import { HOME_SERVICES as services } from '../content';
+import { HOME_SERVICES as services, servicePriceLabel } from '../content';
 
 export default function Services() {
   return (
@@ -16,7 +16,7 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(({ icon: Icon, title, desc }, i) => (
+          {services.map(({ icon: Icon, title, desc, price, priceNote }, i) => (
             <Reveal key={title} delay={Math.min(i * 0.05, 0.25)}>
               <div className="glass-card card-lift rounded-2xl p-8 group h-full">
                 <div className="p-3 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal-dark w-fit mb-6 group-hover:bg-brand-teal group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand-teal/30 transition-all duration-300">
@@ -24,6 +24,9 @@ export default function Services() {
                 </div>
                 <h3 className="font-arabic text-xl font-bold text-brand-maroon mb-3 group-hover:text-brand-teal-dark transition-colors">{title}</h3>
                 <p className="text-brand-ink-soft text-base leading-loose font-body">{desc}</p>
+                <p className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-amber-soft/60 border border-brand-amber/30 text-sm font-extrabold text-brand-maroon">
+                  {servicePriceLabel({ price, priceNote })}
+                </p>
               </div>
             </Reveal>
           ))}

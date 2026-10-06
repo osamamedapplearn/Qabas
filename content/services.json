@@ -10,8 +10,13 @@
     "briefIcon": "fa-bezier-curve",
     "portfolioCategory": "design",
     "pricingPackage": "باقة التصميم",
-    "show": { "home": true, "brief": true },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "social-designs",
@@ -24,8 +29,13 @@
     "briefIcon": "fa-pen-nib",
     "portfolioCategory": "design",
     "pricingPackage": "باقة التصميم",
-    "show": { "home": true, "brief": false },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": false
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "montage-reels",
@@ -38,8 +48,13 @@
     "briefIcon": "fa-film",
     "portfolioCategory": "montage",
     "pricingPackage": "باقة المونتاج",
-    "show": { "home": true, "brief": true },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "web-dev",
@@ -52,8 +67,13 @@
     "briefIcon": "fa-code",
     "portfolioCategory": "web",
     "pricingPackage": "المواقع والأوتوميشن",
-    "show": { "home": true, "brief": true },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "automation",
@@ -66,8 +86,13 @@
     "briefIcon": "fa-robot",
     "portfolioCategory": "automation",
     "pricingPackage": "المواقع والأوتوميشن",
-    "show": { "home": true, "brief": true },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "social-manage",
@@ -80,8 +105,13 @@
     "briefIcon": "fa-hashtag",
     "portfolioCategory": "social",
     "pricingPackage": "باقة SPARK",
-    "show": { "home": true, "brief": true },
-    "visible": true
+    "show": {
+      "home": true,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "photography",
@@ -94,8 +124,13 @@
     "briefIcon": "fa-camera-retro",
     "portfolioCategory": "montage",
     "pricingPackage": null,
-    "show": { "home": false, "brief": true },
-    "visible": true
+    "show": {
+      "home": false,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "ads",
@@ -108,8 +143,13 @@
     "briefIcon": "fa-bullhorn",
     "portfolioCategory": "ads",
     "pricingPackage": null,
-    "show": { "home": false, "brief": true },
-    "visible": true
+    "show": {
+      "home": false,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "strategy",
@@ -122,8 +162,13 @@
     "briefIcon": "fa-chess-knight",
     "portfolioCategory": "strategy",
     "pricingPackage": null,
-    "show": { "home": false, "brief": true },
-    "visible": true
+    "show": {
+      "home": false,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   },
   {
     "id": "custom",
@@ -136,7 +181,12 @@
     "briefIcon": "fa-wand-magic-sparkles",
     "portfolioCategory": "other",
     "pricingPackage": null,
-    "show": { "home": false, "brief": true },
-    "visible": true
+    "show": {
+      "home": false,
+      "brief": true
+    },
+    "visible": true,
+    "price": null,
+    "priceNote": "custom"
   }
 ]

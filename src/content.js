@@ -95,12 +95,22 @@ export const BRIEF_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.brief && s.
   icon: s.briefIcon || 'fa-circle',
 }));
 
-// Homepage cards: { icon(component), title, desc }
+// Homepage cards: { icon(component), title, desc, price, priceNote }
 export const HOME_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.home).map((s) => ({
   icon: SERVICE_ICONS[s.icon] ?? Sparkles,
   title: s.homeTitle || s.title,
   desc: s.homeDesc || s.desc,
+  price: typeof s.price === 'number' ? s.price : null,
+  priceNote: s.priceNote || 'custom',
 }));
+
+// Arabic price label for a service. Returns null when no displayable price.
+export function servicePriceLabel(s) {
+  if (typeof s?.price !== 'number') return 'يُحدد حسب المشروع';
+  const formatted = s.price.toLocaleString('en-US');
+  if (s.priceNote === 'fixed') return `${formatted} ج.م`;
+  return `تبدأ من ${formatted} ج.م`;
+}
 
 // ── Testimonials ──
 export const TESTIMONIALS = testimonialsData.testimonials;

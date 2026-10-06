@@ -29,6 +29,8 @@ const blank = () => ({
   briefIcon: 'fa-star',
   portfolioCategory: 'other',
   pricingPackage: '',
+  price: null,
+  priceNote: 'custom',
   show: { home: false, brief: true },
   visible: true,
 });
@@ -205,6 +207,26 @@ export default function ServicesTab() {
                 <select value={editing.pricingPackage || ''} onChange={(e) => set('pricingPackage', e.target.value)} className={inputCls}>
                   <option value="">— بدون ربط —</option>
                   {packageNames.map((n) => <option key={n} value={n}>{n}</option>)}
+                </select>
+              </Field>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="سعر الخدمة (ج.م)" hint="اتركه فارغاً لعرض «يُحدد حسب المشروع».">
+                <input
+                  type="number"
+                  min="0"
+                  value={editing.price ?? ''}
+                  onChange={(e) => set('price', e.target.value === '' ? null : Math.max(0, Number(e.target.value) || 0))}
+                  className={inputCls}
+                  dir="ltr"
+                  placeholder="مثال: 7000"
+                />
+              </Field>
+              <Field label="صيغة عرض السعر">
+                <select value={editing.priceNote || 'custom'} onChange={(e) => set('priceNote', e.target.value)} className={inputCls}>
+                  <option value="from">تبدأ من …</option>
+                  <option value="fixed">سعر ثابت</option>
+                  <option value="custom">يُحدد حسب المشروع</option>
                 </select>
               </Field>
             </div>
