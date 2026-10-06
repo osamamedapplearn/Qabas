@@ -21,6 +21,8 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+vercal1.env
+*.private.env
 
 # Editor directories and files
 .vscode/*
