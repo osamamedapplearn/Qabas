@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Brief.css";
+import { BRIEF_SERVICES as SERVICES } from "../content";
 
 const WA_NUMBER = '201144712845';
 
@@ -11,18 +12,6 @@ const STEPS = [
   { n: 5, label: "أهدافك" },
   { n: 6, label: "الذوق والمنافسون" },
   { n: 7, label: "الميزانية" },
-];
-
-const SERVICES = [
-  { key: "تصميم وهوية بصرية", title: "تصميم وهوية", desc: "شعارات، هويات بصرية، وبوسترات وسوشيال ميديا", icon: "fa-bezier-curve" },
-  { key: "مونتاج وفيديو", title: "مونتاج وفيديو", desc: "فيديوهات ريلز، إعلانات سينمائية، وموشن جرافيك", icon: "fa-film" },
-  { key: "تصوير وإنتاج", title: "جلسات تصوير", desc: "تصوير منتجات احترافي، جلسات تجارية وتغطية ميدانية", icon: "fa-camera-retro" },
-  { key: "مواقع إلكترونية وبرمجة", title: "مواقع إلكترونية", desc: "متاجر إلكترونية، صفحات هبوط عصرية، وتطبيقات ويب", icon: "fa-code" },
-  { key: "إدارة سوشيال ميديا", title: "إدارة سوشيال ميديا", desc: "خطة محتوى شهرية، كتابة إعلانية، وإدارة الحسابات", icon: "fa-hashtag" },
-  { key: "إعلانات ممولة Media Buying", title: "إعلانات ممولة", desc: "حملات تحويل ومبيعات على Meta, TikTok, Google", icon: "fa-bullhorn" },
-  { key: "أتمتة وأنظمة ذكية", title: "أتمتة الأعمال AI", desc: "روبوتات واتساب، CRM، وأتمتة مسارات التحويل", icon: "fa-robot" },
-  { key: "تسويق واستراتيجية", title: "تسويق واستراتيجية", desc: "خطة تسويق شاملة، دراسة سوق، وتحديد موقع البراند", icon: "fa-chess-knight" },
-  { key: "حلول أخرى مخصصة", title: "أخرى / مخصص", desc: "استشارات، حزم هجينة، أو متطلبات خاصة بالكامل", icon: "fa-wand-magic-sparkles" },
 ];
 
 const GOALS = [

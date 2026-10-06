@@ -9,13 +9,14 @@
 // - pricing / settings / testimonials / sectors / post-categories: single JSON files
 import {
   Plane, Building2, ShoppingCart, GraduationCap, Stethoscope, Store, LayoutGrid,
-  Zap, Palette, Video, Globe,
+  Zap, Palette, Video, Globe, PenTool, Bot, Megaphone, Camera, Target, Compass, Sparkles,
 } from 'lucide-react';
 import settingsData from '../content/settings.json';
 import pricingData from '../content/pricing.json';
 import testimonialsData from '../content/testimonials.json';
 import sectorsData from '../content/sectors.json';
 import postCategoriesData from '../content/post-categories.json';
+import servicesData from '../content/services.json';
 
 // ── Portfolio ──
 const portfolioModules = import.meta.glob('../content/portfolio/*.json', { eager: true });
@@ -76,6 +77,30 @@ export const PORTFOLIO_CATEGORIES = [
 
 export const portfolioCategoryTitle = (id) =>
   PORTFOLIO_CATEGORIES.find((c) => c.id === id)?.title ?? id;
+
+// ── Services catalog (single source for homepage cards + Brief options) ──
+// briefKey values are stable client-facing identifiers: renaming a title
+// never breaks saved briefs as long as briefKey stays the same.
+const SERVICE_ICONS = { Palette, PenTool, Video, Globe, Bot, Megaphone, Camera, Target, Compass, Sparkles, Zap };
+
+export const SERVICES_CATALOG = servicesData.filter((s) => s && s.visible !== false);
+
+export const serviceById = (id) => SERVICES_CATALOG.find((s) => s.id === id);
+
+// Brief step-3 cards: { key, title, desc, icon(fa class) }
+export const BRIEF_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.brief && s.briefKey).map((s) => ({
+  key: s.briefKey,
+  title: s.title,
+  desc: s.desc,
+  icon: s.briefIcon || 'fa-circle',
+}));
+
+// Homepage cards: { icon(component), title, desc }
+export const HOME_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.home).map((s) => ({
+  icon: SERVICE_ICONS[s.icon] ?? Sparkles,
+  title: s.homeTitle || s.title,
+  desc: s.homeDesc || s.desc,
+}));
 
 // ── Testimonials ──
 export const TESTIMONIALS = testimonialsData.testimonials;

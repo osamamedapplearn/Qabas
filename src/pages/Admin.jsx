@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { LayoutGrid, Tag, FileText, Settings as SettingsIcon, Rocket, Lock, ArrowRight } from 'lucide-react';
+import { LayoutGrid, Tag, FileText, Settings as SettingsIcon, Rocket, Lock, ArrowRight, Briefcase } from 'lucide-react';
 import PortfolioTab from '../admin/PortfolioTab';
 import PricingTab from '../admin/PricingTab';
 import ContentTab from '../admin/ContentTab';
 import SettingsTab from '../admin/SettingsTab';
 import PublishTab from '../admin/PublishTab';
+import ServicesTab from '../admin/ServicesTab';
 import { inputCls } from '../admin/ui';
 
 const TABS = [
   { id: 'portfolio', title: 'الأعمال', icon: LayoutGrid },
+  { id: 'services', title: 'الخدمات', icon: Briefcase },
   { id: 'pricing', title: 'الأسعار', icon: Tag },
   { id: 'content', title: 'المحتوى', icon: FileText },
   { id: 'settings', title: 'الإعدادات', icon: SettingsIcon },
@@ -87,6 +89,7 @@ export default function Admin() {
       </header>
       <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8">
         {tab === 'portfolio' && <PortfolioTab />}
+        {tab === 'services' && <ServicesTab />}
         {tab === 'pricing' && <PricingTab />}
         {tab === 'content' && <ContentTab />}
         {tab === 'settings' && <SettingsTab />}

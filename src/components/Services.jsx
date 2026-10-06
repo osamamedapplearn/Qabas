@@ -1,16 +1,7 @@
 import React from 'react';
-import { Palette, Video, Globe, Bot, PenTool, Megaphone } from 'lucide-react';
 import SectionHeading from './ui/SectionHeading';
 import Reveal from './ui/Reveal';
-
-const services = [
-  { icon: Palette,   title: 'الهوية البصرية',          desc: 'شعار وهوية كاملة تعبّر عن مشروعك، من الألوان إلى الاستخدام على كل المنصات.' },
-  { icon: PenTool,   title: 'تصاميم سوشيال ميديا',    desc: 'تصاميم يومية وحملات متكاملة بخطة محتوى واضحة، تسليم أسبوعي في الموعد.' },
-  { icon: Video,     title: 'المونتاج والريلز',        desc: 'ريلز وموشن قصير يلفت النظر من الثواني الأولى، بتعديلات واضحة ومحددة.' },
-  { icon: Globe,     title: 'تطوير المواقع',           desc: 'مواقع سريعة ومتجاوبة مع الهاتف، تعمل وتجيب عن عملائك على مدار الساعة.' },
-  { icon: Bot,       title: 'الأوتوميشن الذكي',        desc: 'رد تلقائي على عملائك 24/7، يجيب عن الأسئلة المتكررة ويوفر وقت فريقك.' },
-  { icon: Megaphone, title: 'إدارة الصفحات',           desc: 'إدارة المحتوى والتفاعل باستراتيجية، حتى تبقى صفحتك نشطة وجاذبة باستمرار.' },
-];
+import { HOME_SERVICES as services } from '../content';
 
 export default function Services() {
   return (
