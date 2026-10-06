@@ -87,12 +87,15 @@ export const SERVICES_CATALOG = servicesData.filter((s) => s && s.visible !== fa
 
 export const serviceById = (id) => SERVICES_CATALOG.find((s) => s.id === id);
 
-// Brief step-3 cards: { key, title, desc, icon(fa class) }
+// Brief step-3 cards: { key, title, desc, icon(fa class), price, priceNote }
 export const BRIEF_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.brief && s.briefKey).map((s) => ({
   key: s.briefKey,
   title: s.title,
   desc: s.desc,
   icon: s.briefIcon || 'fa-circle',
+  price: typeof s.price === 'number' ? s.price : null,
+  priceNote: s.priceNote || 'custom',
+  orderMessage: s.orderMessage || `أريد الاستفسار عن خدمة: ${s.title}`,
 }));
 
 // Homepage cards: { icon(component), title, desc, price, priceNote }
@@ -102,6 +105,20 @@ export const HOME_SERVICES = SERVICES_CATALOG.filter((s) => s.show?.home).map((s
   desc: s.homeDesc || s.desc,
   price: typeof s.price === 'number' ? s.price : null,
   priceNote: s.priceNote || 'custom',
+  orderMessage: s.orderMessage || `أريد الاستفسار عن خدمة: ${s.title}`,
+  pricingPackage: s.pricingPackage || null,
+}));
+
+// All visible services with resolved icon + ordering CTA — for the pricing page.
+export const PRICED_SERVICES = SERVICES_CATALOG.map((s) => ({
+  id: s.id,
+  icon: SERVICE_ICONS[s.icon] ?? Sparkles,
+  title: s.homeTitle || s.title,
+  desc: s.homeDesc || s.desc,
+  price: typeof s.price === 'number' ? s.price : null,
+  priceNote: s.priceNote || 'custom',
+  orderMessage: s.orderMessage || `أريد الاستفسار عن خدمة: ${s.title}`,
+  pricingPackage: s.pricingPackage || null,
 }));
 
 // Arabic price label for a service. Returns null when no displayable price.

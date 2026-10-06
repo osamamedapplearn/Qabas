@@ -29,6 +29,7 @@ const blank = () => ({
   briefIcon: 'fa-star',
   portfolioCategory: 'other',
   pricingPackage: '',
+  orderMessage: '',
   price: null,
   priceNote: 'custom',
   show: { home: false, brief: true },
@@ -208,6 +209,9 @@ export default function ServicesTab() {
                   <option value="">— بدون ربط —</option>
                   {packageNames.map((n) => <option key={n} value={n}>{n}</option>)}
                 </select>
+              </Field>
+              <Field label="رسالة طلب الخدمة (واتساب)" hint="تُستخدم في زر «اطلب الخدمة» بصفحة الأسعار.">
+                <input value={editing.orderMessage || ''} onChange={(e) => set('orderMessage', e.target.value)} className={inputCls} placeholder="أريد الاستفسار عن خدمة: …" />
               </Field>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -16,7 +16,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: تصميم وهوية"
   },
   {
     "id": "social-designs",
@@ -35,7 +36,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: تصاميم سوشيال ميديا"
   },
   {
     "id": "montage-reels",
@@ -54,7 +56,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: مونتاج وفيديو"
   },
   {
     "id": "web-dev",
@@ -73,7 +76,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: مواقع إلكترونية"
   },
   {
     "id": "automation",
@@ -92,7 +96,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: أتمتة الأعمال AI"
   },
   {
     "id": "social-manage",
@@ -111,7 +116,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: إدارة سوشيال ميديا"
   },
   {
     "id": "photography",
@@ -130,7 +136,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: جلسات تصوير"
   },
   {
     "id": "ads",
@@ -149,7 +156,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: إعلانات ممولة"
   },
   {
     "id": "strategy",
@@ -168,7 +176,8 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: تسويق واستراتيجية"
   },
   {
     "id": "custom",
@@ -187,6 +196,7 @@
     },
     "visible": true,
     "price": null,
-    "priceNote": "custom"
+    "priceNote": "custom",
+    "orderMessage": "أريد الاستفسار عن خدمة: أخرى / مخصص"
   }
 ]

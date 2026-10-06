@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Check, X, Calculator, PhoneCall, ArrowLeft, Tag } from 'lucide-react';
-import { waLink, PRICING, PRICING_CONTENT, packageIcon, applyCoupon } from '../content';
+import { waLink, PRICING, PRICING_CONTENT, PRICED_SERVICES, servicePriceLabel, packageIcon, applyCoupon } from '../content';
 
 export const openExpertChat = () => window.dispatchEvent(new CustomEvent('qabas:open-chat'));
 
@@ -175,6 +175,35 @@ export default function Pricing() {
                 price={p.price.toLocaleString('en-US')}
                 link={p.waMessage}
               />
+            ))}
+          </div>
+        </div>
+
+        {/* Services & prices — driven by the services catalog */}
+        <div className="mb-16">
+          <h3 className="font-arabic text-2xl sm:text-3xl font-extrabold text-brand-maroon mb-2 text-center">خدماتنا وأسعارها</h3>
+          <p className="text-center text-brand-ink-soft font-body mb-8">كل خدمة بسعرها — تُدار جميعها من لوحة التحكم.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PRICED_SERVICES.map((s) => (
+              <div key={s.id} className="card-lift rounded-3xl bg-white border border-brand-deep/15 p-7 flex flex-col shadow-[0_10px_40px_rgba(102,0,0,0.08)]">
+                <div className="w-12 h-12 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center mb-4">
+                  <s.icon className="w-6 h-6" />
+                </div>
+                <h4 className="font-arabic text-xl font-extrabold text-brand-maroon mb-2">{s.title}</h4>
+                <p className="text-sm text-brand-ink-soft font-body leading-relaxed flex-1">{s.desc}</p>
+                <div className="mt-4 mb-5">
+                  <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-amber-soft/60 border border-brand-amber/30 text-base font-extrabold text-brand-maroon">
+                    {servicePriceLabel(s)}
+                  </span>
+                  {s.pricingPackage && (
+                    <span className="block text-xs text-brand-ink-soft mt-2">ضمن: {s.pricingPackage}</span>
+                  )}
+                </div>
+                <a href={waLink(s.orderMessage)} target="_blank" rel="noreferrer"
+                  className="mt-auto w-full py-3 rounded-full bg-brand-maroon text-white font-extrabold text-center hover:bg-brand-red transition-colors">
+                  اطلب الخدمة
+                </a>
+              </div>
             ))}
           </div>
         </div>

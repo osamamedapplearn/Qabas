@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Brief.css";
-import { BRIEF_SERVICES as SERVICES } from "../content";
+import { BRIEF_SERVICES as SERVICES, servicePriceLabel } from "../content";
 
 const WA_NUMBER = '201144712845';
 
@@ -345,7 +345,7 @@ export default function Brief() {
 {SERVICES.map((s) => {
   const selected = selectedServices.has(s.key);
   return (
-<div key={s.key} className={`select-card${selected ? " selected" : ""}`} role="checkbox" aria-checked={selected} aria-label={s.key} tabIndex={0} onClick={() => toggleService(s.key)} onKeyDown={(e) => cardKeyDown(e, () => toggleService(s.key))}><div className="select-card-header"><div className="select-card-icon"><i className={`fa-solid ${s.icon}`}></i></div><div className="select-check"><i className="fa-solid fa-check"></i></div></div><div className="select-card-title">{s.title}</div><div className="select-card-desc">{s.desc}</div></div>
+<div key={s.key} className={`select-card${selected ? " selected" : ""}`} role="checkbox" aria-checked={selected} aria-label={s.key} tabIndex={0} onClick={() => toggleService(s.key)} onKeyDown={(e) => cardKeyDown(e, () => toggleService(s.key))}><div className="select-card-header"><div className="select-card-icon"><i className={`fa-solid ${s.icon}`}></i></div><div className="select-check"><i className="fa-solid fa-check"></i></div></div><div className="select-card-title">{s.title}</div><div className="select-card-desc">{s.desc}</div><div className="select-card-price">{servicePriceLabel(s)}</div></div>
   );
 })}
 </div>
