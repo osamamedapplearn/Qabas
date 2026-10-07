@@ -1,5 +1,9 @@
 [
   {
+    "show": {
+      "home": true,
+      "brief": true
+    },
     "id": "design-identity",
     "title": "تصميم وهوية",
     "desc": "شعارات، هويات بصرية، وبوسترات وسوشيال ميديا",
@@ -10,12 +14,8 @@
     "briefIcon": "fa-bezier-curve",
     "portfolioCategory": "design",
     "pricingPackage": "باقة التصميم",
-    "show": {
-      "home": true,
-      "brief": true
-    },
     "visible": true,
-    "price": null,
+    "price": 5555,
     "priceNote": "custom",
     "orderMessage": "أريد الاستفسار عن خدمة: تصميم وهوية"
   },

@@ -44,6 +44,18 @@ export default function Admin() {
       .finally(() => setChecking(false));
   }, []);
 
+  // If any API call reports an expired/invalid session, drop back to login.
+  useEffect(() => {
+    if (!CLOUD) return;
+    const onExpired = () => {
+      setAuthed(false);
+      setPin('');
+      setPinErr('انتهت الجلسة — سجل الدخول مجدداً.');
+    };
+    window.addEventListener('qabas:auth-expired', onExpired);
+    return () => window.removeEventListener('qabas:auth-expired', onExpired);
+  }, []);
+
   const login = async (e) => {
     e?.preventDefault();
     setPinErr('');

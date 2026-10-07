@@ -17,7 +17,10 @@ async function req(url, opts, op) {
   if (!r.ok) {
     if (r.status === 401 && CLOUD) {
       sessionStorage.removeItem('qabas-cloud-auth');
-      throw new Error('AUTH_REQUIRED');
+      // Kick the dashboard back to the login screen instead of
+      // leaking raw error codes into the UI.
+      window.dispatchEvent(new Event('qabas:auth-expired'));
+      throw new Error('انتهت الجلسة — سجل الدخول مجدداً.');
     }
     throw new Error(j.error || 'خطأ غير متوقع');
   }
