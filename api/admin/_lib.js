@@ -128,12 +128,15 @@ export function requireAuth(req, res) {
   return true;
 }
 
-// Only allow content/*.json reads/writes (plus public/uploads for media)
+// Only allow content/*.json reads/writes (plus public/uploads for media).
+// The dashboard sends content-relative paths (e.g. "pricing.json",
+// "posts/<slug>.json") — same contract as the local vite plugin, which
+// resolves every path against content/ (see admin/vite-plugin-admin.js).
+// Normalize: paths without the content/ prefix get it prepended.
 export function safeContentPath(rel) {
   const p = String(rel || '').replace(/\\/g, '/').replace(/^\/+/, '');
   if (!p || p.includes('..') || !p.endsWith('.json')) return null;
-  if (!p.startsWith('content/')) return null;
-  return p;
+  return p.startsWith('content/') ? p : `content/${p}`;
 }
 
 // --- GitHub ---
