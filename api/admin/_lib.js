@@ -154,7 +154,11 @@ export async function gh(apiPath, { method = 'GET', body } = {}) {
     body: body ? JSON.stringify(body) : undefined,
   });
   const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(j.message || `GitHub API error ${r.status}`);
+  if (!r.ok) {
+    if (r.status === 401) throw new Error('توكن GitHub غير صالح — حدّث GITHUB_TOKEN في متغيرات بيئة Vercel ثم أعد النشر.');
+    if (r.status === 403) throw new Error('GitHub رفض الطلب (صلاحيات أو تجاوز حد الطلبات) — تأكد أن التوكن يملك صلاحية Contents قراءة+كتابة على هذا المستودع.');
+    throw new Error(j.message || `GitHub API error ${r.status}`);
+  }
   return j;
 }
 

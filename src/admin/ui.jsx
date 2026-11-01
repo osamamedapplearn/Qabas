@@ -1,7 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { Plus, Trash2, UploadCloud } from 'lucide-react';
 import { youtubeIdFromUrl } from '../content';
-import { apiUpload } from './api';
+import { CLOUD, apiUpload } from './api';
+
+// Cloud saves auto-deploy (~2 min); local saves wait for the publish tab.
+// Tabs pass their local-mode wording as the fallback.
+export const savedNote = (localNote) =>
+  CLOUD ? 'تم الحفظ — يُنشر على الموقع الحي تلقائياً خلال دقيقتين تقريباً.' : localNote;
+
+export const deletedNote = (localNote) =>
+  CLOUD ? 'تم الحذف — سينعكس على الموقع الحي تلقائياً خلال دقيقتين تقريباً.' : localNote;
 
 export const inputCls =
   'w-full p-3 rounded-xl border border-brand-deep/20 bg-white text-brand-ink font-body focus:outline-none focus:border-brand-teal font-medium';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import { SITE } from '../content';
 import { apiSave } from './api';
-import { Field, inputCls } from './ui';
+import { Field, inputCls, savedNote } from './ui';
 
 export default function SettingsTab() {
   const [form, setForm] = useState(() => JSON.parse(JSON.stringify(SITE)));
@@ -22,7 +22,7 @@ export default function SettingsTab() {
     setMsg('');
     try {
       await apiSave('settings.json', form);
-      setMsg('تم الحفظ. أعد تحميل الموقع لرؤية بيانات التواصل الجديدة، ثم ادفع للنشر.');
+      setMsg(savedNote('تم الحفظ. أعد تحميل الموقع لرؤية بيانات التواصل الجديدة، ثم ادفع للنشر.'));
     } catch (ex) {
       setMsg(`فشل الحفظ: ${ex.message}`);
     } finally {

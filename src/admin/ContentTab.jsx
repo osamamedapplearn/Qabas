@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pencil, Plus, Trash2, Save } from 'lucide-react';
 import { POSTS, POST_CATEGORIES } from '../content';
 import { apiSave, apiDelete } from './api';
-import { Field, StringList, UploadButton, YTPreview, inputCls } from './ui';
+import { Field, StringList, UploadButton, YTPreview, inputCls, savedNote, deletedNote } from './ui';
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CTYPES = [
@@ -136,7 +136,7 @@ export default function ContentTab() {
       };
       await apiSave(`posts/${slug}.json`, payload);
       setItems((prev) => [...prev.filter((x) => x.slug !== slug), normalize(payload)].sort((a, b) => String(b.date).localeCompare(String(a.date))));
-      setMsg('تم الحفظ. عاين المدونة ثم ادفع للنشر من تبويب النشر.');
+      setMsg(savedNote('تم الحفظ. عاين المدونة ثم ادفع للنشر من تبويب النشر.'));
       setIsNew(false);
     } catch (ex) {
       setMsg(`فشل الحفظ: ${ex.message}`);
@@ -152,7 +152,7 @@ export default function ContentTab() {
       await apiDelete(`posts/${slug}.json`);
       setItems((prev) => prev.filter((x) => x.slug !== slug));
       if (editing?.slug === slug) setEditing(null);
-      setMsg('تم الحذف. ادفع للنشر لتطبيقه على الموقع الحي.');
+      setMsg(deletedNote('تم الحذف. ادفع للنشر لتطبيقه على الموقع الحي.'));
     } catch (ex) {
       setMsg(`فشل الحذف: ${ex.message}`);
     } finally {

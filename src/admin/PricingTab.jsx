@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { PRICING, PRICING_CONTENT } from '../content';
 import { apiSave } from './api';
-import { Field, StringList, UploadButton, inputCls } from './ui';
+import { Field, StringList, UploadButton, inputCls, savedNote } from './ui';
 
 const ICONS = ['Zap', 'Palette', 'Video', 'Globe'];
 
@@ -41,7 +41,7 @@ export default function PricingTab() {
         featured,
         packages,
       });
-      setMsg('تم حفظ الأسعار. عاين قسم الباقات ثم ادفع للنشر من تبويب النشر.');
+      setMsg(savedNote('تم حفظ الأسعار. عاين قسم الباقات ثم ادفع للنشر من تبويب النشر.'));
     } catch (ex) {
       setMsg(`فشل الحفظ: ${ex.message}`);
     } finally {

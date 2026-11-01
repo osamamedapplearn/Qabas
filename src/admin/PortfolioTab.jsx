@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pencil, Plus, Trash2, Eye, EyeOff, Save } from 'lucide-react';
 import { PROJECTS, SECTORS, PORTFOLIO_CATEGORIES, portfolioCategoryTitle } from '../content';
 import { apiSave, apiDelete } from './api';
-import { Field, StringList, UploadButton, YTPreview, inputCls } from './ui';
+import { Field, StringList, UploadButton, YTPreview, inputCls, savedNote, deletedNote } from './ui';
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -85,7 +85,7 @@ export default function PortfolioTab() {
         const without = prev.filter((x) => x.slug !== payload.slug);
         return [...without, payload].sort((a, b) => a.slug.localeCompare(b.slug));
       });
-      setMsg('تم الحفظ في ملف المحتوى. عاين صفحة الأعمال ثم ادفع للنشر من تبويب النشر.');
+      setMsg(savedNote('تم الحفظ في ملف المحتوى. عاين صفحة الأعمال ثم ادفع للنشر من تبويب النشر.'));
       setIsNew(false);
     } catch (ex) {
       setMsg(`فشل الحفظ: ${ex.message}`);
@@ -101,7 +101,7 @@ export default function PortfolioTab() {
       await apiDelete(`portfolio/${slug}.json`);
       setItems((prev) => prev.filter((x) => x.slug !== slug));
       if (editing?.slug === slug) setEditing(null);
-      setMsg('تم الحذف. ادفع للنشر من تبويب النشر لتطبيقه على الموقع الحي.');
+      setMsg(deletedNote('تم الحذف. ادفع للنشر من تبويب النشر لتطبيقه على الموقع الحي.'));
     } catch (ex) {
       setMsg(`فشل الحذف: ${ex.message}`);
     } finally {

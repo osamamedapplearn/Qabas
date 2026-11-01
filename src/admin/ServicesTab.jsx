@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pencil, Plus, Trash2, Save, Eye, EyeOff } from 'lucide-react';
 import { SERVICES_CATALOG, PORTFOLIO_CATEGORIES, PRICING_CONTENT } from '../content';
 import { apiSave } from './api';
-import { Field, inputCls } from './ui';
+import { Field, inputCls, savedNote, deletedNote } from './ui';
 
 // Brief option keys pre-selected for new visitors in Brief.jsx —
 // removing or renaming one of these breaks the form defaults.
@@ -99,7 +99,7 @@ export default function ServicesTab() {
       const next = isNew ? [...list, payload] : list.map((x) => (x.id === payload.id ? payload : x));
       await apiSave('services.json', next);
       setItems(next);
-      setMsg('تم الحفظ. التغيير يظهر على الرئيسية ونموذج البريف معاً بعد النشر.');
+      setMsg(savedNote('تم الحفظ. التغيير يظهر على الرئيسية ونموذج البريف معاً بعد النشر.'));
       setIsNew(false);
       setOrigBriefKey(payload.briefKey || '');
     } catch (ex) {
@@ -122,7 +122,7 @@ export default function ServicesTab() {
       await apiSave('services.json', next);
       setItems(next);
       if (editing?.id === id) setEditing(null);
-      setMsg('تم الحذف. ادفع للنشر لتطبيقه على الموقع الحي.');
+      setMsg(deletedNote('تم الحذف. ادفع للنشر لتطبيقه على الموقع الحي.'));
     } catch (ex) {
       setMsg(`فشل الحذف: ${ex.message}`);
     } finally {
